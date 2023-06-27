@@ -3,7 +3,7 @@ import React from 'react'
 export default function SupportFooter() {
   return (
     <footer className='border-t border-[rgba(255,219,184,1)] mt-[90px] flex flex-col items-center pt-[52px] pb-[64px]'>
-      <h1 className='font-rubik font-bold text-[32px] leading-[37.92px] tracking-[-0.02em] text-primary'>COOK</h1>
+      <h1 className='font-rubik font-bold text-[32px] leading-[37.92px] tracking-[-0.02em] text-primary2'>COOK</h1>
       <div className='flex gap-[10px] mt-[8px]'>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M17 2H7C4.23858 2 2 4.23858 2 7V17C2 19.7614 4.23858 22 7 22H17C19.7614 22 22 19.7614 22 17V7C22 4.23858 19.7614 2 17 2Z" stroke="#D27722" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />

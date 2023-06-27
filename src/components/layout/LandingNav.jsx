@@ -47,7 +47,7 @@ export default function LandingNav() {
               </svg>
             </div>
 
-            <div className='md:hidden sm:hidden h-[15px] border border-primary rouded-[16px] xsm:hidden'></div>
+            <div className='md:hidden sm:hidden h-[15px] border border-primary2 rouded-[16px] xsm:hidden'></div>
             <div className='md:hidden sm:hidden flex gap-[1.667vw] xsm:hidden'>
               <Link href='/search-tutors'>
                 <div className='flex gap-[0.486vw]'>
@@ -123,7 +123,7 @@ export default function LandingNav() {
                 <path d="M5.53306 5.46142C5.23955 5.75797 4.76045 5.75797 4.46694 5.46142L1.06833 2.02759C0.599611 1.55401 0.935073 0.75 1.60139 0.75L8.39861 0.750001C9.06493 0.750001 9.40039 1.55401 8.93167 2.02759L5.53306 5.46142Z" fill="#D27722" />
               </svg>
             </div>
-            <div className='h-[15px] border border-primary rouded-[16px]'></div>
+            <div className='h-[15px] border border-primary2 rouded-[16px]'></div>
             <Link href='/support'>
               <div className='custom-tooltip' data-tooltip="Support">
                 <svg className='fill-[white] stroke-primary2 hover:fill-primary2 hover:stroke-[white] transition-all duration-200' width="24" height="25" viewBox="0 0 24 25" xmlns="http://www.w3.org/2000/svg">
@@ -133,7 +133,7 @@ export default function LandingNav() {
                 </svg>
               </div>
             </Link>
-            <div className='h-[15px] border border-primary rouded-[16px]'></div>
+            <div className='h-[15px] border border-primary2 rouded-[16px]'></div>
             <div>
               <Link href='/signin'>
                 <button className='w-[131px] group border-2 border-primary2 hover:bg-[white] hover:border-2 hover:border-primary2 hover:text-primary2 transition-all duration-200 h-[41px] bg-primary2 text-backPri font-outfit font-[500] text-[20px] leading-[25px] flex justify-center items-center gap-[0.556vw] rounded-[4px]'>

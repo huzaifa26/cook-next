@@ -23,7 +23,7 @@ export default function GroupCardScroll({ background = 'white', divRef = null, w
             <div className='flex gap-[21px] items-center'>
               <p className='font-outfit text-[18px] leading-[22.68px] font-medium'>Michael Doe</p>
               <div className='flex gap-[7px] items-center'>
-                <p className='font-kanit font-bold text-[20px] leading-[29.9px] text-primary'>5</p>
+                <p className='font-kanit font-bold text-[20px] leading-[29.9px] text-primary2'>5</p>
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M8 1.5L10.163 5.77865L15 6.46898L11.5 9.79758L12.326 14.5L8 12.2787L3.674 14.5L4.5 9.79758L1 6.46898L5.837 5.77865L8 1.5Z" fill="#D27722" stroke="#D27722" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
@@ -47,7 +47,7 @@ export default function GroupCardScroll({ background = 'white', divRef = null, w
                 );
               })}
             </div>
-            <p className='font-rubik font-bold text-[24px] leading-[28.44px] text-primary'>$19</p>
+            <p className='font-rubik font-bold text-[24px] leading-[28.44px] text-primary2'>$19</p>
           </div>
         </div>
       </div>

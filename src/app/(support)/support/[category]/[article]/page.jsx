@@ -69,7 +69,7 @@ export default function Page() {
 
               <div className='w-fit flex flex-col items-end gap-[11px] mt-[58px]'>
                 <Image className='w-[439px]' src={SupportArticleImage} alt="" />
-                <p style={{ fontStyle: 'italic' }} className=' font-kanit font-normal text-[20px] leading-[30px] text-primary'>Image title</p>
+                <p style={{ fontStyle: 'italic' }} className=' font-kanit font-normal text-[20px] leading-[30px] text-primary2'>Image title</p>
               </div>
             </div>
 

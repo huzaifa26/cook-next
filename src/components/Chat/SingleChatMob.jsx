@@ -27,7 +27,7 @@ const SingleChatMob = () => {
                     userId === chat.senderId ? (
                       <div className='flex  my-[12px] justify-center ml-auto items-start' key={index}>
                         <div className='flex flex-col gap-[5px]'>
-                          <div style={{ borderRadius: '16px 16px 0px 16px' }} className='flex justify-center items-center py-[12px] px-[16px] bg-primary'>
+                          <div style={{ borderRadius: '16px 16px 0px 16px' }} className='flex justify-center items-center py-[12px] px-[16px] bg-primary2'>
                             <p className='max-w-[326px] text-[white] text-[16px] font-[400] font-outfit '>{chat.message}</p>
                           </div>
                         </div>
