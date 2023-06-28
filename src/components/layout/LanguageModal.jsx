@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import ChineseIcon from "../../assets/LandingPage/ChineseIcon.svg"
 import EnglishIcon from "../../assets/LandingPage/EnglishIcon.svg"
 import GermanIcon from "../../assets/LandingPage/GermanIcon.svg"
@@ -33,24 +34,24 @@ export default function LanguageModal({ state, closeModal, mobileNav=false }) {
         <h5 className='font-outfit font-bold text-[18px] leading-[22.68px] text-TextColor'>Select a language</h5>
         <div className='mt-[17px] flex flex-col gap-[5px]'>
           <div className='flex gap-[10px] items-center h-[36px] bg-[rgba(255,219,184,1)] px-[12px] '>
-            {/* <img src={EnglishIcon} alt="" /> */}
-            <p>{String.fromCodePoint(0x1F1EC, 0x1F1E7)} </p>
+            <Image src={EnglishIcon} alt="" />
+            {/* <p>{String.fromCodePoint(0x1F1EC, 0x1F1E7)} </p> */}
             <p className='font-outfit font-medium text-[16px] leading-[20.16px] text-TextColorSec'>English</p>
           </div>
           <div className='flex gap-[10px] items-center h-[36px] px-[12px]'>
-            <img src={GermanIcon} alt="" />
+            <Image src={GermanIcon} alt="" />
             <p className='font-outfit font-medium text-[16px] leading-[20.16px] text-TextColorSec'>German</p>
           </div>
           <div className='flex gap-[10px] items-center h-[36px] px-[12px] border-t border-t-[rgba(255,219,184,1)]'>
-            <img src={ChineseIcon} alt="" />
+            <Image src={ChineseIcon} alt="" />
             <p className='font-outfit font-medium text-[16px] leading-[20.16px] text-TextColorSec'>Chinese</p>
           </div>
           <div className='flex gap-[10px] items-center h-[36px] px-[12px] border-t border-t-[rgba(255,219,184,1)]'>
-            <img src={ItalianIcon} alt="" />
+            <Image src={ItalianIcon} alt="" />
             <p className='font-outfit font-medium text-[16px] leading-[20.16px] text-TextColorSec'>Italian</p>
           </div>
           <div className='flex gap-[10px] items-center h-[36px] px-[12px] border-t border-t-[rgba(255,219,184,1)]'>
-            <img src={HebrewIcon} alt="" />
+            <Image src={HebrewIcon} alt="" />
             <p className='font-outfit font-medium text-[16px] leading-[20.16px] text-TextColorSec'>Hebrew</p>
           </div>
         </div>
