@@ -1,11 +1,12 @@
 import React from 'react'
-import Member from "../../assets/OnlineLesson/Member.png"
+import Member from "@/assets/OnlineLesson/Member.png"
+import Image from 'next/image'
 
 export default function Members() {
   return (
     <div className='hideScrollbar pr-[64px] pl-[20px] py-[46px] divide-y divide-[rgba(255,219,184,1)] overflow-scroll max-h-[calc(100vh-114px)] overflow-x-hidden'>
       <div className='w-full flex items-center gap-[16px] h-[96px]'>
-        <img className='w-[64px]' src={Member} alt="" />
+        <Image className='w-[64px]' src={Member} alt="" />
         <div className='flex-1 flex flex-col'>
           <p className='font-outfit font-semibold text-[16px] leading-[24px] text-primary2'>Tutor</p>
           <p className='font-outfit font-bold text-[20px] leading-[30px]'>John Doe</p>
@@ -18,22 +19,14 @@ export default function Members() {
         </svg>
       </div>
       <div className='w-full flex items-center gap-[16px] h-[96px]'>
-        <img className='w-[64px]' src={Member} alt="" />
+        <Image className='w-[64px]' src={Member} alt="" />
         <div className='flex-1 flex flex-col'>
           <p className='font-outfit font-semibold text-[16px] leading-[24px] text-primary2'>Tutor</p>
           <p className='font-outfit font-bold text-[20px] leading-[30px]'>John Doe</p>
         </div>
       </div>
       <div className='w-full flex items-center gap-[16px] h-[96px]'>
-        <img className='w-[64px]' src={Member} alt="" />
-        <div className='flex-1 flex flex-col'>
-          <p className='font-outfit font-semibold text-[16px] leading-[24px] text-primary2'>Tutor</p>
-          <p className='font-outfit font-bold text-[20px] leading-[30px]'>John Doe</p>
-        </div>
-
-      </div>
-      <div className='w-full flex items-center gap-[16px] h-[96px]'>
-        <img className='w-[64px]' src={Member} alt="" />
+        <Image className='w-[64px]' src={Member} alt="" />
         <div className='flex-1 flex flex-col'>
           <p className='font-outfit font-semibold text-[16px] leading-[24px] text-primary2'>Tutor</p>
           <p className='font-outfit font-bold text-[20px] leading-[30px]'>John Doe</p>
@@ -41,7 +34,15 @@ export default function Members() {
 
       </div>
       <div className='w-full flex items-center gap-[16px] h-[96px]'>
-        <img className='w-[64px]' src={Member} alt="" />
+        <Image className='w-[64px]' src={Member} alt="" />
+        <div className='flex-1 flex flex-col'>
+          <p className='font-outfit font-semibold text-[16px] leading-[24px] text-primary2'>Tutor</p>
+          <p className='font-outfit font-bold text-[20px] leading-[30px]'>John Doe</p>
+        </div>
+
+      </div>
+      <div className='w-full flex items-center gap-[16px] h-[96px]'>
+        <Image className='w-[64px]' src={Member} alt="" />
         <div className='flex-1 flex flex-col'>
           <p className='font-outfit font-semibold text-[16px] leading-[24px] text-primary2'>Tutor</p>
           <p className='font-outfit font-bold text-[20px] leading-[30px]'>John Doe</p>
