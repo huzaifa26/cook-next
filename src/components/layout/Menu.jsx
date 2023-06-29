@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation'
-import ChineseIcon from "../../assets/LandingPage/ChineseIcon.svg";
-import EnglishIcon from "../../assets/LandingPage/EnglishIcon.svg";
-import GermanIcon from "../../assets/LandingPage/GermanIcon.svg";
-import HebrewIcon from "../../assets/LandingPage/HebrewIcon.svg";
-import ItalianIcon from "../../assets/LandingPage/ItalianIcon.svg";
-import LanguageModal from './LanguageModal';
+'use client'
+
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import CurrencyModal from './CurrencyModal';
+import LanguageModal from './LanguageModal';
 
 export default function Menu({ showMenu, closeMenu }) {
   const router = useRouter()

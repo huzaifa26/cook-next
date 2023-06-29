@@ -1,9 +1,9 @@
+import Link from 'next/link'
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 export default function BlogCategoriesCard({ img, title,type="svg" }) {
   return (
-    <Link to={title}>
+    <Link href={title}>
       <div style={{ background: 'linear-gradient(95.49deg, #FFDBB8 2.04%, rgba(255, 187, 121, 0.8) 99.48%)' }} className='h-[134px] flex gap-[10px] rounded-[15px] justify-center items-center'>
       {/* <div style={{ background: 'linear-gradient(95.49deg, #FFDBB8 2.04%, rgba(255, 187, 121, 0.8) 99.48%)' }} className='w-[424px] h-[134px] flex gap-[10px] rounded-[15px] justify-center items-center'> */}
         {type === "svg"? img :<img className='w-[32px]' src={img} alt="" />}

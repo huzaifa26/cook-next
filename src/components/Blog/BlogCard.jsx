@@ -1,13 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import BlogImage1 from "../../assets/Blog/BlogImage1.png"
+import Image from 'next/image'
+import Link from 'next/link'
 
 export default function BlogCard() {
   return (
     // <div className='w-[393px] min-h-[371px] '>
-    <Link to={'/blog/category/article'}>
+    <Link href='/blog/category/article'>
       <div className=' min-h-[371px] '>
-        <img src={BlogImage1} alt="" />
+        <Image src={BlogImage1} alt="" />
         <div className='p-[20px]'>
           <div className='flex justify-between items-center'>
             <button className='px-[16px] h-[30px] rounded-[8px] border border-[rgba(255,219,184,1)] bg-[rgba(255,253,244,1)] text-primary2 font-outfit font-medium text-[14px] leading-[17.64px]'>Home Cooking</button>
