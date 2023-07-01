@@ -45,13 +45,13 @@ export default function RootLayout({ children }) {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  },[newWidth]);
 
   const [img, setImg] = useState(document.createElement("img"))
 
   useEffect(() => {
     img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
-  }, [])
+  }, [img])
 
   const handleDragStart = (event) => {
     event.dataTransfer.setDragImage(img, 0, 0);

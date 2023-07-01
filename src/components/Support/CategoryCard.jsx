@@ -9,7 +9,7 @@ export default function CategoryCard({ title, description, icon, type = "svg" })
 
   return (
     <div className='min-h-[197px] rounded-[8px] border border-[rgba(255,219,184,1)] m-auto py-[20px] pl-[76px] md:pl-[67px] sm:pl-[67px] pr-[39px] md:pr-[15px] sm:pr-[15px] xsm:pl-[19px] xsm:pr-[17px] relative mt-[58px] xsm:py-0 xsm:pt-[58px] xsm:pb-[16px]'>
-      {type === 'svg' ? icon : <Image className='absolute top-[-34px] left-[-29px] xsm:left-[19px] xsm:top-[-34px] xsm:w-[74px] xsm:h-[74px]' src={icon} />}
+      {type === 'svg' ? icon : <Image alt='' className='absolute top-[-34px] left-[-29px] xsm:left-[19px] xsm:top-[-34px] xsm:w-[74px] xsm:h-[74px]' src={icon} />}
       <div className='mb-[29px] xsm:mb-[48px]'>
         <h1 className='font-rubik font-semibold text-[28px] leading-[33.18px] tracking-[-0.02em] text-TextColor mb-[7px]'>{title}</h1>
         <p className='font-outfit font-normal text-[18px] leading-[27px] text-TextColorSec'>{description}</p>

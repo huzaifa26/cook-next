@@ -116,7 +116,7 @@ export default function LandingPage() {
                 <div className='flex items-center justify-between'>
                   <h3 className='font-rubik font-bold text-[24px] leading-[27.19px] tracking-[-0.02em] text-[white] delay-100 duration-100 md:text-[20px] md:leading-[22.66px] sm:text-[20px] sm:leading-[22.66px] xsm:text-[20px] xsm:leading-[22.66px]'>Bakery</h3>
                   <div>
-                    <Image src={StatsIcon1} />
+                    <Image src={StatsIcon1} alt=""/>
                   </div>
                 </div>
                 <p className='font-kanit font-normal text-[14px] leading-[21px] text-[white] delay-100 duration-100 mt-[4px]'>Master baking: from rustic bread to delicate pastries</p>

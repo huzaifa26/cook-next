@@ -19,7 +19,7 @@ export default function Menu({ showMenu, closeMenu }) {
     return () => {
       window.removeEventListener('resize', resizeHandler);
     }
-  }, [])
+  })
 
   return (
     <div style={showMenu ? { right: 0 } : { right: '-80vw' }} className='transition-all duration-500 fixed z-[2000] right-0 bg-primary2 h-screen w-[79.487vw] top-0 pl-[7.949vw] pr-[6.923vw]'>
