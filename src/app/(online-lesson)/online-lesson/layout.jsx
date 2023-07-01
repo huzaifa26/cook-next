@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from 'react';
 
 export default function RootLayout({ children }) {
-  const pathname = usePathname();
+  const pathname=usePathname();
 
   const [currentTab, setCurrentTab] = useState("chat");
   const [width, setWidth] = useState('932px');
@@ -14,13 +14,6 @@ export default function RootLayout({ children }) {
   const resizableDivRef = useRef(null);
   const handleDivRef = useRef(null);
   const [newWidth, setNewWidth] = useState()
-
-  const [img, setImg] = useState(() => {
-    if (typeof document !== undefined) {
-      return document.createElement("img")
-    }
-    return undefined
-  })
 
   const handleDrag = (event) => {
     setNewWidth(event.clientX || (event?.touches && event?.touches[0].clientX))
@@ -55,16 +48,23 @@ export default function RootLayout({ children }) {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, [newWidth]);
+  },[newWidth]);
 
+  // const [img, setImg] = useState(document.createElement("img"))
+  const imgRef=useRef(null);
 
   useEffect(() => {
-    img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
-  }, [img])
+    imgRef.current=document.createElement("img")
+    imgRef.current.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+    // img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+  }, [imgRef])
 
   const handleDragStart = (event) => {
-    event.dataTransfer.setDragImage(img, 0, 0);
+    event.dataTransfer.setDragImage(imgRef.current, 0, 0);
+    // event.dataTransfer.setDragImage(img, 0, 0);
   };
+
+  console.log(imgRef.current)
 
   const handleDragEnd = (event) => {
     event.target.style.opacity = '1';
