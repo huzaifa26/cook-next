@@ -27,10 +27,12 @@ export default function RootLayout({ children }) {
       setWidthNumber(windowSize.width)
     }
   };
+
   const [windowSize, setWindowSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
+    width: window?.innerWidth || 1440,
+    height: window?.innerHeight || 752,
   });
+
   useEffect(() => {
     const handleResize = () => {
       setWindowSize({
@@ -56,6 +58,7 @@ export default function RootLayout({ children }) {
   const handleDragStart = (event) => {
     event.dataTransfer.setDragImage(img, 0, 0);
   };
+
   const handleDragEnd = (event) => {
     event.target.style.opacity = '1';
   };
