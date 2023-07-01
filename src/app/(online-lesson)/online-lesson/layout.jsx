@@ -15,6 +15,11 @@ export default function RootLayout({ children }) {
   const handleDivRef = useRef(null);
   const [newWidth, setNewWidth] = useState()
 
+  const [img, setImg] = useState()
+  useEffect(()=>{
+    setImg(document.createElement("img"));
+  },[img])
+
   const handleDrag = (event) => {
     setNewWidth(event.clientX || (event?.touches && event?.touches[0].clientX))
     let newWidth = event.clientX || (event?.touches && event?.touches[0].clientX) + "px";
@@ -50,7 +55,6 @@ export default function RootLayout({ children }) {
     };
   }, [newWidth]);
 
-  const [img, setImg] = useState(document.createElement("img"))
 
   useEffect(() => {
     img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
