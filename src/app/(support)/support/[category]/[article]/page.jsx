@@ -50,7 +50,7 @@ export default function Page() {
           <div>
             <h1 className='font-rubik text-[40px] font-bold leading-[47.4px] tracking-[-0.02em] text-TextColor'>Main Header</h1>
             <div className='flex gap-[13px] items-center mt-[19px] mb-[27px]'>
-              <img className='w-[35px] ' src={AutherProfile} alt="" />
+              <Image className='w-[35px] ' src={AutherProfile} alt="" />
               <p className='font-outfit font-semibold text-[18px] leading-[22.68px] text-TextColorSec'>Alex Doe</p>
             </div>
           </div>

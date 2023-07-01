@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import user from '../../assets/StudentDashboard/user.svg';
+import Image from 'next/image';
 
 const SingleChatMob = () => {
   const location = useLocation()
@@ -14,7 +15,7 @@ const SingleChatMob = () => {
           <path d="M20 24L12 16L20 8" stroke="#D27722" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
         <h1 className='font-outfit text-[16px] leading-[18.13px] tracking-[-0.02em] font-[600]'>Tutor Name</h1>
-        <img src={user} className='h-[40px] w-[40px]' alt="" />
+        <Image src={user} className='h-[40px] w-[40px]' alt="" />
       </header>
 
       <div className='sm:pr-0 w-full'>
@@ -34,7 +35,7 @@ const SingleChatMob = () => {
                       </div>
                     ) : (
                       <div className='flex my-[12px]' key={index}>
-                        <img src={user} className='mr-[11px] h-[42px] w-[42px] cursor-pointer rounded-full' alt='user' />
+                        <Image  src={user} className='mr-[11px] h-[42px] w-[42px] cursor-pointer rounded-full' alt='user' />
                         <div className='flex flex-col gap-[5px] mt-[10px]'>
                           <div style={{ borderRadius: '0px 12px 12px 12px' }} className='flex justify-center items-center py-[12px] px-[16px] bg-backSec'>
                             <p className='max-w-[326px]  text-[black] text-[16px] font-[400] font-outfit'>{chat.message}</p>

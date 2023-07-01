@@ -38,7 +38,7 @@ export default function GroupCardScroll({ background = 'white', divRef = null, w
                 const adjustedNumber = arr.length - index;
                 const leftPosition = `-${index * 18}px`;
                 return (
-                  <img
+                  <Image
                     key={index}
                     style={index !== 0 ? { left: leftPosition, zIndex: adjustedNumber } : { zIndex: adjustedNumber }}
                     className='relative w-[35px]'

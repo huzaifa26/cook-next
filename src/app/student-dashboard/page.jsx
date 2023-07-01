@@ -1,5 +1,6 @@
 import React from 'react'
 import user from "@/assets/StudentDashboard/user.svg"
+import Image from 'next/image'
 
 export default function Page (){
   return (
@@ -56,7 +57,7 @@ export default function Page (){
                 return (
                   <div key={index} className='flex justify-between p-[16px] border border-primaryLighten2 rounded-lg'>
                     <div className='flex gap-[16px] items-center xsm:flex-col xsm:items-start'>
-                      <img src={user} alt="" />
+                      <Image src={user} alt="" />
                       <div className='flex flex-col gap-[5px]'>
                         <h2 className='text-[16px] font-outfit leading-[18.13px] text-primary2'>Lesson with Jack</h2>
                         <p className='text-[22px] xsm:text-[16px] xsm:leading-[18.13px] leading-[24.93px] font-[600] font-outfit'>Monday, 26 June, 19:00-22:00</p>
@@ -75,7 +76,7 @@ export default function Page (){
                 return (
                   <div className='flex justify-between p-[16px] border border-primaryLighten2 rounded-lg'>
                     <div className='flex gap-[16px] items-center xsm:flex-col xsm:items-start'>
-                      <img src={user} alt="" />
+                      <Image src={user} alt="" />
                       <div className='flex flex-col gap-[5px]'>
                         <h2 className='text-[16px] font-outfit leading-[18.13px] text-[#349910]'>Lesson with Jack  •  Confirmed</h2>
                         <p className='text-[22px] xsm:text-[16px] xsm:leading-[18.13px] leading-[24.93px] font-[600] font-outfit'>Monday, 26 June, 19:00-22:00</p>
