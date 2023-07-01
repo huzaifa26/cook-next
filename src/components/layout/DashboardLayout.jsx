@@ -37,7 +37,7 @@ const DashboardLayout = () => {
               <div className='sm:hidden xsm:hidden md:hidden flex gap-[24px]'>
                 <Link href='/search-tutors'>
                   <div className='flex gap-[7px]'>
-                    <Image src={search} />
+                    <Image src={search} alt=""/>
                     <p className='font-outfit font-normal text-lg leading-[22.68px] text-TextColor'>Find Tutors</p>
                   </div>
                 </Link>
