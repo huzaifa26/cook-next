@@ -15,8 +15,8 @@ export default function RootLayout({ children }) {
   const handleDivRef = useRef(null);
   const [newWidth, setNewWidth] = useState()
 
-  const [img, setImg] = useState(()=>{
-    if(typeof window !==undefined){
+  const [img, setImg] = useState(() => {
+    if (typeof document !== undefined) {
       return document.createElement("img")
     }
     return undefined
