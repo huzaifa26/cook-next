@@ -15,10 +15,12 @@ export default function RootLayout({ children }) {
   const handleDivRef = useRef(null);
   const [newWidth, setNewWidth] = useState()
 
-  const [img, setImg] = useState()
-  useEffect(()=>{
-    setImg(document.createElement("img"));
-  },[img])
+  const [img, setImg] = useState(()=>{
+    if(typeof window !==undefined){
+      return document.createElement("img")
+    }
+    return undefined
+  })
 
   const handleDrag = (event) => {
     setNewWidth(event.clientX || (event?.touches && event?.touches[0].clientX))
