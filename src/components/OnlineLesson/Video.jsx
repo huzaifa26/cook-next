@@ -4,7 +4,7 @@ import VideoImage from "@/assets/OnlineLesson/VideoImage.png"
 
 export default function Video({divRef,widthNumber,windowSize,width}) {
   return (
-    <div ref={divRef} style={widthNumber < windowSize.width ? { width } : { width: "100%" }} className='h-full relative min-w-[508px] xsm:min-w-[320px]'>
+    <div ref={divRef} style={widthNumber < windowSize?.width ? { width } : { width: "100%" }} className='h-full relative min-w-[508px] xsm:min-w-[320px]'>
       <Image className='object-cover w-full h-screen' src={VideoImage} alt="" />
       <div className='absolute top-[38px] w-full px-[44px] flex justify-between items-center'>
         <svg width="54" height="54" viewBox="0 0 65 65" fill="none" xmlns="http://www.w3.org/2000/svg">

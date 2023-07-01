@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from 'react';
 
 export default function RootLayout({ children }) {
-  const pathname=usePathname();
+  const pathname = usePathname();
 
   const [currentTab, setCurrentTab] = useState("chat");
   const [width, setWidth] = useState('932px');
@@ -28,12 +28,13 @@ export default function RootLayout({ children }) {
     }
   };
 
-  const [windowSize, setWindowSize] = useState({
-    width: window?.innerWidth || 1440,
-    height: window?.innerHeight || 752,
-  });
+  const [windowSize, setWindowSize] = useState({});
 
   useEffect(() => {
+    setWindowSize({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
     const handleResize = () => {
       setWindowSize({
         width: window.innerWidth,
@@ -47,7 +48,7 @@ export default function RootLayout({ children }) {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  },[newWidth]);
+  }, [newWidth]);
 
   const [img, setImg] = useState(document.createElement("img"))
 
