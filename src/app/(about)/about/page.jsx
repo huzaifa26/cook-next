@@ -126,7 +126,6 @@ export default function Page(){
             </Link>
           </div>
         </div>
-        {/* <Image className='sm:block xsm:block md:block hidden cursor-pointer' onClick={() => { setShowMenu(true) }} src={Hamburger} alt="" /> */}
 
         <div className='sm:block xsm:block md:block hidden cursor-pointer'>
           <svg className='cursor-pointer' onClick={() => setShowMenu(true)} width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -229,7 +228,6 @@ export default function Page(){
               </svg>
             </Link>
           </div>
-          {/* <Image className='sm:block xsm:block md:block hidden cursor-pointer' src={Hamburger} onClick={() => { setShowMenu(true) }} alt="" /> */}
           <div className='sm:block xsm:block md:block hidden cursor-pointer'>
             <svg className='cursor-pointer' onClick={() => setShowMenu(true)} width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect width="42" height="42" rx="10" fill="#FFDBB8" />

@@ -36,12 +36,7 @@ export default function LandingPage() {
         </div>
         <div className='mt-[71px] relative w-fit h-fit'>
           <div className='xsm:overflow-hidden xsm:w-[calc(100vw - 100%)] flex justify-center'>
-            <Image className='w-[518px] md:w-[585.994px] sm:w-[585.994px] xsm:min-w-[110vw] xsm:m-auto' src={HeroImg} />
-            {/* <Image
-              src={HeroImg}
-              className='w-[518px] md:w-[585.994px] sm:w-[585.994px] xsm:min-w-[110vw] xsm:m-auto'
-              alt="Picture of the author"
-            /> */}
+            <Image alt="" className='w-[518px] md:w-[585.994px] sm:w-[585.994px] xsm:min-w-[110vw] xsm:m-auto' src={HeroImg} />
           </div>
           <div className='absolute right-[-1.84vw] bottom-[-34px] xsm:hidden'>
             <svg width="129" height="102" viewBox="0 0 129 102" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -50,7 +45,7 @@ export default function LandingPage() {
           </div>
           <div className='absolute xsm:left-[50%] bg-[rgba(255,253,244,1)] xsm:bottom-[-133px] xsm:translate-x-[-50%] left-[-5.139vw] bottom-[-58px] bg-primary2Lighten border border-[rgba(255,219,184,1)] rounded-[16px] p-[24px] w-[284px] h-[200px] '>
             <div className='flex items-center gap-[25px]'>
-              <Image className='w-[65px]' src={CardProfile} />
+              <Image alt="" className='w-[65px]' src={CardProfile} />
               <div>
                 <h2 className='font-rubik text-[18px] font-medium leading-[21.33px]'>David Mitchell</h2>
                 <div className='flex items-center gap-[7px]'>
@@ -372,7 +367,7 @@ export default function LandingPage() {
       <section className='mt-[260px] md:mt-[163px] sm:mt-[163px] xsm:mt-[151px] px-[64px] md:px-[5.749vw] sm:px-[5.749vw] xsm:px-[32px] flex md:flex-col sm:flex-col xsm:flex-col items-center gap-x-[8.403vw] lg:gap-x-[3.403vw] gap-y-[162px] w-full'>
         <div className='relative w-fit h-fit'>
           <div className='xsm:w-[calc(100vw - 100%)] xsm:overflow-hidden flex justify-center'>
-            <Image className='min-w-[535px] md:w-[583px] sm:w-[583px] xsm:min-w-[110vw]' src={AdvantagesHero} />
+            <Image alt="" className='min-w-[535px] md:w-[583px] sm:w-[583px] xsm:min-w-[110vw]' src={AdvantagesHero} />
           </div>
           <div className='absolute rounded-[16px] bg-primary2 h-[180px] w-[284px] bottom-[-27.023px] xsm:bottom-[-101px] left-[-5.694vw] xsm:left-[50%] xsm:translate-x-[-50%] p-[24px] flex flex-col items-end'>
             <h4 className='flex gap-[4px] items-center font-rubik font-medium text-right text-[white] text-[24px] leading-[28.44px]'>Level up <Image src={AdvantagesIcon4} alt="" /></h4>
@@ -598,7 +593,6 @@ export default function LandingPage() {
         <div className='bg-primary2 xsm:rounded-none sm:rounded-none md:rounded-none rounded-[26px] flex md:items-center sm:items-center md:px-[42px] sm:px-[36px] px-0 gap-[5.036vw] xsm:gap-0 xsm:flex-col'>
           <div className='xsm:overflow-hidden xsm:w-[calc(100vw - 100%)] flex justify-center'>
             <Image className='object-cover rounded-s-[26px] lg:min-w-[39.167vw] xl:min-w-[39.167vw] 2xl:min-w-[39.167vw] md:min-w-[278.999px] sm:min-w-[230.999px] xsm:min-w-[105vw] xsm:m-auto md:rounded-[24px] sm:rounded-[24px] md:h-[506px] sm:h-[506px]' src={BecomeaStudent} alt="" />
-            {/* <Image className='' src={BecomeaStudent} alt="" /> */}
           </div>
           <div className='pt-[90px] w-full xsm:pt-[65px] xsm:pb-[65px] xsm:px-[31.997px] md:pr-0 sm:pr-0 pr-[5.556vw] pb-[74px] flex flex-col gap-[31px]'>
             <h3 className='font-rubik font-semibold tracking-[-0.02em] text-[50px] md:text-[42px] md:leading-[47.59px] sm:text-[42px] sm:leading-[47.59px] xsm:text-[30px] xsm:leading-[33.99px] leading-[56.65px] text-[white]'>Become A Student</h3>

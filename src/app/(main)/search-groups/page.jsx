@@ -31,6 +31,9 @@ export default function Page() {
       });
     }
   };
+
+  const [showMobileFilter, setShowMobileFilter] = useState(false);
+
   return (
     <main className='xsm:overflow-hidden'>
       <div className='w-full min-h-[411px] flex items-center md:justify-center sm:justify-center bg-[rgba(255,253,244,1)] xsm:mt-[104px]'>
@@ -56,42 +59,12 @@ export default function Page() {
         </div>
       </div>
       <div className='pl-[65px] pr-[63px] md:px-[5.749vw] sm:px-[5.749vw] xsm:px-[8.205vw] '>
-        <button className='w-full rounded-[12px] justify-center py-[14px] mt-[21px] mb-[41px] xsm:flex hidden gap-[12px] items-center border-2 border-[rgba(255,219,184,1)]'>
-          <Image src={FilterIcon} alt="" />
-          <p className='font-outfit font-medium text-[22px] leading-[33px]'>Filters</p>
-        </button>
-        {/* <div className='flex gap-[21px] mt-[81px] mb-[79px] flex-wrap xsm:hidden'>
-          <div className='flex flex-col gap-[4ox]'>
-            <p className='font-outfit font-semibold text-[16px] leading-[24px] text-primary'>Category</p>
-            <select name="" className='min-h-[49px] w-[239px] md:w-[231px] sm:w-[231px] flex border-2 border-[rgba(255,219,184,1)] font-outfit font-normal text-[20px] leading-[25.2px] text-TextColor flex-1 rounded-[12px] px-[16px]' id="">
-              <option selected value="Baking">Baking</option>
-            </select>
-          </div>
-          <div className='flex flex-col gap-[4ox]'>
-            <p className='font-outfit font-semibold text-[16px] leading-[24px] text-primary'>Price</p>
-            <select name="" className='min-h-[49px] w-[239px] md:w-[231px] sm:w-[231px] flex border-2 border-[rgba(255,219,184,1)] font-outfit font-normal text-[20px] leading-[25.2px] text-TextColor flex-1 rounded-[12px] px-[16px]' id="">
-              <option selected value="Baking">Mon, 27 Apr </option>
-            </select>
-          </div>
-          <div className='flex flex-col gap-[4ox]'>
-            <p className='font-outfit font-semibold text-[16px] leading-[24px] text-primary'>Time</p>
-            <select name="" className='min-h-[49px] w-[239px] md:w-[231px] sm:w-[231px] flex border-2 border-[rgba(255,219,184,1)] font-outfit font-normal text-[20px] leading-[25.2px] text-TextColor flex-1 rounded-[12px] px-[16px]' id="">
-              <option selected value="Baking">9:00pm - 10:00pm</option>
-            </select>
-          </div>
-          <div className='flex flex-col gap-[4ox]'>
-            <p className='font-outfit font-semibold text-[16px] leading-[24px] text-primary'>Date</p>
-            <select name="" className='min-h-[49px] w-[239px] md:w-[231px] sm:w-[231px] flex border-2 border-[rgba(255,219,184,1)] font-outfit font-normal text-[20px] leading-[25.2px] text-TextColor flex-1 rounded-[12px] px-[16px]' id="">
-              <option selected value="Baking">Mon, 27 Apr </option>
-            </select>
-          </div>
-        </div> */}
         <div className='mt-[52px] flex justify-between items-center xsm:hidden'>
           <div className='flex gap-[21px]'>
             <div className='relative w-[15.694vw] md:w-[27.784vw] sm:w-[27.784vw]'>
               <div style={iWantToLearn ? { borderBottomLeftRadius: "0", borderBottomRightRadius: "0" } : {}} onClick={() => setIWantToLearn(!iWantToLearn)} className='cursor-pointer h-[67px]  rounded-[12px] flex relative border-2 border-[rgba(255,219,184,1)]'>
                 <p name="" className='h-full flex items-center font-medium md:text-[18px] md:leading-[27px] text-[20px] leading-[24.68px] text-TextColor flex-1 rounded-[12px] px-[20px]' id="">I want to Learn</p>
-                <svg style={iWantToLearn?{transform:"rotate(-45deg)"}:{}} className='transition-all duration-200 self-center mr-[20px]' width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg style={iWantToLearn ? { transform: "rotate(-45deg)" } : {}} className='transition-all duration-200 self-center mr-[20px]' width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M6.18205 6.40236C5.79792 6.76062 5.20208 6.76062 4.81795 6.40236L0.861155 2.71208C0.197273 2.09292 0.635403 0.980775 1.5432 0.980775L9.4568 0.980776C10.3646 0.980776 10.8027 2.09292 10.1388 2.71208L6.18205 6.40236Z" fill="#D27722" />
                 </svg>
               </div>
@@ -102,7 +75,7 @@ export default function Page() {
             <div className='relative w-[15.694vw] md:w-[27.784vw] sm:w-[27.784vw]'>
               <div style={pricePerLesson ? { borderBottomLeftRadius: "0", borderBottomRightRadius: "0" } : {}} onClick={() => setPricePerLesson(!pricePerLesson)} className='cursor-pointer h-[67px] w-full md:w-[27.784vw] sm:w-[27.784vw]  rounded-[12px] flex relative border-2 border-[rgba(255,219,184,1)]'>
                 <p name="" className='h-full flex items-center font-medium md:text-[18px] md:leading-[27px] text-[20px] leading-[24.68px] text-TextColor flex-1 rounded-[12px] px-[20px]' id="">Price per lesson</p>
-                <svg style={pricePerLesson?{transform:"rotate(-45deg)"}:{}} className='transition-all duration-200 self-center mr-[20px]' width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg style={pricePerLesson ? { transform: "rotate(-45deg)" } : {}} className='transition-all duration-200 self-center mr-[20px]' width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M6.18205 6.40236C5.79792 6.76062 5.20208 6.76062 4.81795 6.40236L0.861155 2.71208C0.197273 2.09292 0.635403 0.980775 1.5432 0.980775L9.4568 0.980776C10.3646 0.980776 10.8027 2.09292 10.1388 2.71208L6.18205 6.40236Z" fill="#D27722" />
                 </svg>
               </div>
@@ -113,7 +86,7 @@ export default function Page() {
             <div className='relative w-[19.792vw] md:w-[27.784vw] sm:w-[27.784vw]'>
               <div style={availability ? { borderBottomLeftRadius: "0", borderBottomRightRadius: "0" } : {}} onClick={() => setAvailability(!availability)} className='cursor-pointer h-[67px] w-full rounded-[12px] flex relative border-2 border-[rgba(255,219,184,1)]'>
                 <p name="" className='h-full flex items-center font-outfit font-medium md:text-[18px] md:leading-[27px] text-[20px] leading-[24.68px] text-TextColor flex-1 rounded-[12px] px-[20px]' id="">Availability</p>
-                <svg style={availability?{transform:"rotate(-45deg)"}:{}} className='transition-all duration-200 self-center mr-[20px]' width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg style={availability ? { transform: "rotate(-45deg)" } : {}} className='transition-all duration-200 self-center mr-[20px]' width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M6.18205 6.40236C5.79792 6.76062 5.20208 6.76062 4.81795 6.40236L0.861155 2.71208C0.197273 2.09292 0.635403 0.980775 1.5432 0.980775L9.4568 0.980776C10.3646 0.980776 10.8027 2.09292 10.1388 2.71208L6.18205 6.40236Z" fill="#D27722" />
                 </svg>
               </div>
@@ -131,6 +104,7 @@ export default function Page() {
               </svg>
               <input type="text" name="" id="" placeholder='Search' className='placeholder:text-TextColor w-full outline-none font-outfit text-[20px] leading-[22.68px]' />
             </div>
+
             <div className='relative'>
               <svg onClick={() => setSort(!sort)} className='transition-all duration-200 group cursor-pointer min-w-[64px] min-h-[61px]' width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect className='transition-all duration-200 ' style={sort ? { stroke: "#D27722", fill: "#D27722" } : { stroke: "#FFDBB8" }} x="0.5" y="0.5" width="47" height="47" rx="23.5" />
@@ -145,6 +119,57 @@ export default function Page() {
             </div>
           </div>
         </div>
+
+        <button onClick={() => setShowMobileFilter(!showMobileFilter)} className='w-full rounded-[12px] justify-center py-[14px] mt-[21px] mb-[41px] xsm:flex hidden gap-[12px] items-center border-2 border-[rgba(255,219,184,1)]'>
+          {!showMobileFilter?<Image src={FilterIcon} alt="" />:
+          <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 22.5C17.5228 22.5 22 18.0228 22 12.5C22 6.97715 17.5228 2.5 12 2.5C6.47715 2.5 2 6.97715 2 12.5C2 18.0228 6.47715 22.5 12 22.5Z" stroke="#D27722" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M15 9.5L9 15.5" stroke="#D27722" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M9 9.5L15 15.5" stroke="#D27722" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>}
+          <p className='font-outfit font-medium text-[22px] leading-[33px]'>Filters</p>
+        </button>
+        {
+          showMobileFilter &&
+          <div className='xsm:flex flex-col gap-[17px] xsm:mb-[58px] hidden'>
+            <div className='relative w-full'>
+              <div style={iWantToLearn ? { borderBottomLeftRadius: "0", borderBottomRightRadius: "0" } : {}} onClick={() => setIWantToLearn(!iWantToLearn)} className='cursor-pointer h-[67px]  rounded-[12px] flex relative border-2 border-[rgba(255,219,184,1)]'>
+                <p name="" className='h-full flex items-center font-outfit font-medium md:text-[18px] md:leading-[27px] text-[20px] leading-[24.68px] text-TextColor flex-1 rounded-[12px] px-[20px]' id="">I want to Learn</p>
+                <svg style={iWantToLearn ? { transform: "rotate(-45deg)" } : {}} className='transition-all duration-200 self-center mr-[20px]' width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6.18205 6.40236C5.79792 6.76062 5.20208 6.76062 4.81795 6.40236L0.861155 2.71208C0.197273 2.09292 0.635403 0.980775 1.5432 0.980775L9.4568 0.980776C10.3646 0.980776 10.8027 2.09292 10.1388 2.71208L6.18205 6.40236Z" fill="#D27722" />
+                </svg>
+              </div>
+              {iWantToLearn &&
+                <IWantToLearn />
+              }
+            </div>
+
+            <div className='relative w-full'>
+              <div style={pricePerLesson ? { borderBottomLeftRadius: "0", borderBottomRightRadius: "0" } : {}} onClick={() => setPricePerLesson(!pricePerLesson)} className='cursor-pointer h-[67px] w-full md:w-[27.784vw] sm:w-[27.784vw]  rounded-[12px] flex relative border-2 border-[rgba(255,219,184,1)]'>
+                <p name="" className='h-full flex items-center font-outfit font-medium md:text-[18px] md:leading-[27px] text-[20px] leading-[24.68px] text-TextColor flex-1 rounded-[12px] px-[20px]' id="">Price per lesson</p>
+                <svg style={pricePerLesson ? { transform: "rotate(-45deg)" } : {}} className='transition-all duration-200 self-center mr-[20px]' width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6.18205 6.40236C5.79792 6.76062 5.20208 6.76062 4.81795 6.40236L0.861155 2.71208C0.197273 2.09292 0.635403 0.980775 1.5432 0.980775L9.4568 0.980776C10.3646 0.980776 10.8027 2.09292 10.1388 2.71208L6.18205 6.40236Z" fill="#D27722" />
+                </svg>
+              </div>
+              {pricePerLesson &&
+                <PricePerLesson />
+              }
+            </div>
+
+            <div className='relative w-full'>
+              <div style={availability ? { borderBottomLeftRadius: "0", borderBottomRightRadius: "0" } : {}} onClick={() => setAvailability(!availability)} className='cursor-pointer h-[67px] w-full rounded-[12px] flex relative border-2 border-[rgba(255,219,184,1)]'>
+                <p name="" className='h-full flex items-center font-outfit font-medium md:text-[18px] md:leading-[27px] text-[20px] leading-[24.68px] text-TextColor flex-1 rounded-[12px] px-[20px]' id="">Availability</p>
+                <svg style={availability ? { transform: "rotate(-45deg)" } : {}} className='transition-all duration-200 self-center mr-[20px]' width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6.18205 6.40236C5.79792 6.76062 5.20208 6.76062 4.81795 6.40236L0.861155 2.71208C0.197273 2.09292 0.635403 0.980775 1.5432 0.980775L9.4568 0.980776C10.3646 0.980776 10.8027 2.09292 10.1388 2.71208L6.18205 6.40236Z" fill="#D27722" />
+                </svg>
+              </div>
+              {availability &&
+                <Availability />
+              }
+            </div>
+          </div>
+        }
+
         <div className='w-full mt-[52px]'>
           <div>
             <h3 className='font-rubik font-semibold text-[24px] leading-[28.44px] tracking-[-0.02em]'>Popular classes</h3>
