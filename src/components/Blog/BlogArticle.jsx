@@ -6,6 +6,7 @@ import BlogArticleImage from "../../assets/Blog/BlogArticleImage.png";
 import LandingFooter from '../../layout/LandingFooter';
 import CopyrightTable from '../Copyright/CopyrightTable';
 import BlogCard from './BlogCard';
+import Image from 'next/image';
 
 export default function BlogArticle() {
   const navigate = useNavigate();
@@ -45,21 +46,21 @@ export default function BlogArticle() {
       <div className=''>
         <h1 className='font-rubik font-bold text-[48px] leading-[56.16px] tracking-[-0.02em] text-center mt-[70px] xsm:mt-[40px] mb-[16px]'>Lorem Ipsum</h1>
         <div className='flex items-center justify-center gap-[5px]'>
-          <img className='w-[32px]' src={ArticleAuthorProfile} alt="" />
+          <Image className='w-[32px]' src={ArticleAuthorProfile} alt="" />
           <p className='font-outfit font-medium text-[16px] leading-[20.96px] tracking-[-0.02em] text-primary2'>by Jane Doe</p>
         </div>
       </div>
 
       <div className='mt-[82px] w-full px-[64px] md:px-[48px] sm:px-[48px] xsm:px-[32px] flex gap-[4.236vw]'>
         <div className='w-fit md:hidden sm:hidden xsm:hidden'>
-          <img src={BlogArticle1} alt="" />
+          <Image src={BlogArticle1} alt="" />
           <p className='font-outfit font-semibold text-[24px] leading-[28.08px] tracking-[-0.02em] mt-[27px]'>Learn more about cooking  </p>
           <Link to={'/search-tutors'}>
             <button className='w-[129px] h-[39px] bg-primary2 text-[white] font-outfit font-medium text-[16px] leading-[22.68px] rounded-[4px] mt-[27px]'>Find A Tutor</button>
           </Link>
         </div>
         <div className='w-[44.375vw] md:w-full sm:w-full xsm:w-full'>
-          <img className='w-[639px] ' src={BlogArticleImage} alt="" />
+          <Image className='w-[639px] ' src={BlogArticleImage} alt="" />
 
           <div className='w-[269px] flex-col mt-[53px] border border-[rgba(255,219,184,1)] rounded-[8px] p-[24px] hidden md:flex sm:flex xsm:flex'>
             <h4 className='font-outfit font-semibold text-[24px] leading-[28.08px] tracking-[-0.02em]'>Table of content</h4>

@@ -6,6 +6,7 @@ import XSMDidYouKnow from "../../assets/Blog/XSMDidYouKnow.png";
 import LandingFooter from '../../layout/LandingFooter';
 import Pagination from '../utils/Pagination';
 import BlogCard from './BlogCard';
+import Image from 'next/image';
 
 export default function BlogCategory() {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ export default function BlogCategory() {
       </div>
 
       <section className='flex flex-col items-center w-full px-[64px] md:px-[48px] sm:px-[48px] xsm:px-[32px]'>
-        <img src={BlogCategoryHeroImage} alt="" />
+        <Image src={BlogCategoryHeroImage} alt="" />
         <div className='w-full relative mt-[48px] md:mt-[41px] sm:mt-[41px] xsm:mt-[36px]'>
           <h1 className='relative z-20 m-auto font-rubik font-bold text-[48px] leading-[56.16px] tracking-[-0.02em] bg-[white] text-center xsm:text-[34px] xsm:leading-[39.78px]'>Ingredient Insights</h1>
           <p className='font-outfit font-normal text-[16px] leading-[28.48px] w-[45.069vw] text-center m-auto mt-[24px] xsm:w-full'>Discover the secrets behind various ingredients, their unique characteristics, and how to incorporate them into your culinary creations</p>
@@ -66,8 +67,8 @@ export default function BlogCategory() {
           </div>
         </div>
         <div className='h-fit max-w-[434px] xsm:max-w-full relative '>
-          <img className='relative z-20 w-full xsm:hidden' src={BlogSecondImage} alt="" />
-          <img className='z-20 w-full hidden xsm:flex min-w-[calc(100vw-64px)]' src={XSMDidYouKnow} alt="" />
+          <Image className='relative z-20 w-full xsm:hidden' src={BlogSecondImage} alt="" />
+          <Image className='z-20 w-full hidden xsm:flex min-w-[calc(100vw-64px)]' src={XSMDidYouKnow} alt="" />
           <svg className='absolute z-10 xsm:hidden bottom-[-63px] right-[-80px]' width="258" height="258" viewBox="0 0 258 258" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="258" height="258" rx="129" fill="#FFDBB8" />
           </svg>
