@@ -1,12 +1,14 @@
-import React from 'react'
-import Image1 from '@/assets/Signin/Image1.png'
-import Image2 from '@/assets/Signin/Image2.png'
-import MDImage1 from '@/assets/Signin/MDImage1.png'
-import MDImage2 from '@/assets/Signin/MDImage2.png'
-import Facebook from "@/assets/Signup/Facebook.svg"
-import Google from "@/assets/Signup/Google.svg"
-import Image from 'next/image'
-import Link from 'next/link'
+'use client'
+import React from 'react';
+import Image1 from '@/assets/Signin/Image1.png';
+import Image2 from '@/assets/Signin/Image2.png';
+import MDImage1 from '@/assets/Signin/MDImage1.png';
+import MDImage2 from '@/assets/Signin/MDImage2.png';
+import Facebook from "@/assets/Signup/Facebook.svg";
+import Google from "@/assets/Signup/Google.svg";
+import Image from 'next/image';
+import Link from 'next/link';
+import { signIn } from 'next-auth/react';
 
 export default function Page() {
   return (
@@ -21,7 +23,7 @@ export default function Page() {
         <div className='w-fit h-fit flex flex-col justify-center items-center'>
           <h1 className='font-rubik font-bold text-[32px] leading-[37.92px] tracking-[-0.02em]'>Log in to <Link href='/'><span className='text-primary2 underline'>COOK</span></Link></h1>
           <div className='flex flex-col gap-[8px] mt-[24px]'>
-            <button className='hover:bg-primaryLighten2 transition-all duration-200 flex items-center justify-center gap-[14px] w-[322px] xsm:min-w-[90vw] xsm:w-full h-[56px] border border-[rgba(255,219,184,1)] font-outfit font-normal text-[20px] leading-[30px]'>
+            <button onClick={()=> signIn('google')} className='hover:bg-primaryLighten2 transition-all duration-200 flex items-center justify-center gap-[14px] w-[322px] xsm:min-w-[90vw] xsm:w-full h-[56px] border border-[rgba(255,219,184,1)] font-outfit font-normal text-[20px] leading-[30px]'>
               <Image src={Google} alt="" />
               Continue with Google
             </button>

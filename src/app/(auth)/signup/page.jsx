@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import Facebook from "@/assets/Signup/Facebook.svg"
 import Google from "@/assets/Signup/Google.svg"
@@ -9,6 +10,19 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 export default function Page() {
+
+  const formSubmitHandler=(e)=>{
+    e.preventDefault();
+
+    const data={
+      firstName:e.target[0].value,
+      lastName:e.target[1].value,
+      email:e.target[2].value,
+      password:e.target[3].value,
+    }
+
+    console.log(data);
+  }
   return (
     <main className='flex relative md:min-h-[1194px] sm:min-h-[1194px] xsm:h-[844px]'>
       <div className='blurSignup md:min-h-[1194px] sm:min-h-[1194px] bg-primary2 xsm:hidden w-[49.306vw] md:w-full sm:w-full h-[846px] flex gap-[13px] justify-center overflow-hidden xsm:relative xsm:z-20'>
@@ -44,7 +58,7 @@ export default function Page() {
         </div>
         <div>
           <h3 className='font-redHatDisplay font-bold text-[20px] leading-[26.46px] text-center'>Sign up with email</h3>
-          <form className='w-[346px] xsm:w-[90vw] flex flex-col gap-[18px] items-center mt-[29px] mb-[62px] md:mb-[100px] sm:mb-[100px]'>
+          <form onSubmit={formSubmitHandler} className='w-[346px] xsm:w-[90vw] flex flex-col gap-[18px] items-center mt-[29px] mb-[62px] md:mb-[100px] sm:mb-[100px]'>
             <div className='w-full flex gap-[18px] xsm:flex-col'>
               <div className='w-[164px] xsm:w-full flex flex-col gap-[2px]'>
                 <label className='font-outfit font-medium text-[16px] leading-[20.16px]' htmlFor="">First Name</label>
@@ -63,7 +77,7 @@ export default function Page() {
               <label className='font-outfit font-medium text-[16px] leading-[20.16px]' htmlFor="">Password</label>
               <input className='p-[10px] outline-primary2 border border-[rgba(255,219,184,1)] h-[37px]' type="text" />
             </div>
-            <button className='text-[white] hover:bg-[white] hover:text-primary2 border-2 border-primary2 transition-all duration-200 bg-primary2 h-[39px] w-[122px] rounded-[4px] font-outfit font-medium text-[18px] leading-[22.68px] mt-[11px]'>Join COOK</button>
+            <button type='submit' className='text-[white] hover:bg-[white] hover:text-primary2 border-2 border-primary2 transition-all duration-200 bg-primary2 h-[39px] w-[122px] rounded-[4px] font-outfit font-medium text-[18px] leading-[22.68px] mt-[11px]'>Join COOK</button>
           </form>
         </div>
       </div>

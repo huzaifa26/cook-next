@@ -1,5 +1,7 @@
 import ReduxProvider from '@/redux/ReduxProvider'
 import './globals.css'
+import { SessionProvider } from "next-auth/react"
+import AuthProvider from '@/utils/AuthProvider'
 
 export const metadata = {
   title: 'Learn cooking online | COOK',
@@ -51,7 +53,9 @@ export default function RootLayout({ children }) {
 
       <body>
         <ReduxProvider>
-          {children}
+          <AuthProvider>
+            {children}
+          </AuthProvider>
         </ReduxProvider>
       </body>
     </html>
