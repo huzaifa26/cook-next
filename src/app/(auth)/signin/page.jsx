@@ -1,5 +1,5 @@
 'use client'
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import Image1 from '@/assets/Signin/Image1.png';
 import Image2 from '@/assets/Signin/Image2.png';
 import MDImage1 from '@/assets/Signin/MDImage1.png';
@@ -8,9 +8,36 @@ import Facebook from "@/assets/Signup/Facebook.svg";
 import Google from "@/assets/Signup/Google.svg";
 import Image from 'next/image';
 import Link from 'next/link';
-import { signIn } from 'next-auth/react';
+import { signIn, signOut, useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 export default function Page() {
+  const session=useSession()
+  const router=useRouter()
+
+  const formSubmitHandler = (e) => {
+    e.preventDefault();
+    const data = {
+      email: e.target[0].value,
+      password: e.target[1].value,
+    }
+
+    signIn('credentials', data);
+  }
+
+  const googleSigninHandler = async() => {
+    signIn('google');
+  }
+
+  useLayoutEffect(()=>{
+    console.log(session.status)
+    if(session.status === 'authenticated'){
+      router.push('/student-dashboard');
+    }
+    // signOut('credentials');
+  },[session])
+
+
   return (
     <main className='flex relative md:min-h-[1194px] sm:min-h-[1194px] xsm:h-[844px]'>
       <div className='blurSignin md:min-h-[1194px] sm:min-h-[1194px] bg-[rgba(255,219,184,1)] xsm:hidden w-[49.306vw] md:w-full sm:w-full h-[846px] flex gap-[13px] justify-center overflow-hidden'>
@@ -23,7 +50,7 @@ export default function Page() {
         <div className='w-fit h-fit flex flex-col justify-center items-center'>
           <h1 className='font-rubik font-bold text-[32px] leading-[37.92px] tracking-[-0.02em]'>Log in to <Link href='/'><span className='text-primary2 underline'>COOK</span></Link></h1>
           <div className='flex flex-col gap-[8px] mt-[24px]'>
-            <button onClick={()=> signIn('google')} className='hover:bg-primaryLighten2 transition-all duration-200 flex items-center justify-center gap-[14px] w-[322px] xsm:min-w-[90vw] xsm:w-full h-[56px] border border-[rgba(255,219,184,1)] font-outfit font-normal text-[20px] leading-[30px]'>
+            <button onClick={googleSigninHandler} className='hover:bg-primaryLighten2 transition-all duration-200 flex items-center justify-center gap-[14px] w-[322px] xsm:min-w-[90vw] xsm:w-full h-[56px] border border-[rgba(255,219,184,1)] font-outfit font-normal text-[20px] leading-[30px]'>
               <Image src={Google} alt="" />
               Continue with Google
             </button>
@@ -46,7 +73,7 @@ export default function Page() {
         </div>
         <div>
           <h3 className='font-redHatDisplay font-bold text-[20px] leading-[26.46px] text-center'>Log in with email</h3>
-          <form className='w-[346px] xsm:w-[90vw] flex flex-col gap-[18px] items-center mt-[29px] mb-[62px] md:mb-[100px] sm:mb-[100px]'>
+          <form onSubmit={formSubmitHandler} className='w-[346px] xsm:w-[90vw] flex flex-col gap-[18px] items-center mt-[29px] mb-[62px] md:mb-[100px] sm:mb-[100px]'>
             <div className='w-full flex flex-col gap-[2px]'>
               <label className='font-outfit font-medium text-[16px] leading-[20.16px]' htmlFor="">Email</label>
               <input className='p-[10px] outline-primary2 border border-[rgba(255,219,184,1)] h-[37px]' type="text" />

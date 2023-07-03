@@ -8,10 +8,12 @@ import MDImage1 from '@/assets/Signup/MDImage1.png'
 import MDImage2 from '@/assets/Signup/MDImage2.png'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
 export default function Page() {
+  const router=useRouter();
 
-  const formSubmitHandler=(e)=>{
+  const formSubmitHandler=async(e)=>{
     e.preventDefault();
 
     const data={
@@ -21,7 +23,19 @@ export default function Page() {
       password:e.target[3].value,
     }
 
-    console.log(data);
+    try{
+      const res = await fetch('http://localhost:3000/api/auth/signup',{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body:JSON.stringify(data)
+      })
+
+      res.status === 201 && router.push("/signin");
+    } catch(error){
+      console.log(error);
+    }   
   }
   return (
     <main className='flex relative md:min-h-[1194px] sm:min-h-[1194px] xsm:h-[844px]'>
