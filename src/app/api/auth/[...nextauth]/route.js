@@ -1,9 +1,10 @@
 import { User } from "@/models/User";
 import connect from "@/utils/db";
 import NextAuth from "next-auth"
-import GoogleProvider from "next-auth/providers/Google"
 import bcrypt from "bcryptjs"
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
+
 
 export const handler = NextAuth({
   providers: [
@@ -12,26 +13,26 @@ export const handler = NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
     CredentialsProvider({
-      id:"credentials",
-      name:"Credentials",
-      async authorize(credentials){
+      id: "credentials",
+      name: "Credentials",
+      async authorize(credentials) {
         await connect();
-        try{
-          const user=await User.findOne({email:credentials.email})
+        try {
+          const user = await User.findOne({ email: credentials.email })
 
-          if(user){
-            const isPasswordCorrect=await bcrypt.compare(
+          if (user) {
+            const isPasswordCorrect = await bcrypt.compare(
               credentials.password,
               user.password
             )
 
-            if(isPasswordCorrect){
+            if (isPasswordCorrect) {
               return user
-            }else{
-              throw new Error("Wrong credentials"); 
+            } else {
+              throw new Error("Wrong credentials");
             }
           }
-        }catch(err){
+        } catch (err) {
           throw new Error(err)
         }
       }
@@ -39,4 +40,4 @@ export const handler = NextAuth({
   ],
 })
 
-export {handler as GET, handler as POST}
+export { handler as GET, handler as POST }
