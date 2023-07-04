@@ -28,6 +28,9 @@ export default function Page() {
   const googleSigninHandler = async() => {
     signIn('google');
   }
+  const facebookSigninHandler = async() => {
+    signIn('facebook');
+  }
 
   useLayoutEffect(()=>{
     console.log(session.status)
@@ -53,9 +56,9 @@ export default function Page() {
               <Image src={Google} alt="" />
               Continue with Google
             </button>
-            <button className='flex hover:bg-primaryLighten2  transition-all duration-200 items-center justify-center gap-[14px] w-[322px] xsm:w-full h-[56px] border border-[rgba(255,219,184,1)] font-outfit font-normal text-[20px] leading-[30px]'>
+            <button onClick={facebookSigninHandler} className='flex hover:bg-primaryLighten2  transition-all duration-200 items-center justify-center gap-[14px] w-[322px] xsm:w-full h-[56px] border border-[rgba(255,219,184,1)] font-outfit font-normal text-[20px] leading-[30px]'>
               <Image src={Facebook} alt="" />
-              Continue with Google
+              Continue with Facebook
             </button>
             <button className='flex hover:bg-primaryLighten2  transition-all duration-200 items-center justify-center gap-[14px] w-[322px] xsm:w-full h-[56px] border border-[rgba(255,219,184,1)] font-outfit font-normal text-[20px] leading-[30px]'>
               <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
