@@ -37,7 +37,6 @@ export default function Page() {
     // signOut('credentials');
   },[session])
 
-
   return (
     <main className='flex relative md:min-h-[1194px] sm:min-h-[1194px] xsm:h-[844px]'>
       <div className='blurSignin md:min-h-[1194px] sm:min-h-[1194px] bg-[rgba(255,219,184,1)] xsm:hidden w-[49.306vw] md:w-full sm:w-full h-[846px] flex gap-[13px] justify-center overflow-hidden'>
