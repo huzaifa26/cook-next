@@ -10,35 +10,42 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import "@/app/globals.css"
 
 export default function Page() {
   const session=useSession()
-  const router=useRouter()
+  const router=useRouter();
 
-  const formSubmitHandler = (e) => {
+  console.log(session);
+
+  const formSubmitHandler = async (e) => {
     e.preventDefault();
     const data = {
       email: e.target[0].value,
       password: e.target[1].value,
     }
 
-    signIn('credentials', data);
+    const result=await signIn('credentials', data);
+    console.log(result)
   }
 
   const googleSigninHandler = async() => {
-    signIn('google');
+    signIn('google',{callbackUrl:'/student-dashboard'});
   }
   const facebookSigninHandler = async() => {
     signIn('facebook');
   }
+  const linkedInSigninHandler = async() => {
+    signIn('linkedin');
+  }
 
-  useLayoutEffect(()=>{
-    console.log(session.status)
-    if(session.status === 'authenticated'){
-      router.push('/student-dashboard');
-    }
-    // signOut('credentials');
-  },[session])
+  // useLayoutEffect(()=>{
+  //   console.log(session.status)
+  //   if(session.status === 'authenticated'){
+  //     router.push('/student-dashboard');
+  //   }
+  //   // signOut('credentials');
+  // },[session])
 
   return (
     <main className='flex relative md:min-h-[1194px] sm:min-h-[1194px] xsm:h-[844px]'>
@@ -60,7 +67,7 @@ export default function Page() {
               <Image src={Facebook} alt="" />
               Continue with Facebook
             </button>
-            <button className='flex hover:bg-primaryLighten2  transition-all duration-200 items-center justify-center gap-[14px] w-[322px] xsm:w-full h-[56px] border border-[rgba(255,219,184,1)] font-outfit font-normal text-[20px] leading-[30px]'>
+            <button onClick={linkedInSigninHandler} className='flex hover:bg-primaryLighten2  transition-all duration-200 items-center justify-center gap-[14px] w-[322px] xsm:w-full h-[56px] border border-[rgba(255,219,184,1)] font-outfit font-normal text-[20px] leading-[30px]'>
               <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="32" height="31.6838" rx="3" fill="white" />
                 <path d="M27.2655 26.9967H22.5241V19.6446C22.5241 17.8914 22.4925 15.6345 20.0581 15.6345C17.5886 15.6345 17.2108 17.5447 17.2108 19.517V26.9962H12.4694V11.8773H17.0211V13.9435H17.0848C17.5404 13.1723 18.1986 12.5379 18.9895 12.1078C19.7803 11.6777 20.6742 11.4681 21.5758 11.5013C26.3815 11.5013 27.2675 14.6311 27.2675 18.7027L27.2655 26.9967ZM7.1195 9.81067C6.57531 9.81076 6.04329 9.65108 5.59076 9.3518C5.13822 9.05252 4.7855 8.62708 4.57716 8.1293C4.36882 7.63152 4.31421 7.08375 4.42029 6.55525C4.52636 6.02675 4.78833 5.54126 5.17307 5.16018C5.5578 4.7791 6.04803 4.51954 6.58174 4.41432C7.11546 4.3091 7.66869 4.36296 8.1715 4.56907C8.67431 4.77519 9.10409 5.1243 9.40651 5.57227C9.70893 6.02024 9.87041 6.54695 9.87051 7.08578C9.87057 7.44356 9.79945 7.79784 9.66124 8.1284C9.52302 8.45896 9.32043 8.75933 9.06497 9.01236C8.80952 9.26539 8.50621 9.46612 8.17241 9.6031C7.8386 9.74007 7.48083 9.8106 7.1195 9.81067ZM9.4902 26.9967H4.74386V11.8773H9.4902V26.9967ZM29.6293 0.00215867H2.36132C1.74241 -0.0047569 1.14602 0.231903 0.703253 0.660134C0.260483 1.08837 0.00755341 1.67313 0 2.28594V29.3974C0.00729489 30.0105 0.260076 30.5956 0.702831 31.0243C1.14559 31.453 1.74211 31.6901 2.36132 31.6836H29.6293C30.2497 31.6913 30.8479 31.4548 31.2924 31.0262C31.7369 30.5975 31.9914 30.0117 32 29.3974V2.28398C31.9912 1.66996 31.7365 1.08453 31.292 0.656308C30.8475 0.228088 30.2494 -0.00789643 29.6293 0.000201749" fill="#0A66C2" />

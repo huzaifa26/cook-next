@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import Facebook from "@/assets/Signup/Facebook.svg"
 import Google from "@/assets/Signup/Google.svg"
 import Image1 from '@/assets/Signup/Image1.png'
@@ -12,15 +12,15 @@ import { useRouter } from 'next/navigation'
 
 export default function Page() {
   const router=useRouter();
+  const [error,setError]=useState(null)
 
   const formSubmitHandler=async(e)=>{
     e.preventDefault();
 
     const data={
-      firstName:e.target[0].value,
-      lastName:e.target[1].value,
-      email:e.target[2].value,
-      password:e.target[3].value,
+      name:e.target[0].value,
+      email:e.target[1].value,
+      password:e.target[2].value,
     }
 
     try{
@@ -33,6 +33,7 @@ export default function Page() {
       })
 
       res.status === 201 && router.push("/signin");
+      res.status === 500 && setError("Error occured while creating account");
     } catch(error){
       console.log(error);
     }   
@@ -74,13 +75,9 @@ export default function Page() {
           <h3 className='font-redHatDisplay font-bold text-[20px] leading-[26.46px] text-center'>Sign up with email</h3>
           <form onSubmit={formSubmitHandler} className='w-[346px] xsm:w-[90vw] flex flex-col gap-[18px] items-center mt-[29px] mb-[62px] md:mb-[100px] sm:mb-[100px]'>
             <div className='w-full flex gap-[18px] xsm:flex-col'>
-              <div className='w-[164px] xsm:w-full flex flex-col gap-[2px]'>
-                <label className='font-outfit font-medium text-[16px] leading-[20.16px]' htmlFor="">First Name</label>
+              <div className='w-[100%] xsm:w-full flex flex-col gap-[2px]'>
+                <label className='font-outfit font-medium text-[16px] leading-[20.16px]' htmlFor="">Name</label>
                 <input className='p-[10px] outline-primary2  border border-[rgba(255,219,184,1)] h-[37px]' type="text" />
-              </div>
-              <div className='w-[164px] xsm:w-full flex flex-col gap-[2px]'>
-                <label className='font-outfit font-medium text-[16px] leading-[20.16px]' htmlFor="">Last Name</label>
-                <input className='p-[10px] outline-primary2 border border-[rgba(255,219,184,1)] h-[37px]' type="text" />
               </div>
             </div>
             <div className='w-full flex flex-col gap-[2px]'>
@@ -91,6 +88,10 @@ export default function Page() {
               <label className='font-outfit font-medium text-[16px] leading-[20.16px]' htmlFor="">Password</label>
               <input className='p-[10px] outline-primary2 border border-[rgba(255,219,184,1)] h-[37px]' type="text" />
             </div>
+            {
+              error &&
+              <p className='text-[red] font-outfit leading-[18px] text-[16px]'>{error}</p>
+            }
             <button type='submit' className='text-[white] hover:bg-[white] hover:text-primary2 border-2 border-primary2 transition-all duration-200 bg-primary2 h-[39px] w-[122px] rounded-[4px] font-outfit font-medium text-[18px] leading-[22.68px] mt-[11px]'>Join COOK</button>
           </form>
         </div>
