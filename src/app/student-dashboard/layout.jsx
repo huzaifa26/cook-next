@@ -7,7 +7,7 @@ import { redirect } from 'next/navigation'
 import Loading from "@/assets/Loading.svg"
 import Image from 'next/image'
 
-export default function layout({ children }) {
+export default function RootLayout({ children }) {
   const session=useSession({
     required:true,
     onUnauthenticated(){
