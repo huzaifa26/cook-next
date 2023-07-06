@@ -6,8 +6,12 @@ import LanguageModal from './LanguageModal'
 import Menu from './Menu'
 import Link from 'next/link'
 import Image from 'next/image'
+import LoginProfile from "@/assets/LoginProfile.png"
+import { useSession } from 'next-auth/react'
 
 export default function LegalNav() {
+  const session = useSession()
+
   const [currencyModal, setCurrencyModal] = useState(false);
   const [languageModal, setLanguageModal] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
@@ -84,14 +88,19 @@ export default function LegalNav() {
           </Link>
           <div className='h-[15px] border border-primary2 rouded-[16px]'></div>
           <div>
-            <Link href='/signin' className='group transition-all duration-200 hover:bg-primaryLighten2 hover:text-primary2 w-[131px] h-[41px] border-[2px] border-primaryLighten2 text-backPri font-outfit font-[500] text-[20px] leading-[25px] flex justify-center items-center gap-[8px] rounded-[4px]'>
-              Log In
-              <svg className='stroke-[white] group-hover:stroke-primary2 transition-all duration-200' width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M11.75 2.75H14.75C15.1478 2.75 15.5294 2.90804 15.8107 3.18934C16.092 3.47064 16.25 3.85218 16.25 4.25V14.75C16.25 15.1478 16.092 15.5294 15.8107 15.8107C15.5294 16.092 15.1478 16.25 14.75 16.25H11.75" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                <path d="M8 13.25L11.75 9.5L8 5.75" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                <path d="M11.75 9.5H2.75" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </Link>
+            {session.status === "authenticated" ? <Image className='w-[48px] h-[48px]' src={LoginProfile} alt='' />
+              :
+              <Link href='/signin'>
+                <button className='w-[131px] group border-2 border-primary2 hover:bg-[white] hover:border-2 hover:border-primary2 hover:text-primary2 transition-all duration-200 h-[41px] bg-primary2 text-backPri font-outfit font-[500] text-[20px] leading-[25px] flex justify-center items-center gap-[0.556vw] rounded-[4px]'>
+                  Log In
+                  <svg className='stroke-[white] group-hover:stroke-primary2 transition-all duration-200' width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.75 2.75H14.75C15.1478 2.75 15.5294 2.90804 15.8107 3.18934C16.092 3.47064 16.25 3.85218 16.25 4.25V14.75C16.25 15.1478 16.092 15.5294 15.8107 15.8107C15.5294 16.092 15.1478 16.25 14.75 16.25H11.75" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M8 13.25L11.75 9.5L8 5.75" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M11.75 9.5H2.75" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+              </Link>
+            }
           </div>
         </div>
         {/* <Image className='sm:block xsm:block hidden cursor-pointer' onClick={() => setShowMenu(true)} src={Hamburger} alt="" /> */}

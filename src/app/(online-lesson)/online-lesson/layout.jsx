@@ -4,6 +4,11 @@ import Video from "@/components/OnlineLesson/Video";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from 'react';
+import '@/app/globals.css'
+import { useSession } from 'next-auth/react'
+import { redirect } from 'next/navigation'
+import Loading from "@/assets/Loading.svg"
+import Image from 'next/image'
 
 export default function RootLayout({ children }) {
   const pathname=usePathname();
@@ -69,6 +74,21 @@ export default function RootLayout({ children }) {
   const handleDragEnd = (event) => {
     event.target.style.opacity = '1';
   };
+
+  const session=useSession({
+    required:true,
+    onUnauthenticated(){
+      redirect('/signin')
+    },
+  })
+
+  if(session.status === "loading"){
+    return(
+      <div className='w-screen h-screen flex justify-center items-center'>
+        <Image className='m-auto' src={Loading} alt=''/>
+      </div>
+    ) 
+  }
 
   return (
     <div className='min-h-screen max-h-screen w flex md:flex-col sm:flex-col xsm:flex-col'>
