@@ -1,7 +1,7 @@
 'use client'
 
-import DashboardLayout from '@/components/layout/DashboardLayout'
 import '@/app/globals.css'
+import DashboardLayout from '@/components/layout/DashboardLayout'
 import { useSession } from 'next-auth/react'
 import { redirect } from 'next/navigation'
 import Loading from "@/assets/Loading.svg"
