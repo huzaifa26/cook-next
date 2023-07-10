@@ -10,13 +10,13 @@ import Menu from './Menu'
 import { usePathname } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
+import ProfileDropDown from "../DropDowns/ProfileDropDown"
 
 const DashboardLayout = () => {
   const pathname = usePathname()
   const [currencyModal, setCurrencyModal] = useState(false);
   const [languageModal, setLanguageModal] = useState(false);
-
-  console.log(pathname)
+  const [profileModal, setProfileModal] = useState(false);
 
   const [showMenu, setShowMenu] = useState(false);
 
@@ -94,8 +94,9 @@ const DashboardLayout = () => {
                 </Link>
               </div>
               <div className='h-[15px] border border-primaryLighten2 rouded-[16px]'></div>
-              <div>
-                <Image src={user} alt="" className='h-[48px] w-[48px]' />
+              <div onClick={(e) => { setProfileModal(!profileModal); setLanguageModal(false); setCurrencyModal(false); e.stopPropagation(); }} className='relative'>
+                <Image className='w-[48px] h-[48px]' src={user} alt='' />
+                <ProfileDropDown state={profileModal} closeModal={() => setProfileModal(false)} />
               </div>
             </div>
             <div className='hidden cursor-pointer xsm:block sm:block md:block'>

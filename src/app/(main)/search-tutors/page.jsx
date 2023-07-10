@@ -148,7 +148,7 @@ export default function TutorList() {
               </svg>
 
               {sort && <div className='absolute top-[110%] right-0 w-[19.792vw] md:w-[27.784vw] sm:w-[27.784vw]'>
-                <div style={sort ? { borderBottomLeftRadius: "0", borderBottomRightRadius: "0" } : {}} className='cursor-pointer h-[67px] w-full rounded-[12px] flex relative border-2 border-[rgba(255,219,184,1)]'>
+                <div style={sort ? { borderBottomLeftRadius: "0", borderBottomRightRadius: "0" } : {}} className='cursor-pointer h-[67px] w-full rounded-[12px] flex relative border-2 border-[rgba(255,219,184,1)] bg-[white] select-none'>
                   <p name="" className='h-full flex items-center font-outfit font-normal md:text-[18px] md:leading-[27px] text-[18px] leading-[22.68px] text-TextColor flex-1 rounded-[12px] px-[20px]' id="">Sort By</p>
                 </div>
                 <SortBy />
