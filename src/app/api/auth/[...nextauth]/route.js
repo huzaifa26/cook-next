@@ -47,6 +47,14 @@ export const handler = NextAuth({
       },
     })
   ],
+  session: {
+    jwt: true,
+    maxAge: 120,
+  },
+  jwt: {
+    secret: process.env.JWT_SECRET,
+    maxAge: 120,
+  },
   callbacks: {
     async redirect({ url, baseUrl }) {
       return baseUrl + '/student-dashboard';
@@ -87,15 +95,20 @@ export const handler = NextAuth({
       } catch (err) {
         throw new Error(err)
       }
-
       return '/signin'
     },
+    async session({ session, token, user }) {
+      const expirationTime = new Date();
+      expirationTime.setMinutes(expirationTime.getMinutes() + 2);
 
-    // async session({ session, token, user }) {
-    //   session.accessToken = token.accessToken;
-    //   session.user.id = token.id;
-    //   return session
-    // }
+      await connect();
+      const dbUser = await User.findOne({ email: session.user.email })
+      session.accessToken = token.accessToken;
+      session.user.id = token.id;
+      // session.expires=expirationTime.toISOString()
+      session.data = dbUser
+      return session
+    }
   },
 })
 
