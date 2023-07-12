@@ -4,7 +4,7 @@ export const metadata = {
 }
 import "../globals.css"
 
-export default function Layout({ children }) {
+export default function RootLayout({ children }) {
   return (
     <body>
       {children}

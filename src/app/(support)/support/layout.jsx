@@ -8,7 +8,7 @@ export const metadata = {
   description: "Experience the joy of cooking in a whole new way with our engaging online cooking classes. Learn from the chefs, share your unique culinary knowledge, and join our growing foodie community",
 }
 
-export default function layout({ children }) {
+export default function RootLayout({ children }) {
   return (
     <body>
       <SupportNav />

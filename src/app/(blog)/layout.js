@@ -5,7 +5,7 @@ import Menu from '@/components/layout/Menu'
 import Link from 'next/link';
 import LandingFooter from '@/components/layout/LandingFooter';
 
-export default function Layout({children}) {
+export default function RootLayout({children}) {
 
   const [showMenu, setShowMenu] = useState(false);
   const [languageModal, setLanguageModal] = useState(false);

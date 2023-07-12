@@ -46,7 +46,7 @@ export default function page() {
             Linkedin
             <div className='flex-1 flex justify-end'>
               <svg className='' width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M20 6L9 17L4 12" stroke="#D27722" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M20 6L9 17L4 12" stroke="#D27722" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
           </button>
@@ -67,10 +67,10 @@ export default function page() {
         <button className='hover:text-primary2 hover:bg-[white] transition-all duration-200 group bg-primary2 text-[white] border rounded-[4px] border-primary2 px-[16px] py-[6px] font-outfit text-[18px] font-medium leading-normal flex gap-[8px] items-center'>
           Delete
           <svg className='group-hover:stroke-primary2 transition-all duration-200 stroke-[white]' width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2.25 5H3.75H15.75" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M14.25 5V15.5C14.25 15.8978 14.092 16.2794 13.8107 16.5607C13.5294 16.842 13.1478 17 12.75 17H5.25C4.85218 17 4.47064 16.842 4.18934 16.5607C3.90804 16.2794 3.75 15.8978 3.75 15.5V5M6 5V3.5C6 3.10218 6.15804 2.72064 6.43934 2.43934C6.72064 2.15804 7.10218 2 7.5 2H10.5C10.8978 2 11.2794 2.15804 11.5607 2.43934C11.842 2.72064 12 3.10218 12 3.5V5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M7.5 8.75V13.25" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M10.5 8.75V13.25" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M2.25 5H3.75H15.75" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M14.25 5V15.5C14.25 15.8978 14.092 16.2794 13.8107 16.5607C13.5294 16.842 13.1478 17 12.75 17H5.25C4.85218 17 4.47064 16.842 4.18934 16.5607C3.90804 16.2794 3.75 15.8978 3.75 15.5V5M6 5V3.5C6 3.10218 6.15804 2.72064 6.43934 2.43934C6.72064 2.15804 7.10218 2 7.5 2H10.5C10.8978 2 11.2794 2.15804 11.5607 2.43934C11.842 2.72064 12 3.10218 12 3.5V5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M7.5 8.75V13.25" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M10.5 8.75V13.25" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>
       </div>

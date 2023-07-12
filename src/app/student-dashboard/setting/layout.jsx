@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
 
-export default function layout({ children }) {
+export default function RootLayout({ children }) {
   const pathname = usePathname()
   return (
     <div className='px-[12.153vw] flex gap-x-[20px] mt-[50px] mb-[183px]'>

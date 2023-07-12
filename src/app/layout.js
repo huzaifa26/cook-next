@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
       <head>
         <meta charSet="UTF-8" />
         <title>Learn cooking online | COOK</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="Experience the joy of cooking in a whole new way with our engaging online cooking classes. Learn from the chefs, share your unique culinary knowledge, and join our growing foodie community" />

@@ -49,11 +49,11 @@ export const handler = NextAuth({
   ],
   session: {
     jwt: true,
-    maxAge: 120,
+    maxAge: 14 * 24 * 60 * 60,
   },
   jwt: {
     secret: process.env.JWT_SECRET,
-    maxAge: 120,
+    maxAge: 14 * 24 * 60 * 60,
   },
   callbacks: {
     async redirect({ url, baseUrl }) {
