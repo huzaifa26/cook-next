@@ -1,11 +1,40 @@
+'use client'
 import Image from 'next/image'
 import React from 'react'
 import VerifyEmail from "@/assets/VerifyEmail.png"
 import "@/app/globals.css"
 import StudentIcon from "@/assets/AccountType/StudentIcon.png"
 import GroupIcon from "@/assets/AccountType/GroupIcon.png"
+import { useSession } from 'next-auth/react'
 
 export default function page() {
+
+  const session = useSession()
+
+  const accountTypeHandler = async (type) => {
+
+    const data = {
+      userId: session?.data?.data?._id,
+      accountType: type
+    }
+
+    return
+    try {
+      const res = await fetch('http://localhost:3000/api/auth/account-type', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      })
+
+      res.status === 201 && router.push("/account-type");
+      res.status === 500 && setError("Error occured while creating account");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <div className='flex flex-col items-center justify-center w-scree h-screen relative'>
       <svg className='absolute top-[0px] left-[0px] max-h-screen min-h-screen md:hidden sm:hidden xsm:hidden' viewBox="0 0 266 833" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -17,14 +46,15 @@ export default function page() {
 
       <div className='flex flex-col items-center justify-center h-full'>
         <h1 className='font-rubik text-[32px] font-bold leading-normal tracking-[-0.64px]'>I want to be...</h1>
-        <div className='w-[641px] h-[116px] border border-primaryLighten2 rounded-[8px] p-[16px] flex gap-[20px] mt-[41px] hover:scale-[1.02] transition-all duration-200 cursor-pointer' style={{ boxShadow: '0px 0px 0px 0px rgba(39, 122, 3, 0.03), 0px 5px 11px 0px rgba(39, 122, 3, 0.03), 0px 21px 21px 0px rgba(39, 122, 3, 0.03), 0px 47px 28px 0px rgba(39, 122, 3, 0.02), 0px 83px 33px 0px rgba(39, 122, 3, 0.00), 0px 130px 36px 0px rgba(39, 122, 3, 0.00)' }}>
+        <div onClick={() => accountTypeHandler("student")} className='w-[641px] h-[116px] border border-primaryLighten2 rounded-[8px] p-[16px] flex gap-[20px] mt-[41px] hover:scale-[1.02] transition-all duration-200 cursor-pointer' style={{ boxShadow: '0px 0px 0px 0px rgba(39, 122, 3, 0.03), 0px 5px 11px 0px rgba(39, 122, 3, 0.03), 0px 21px 21px 0px rgba(39, 122, 3, 0.03), 0px 47px 28px 0px rgba(39, 122, 3, 0.02), 0px 83px 33px 0px rgba(39, 122, 3, 0.00), 0px 130px 36px 0px rgba(39, 122, 3, 0.00)' }}>
           <Image src={StudentIcon} className='w-[64px] h-[64px]' alt=''></Image>
           <div>
             <h2 className='text-[24px] font-rubik font-semibold tracking-[-0.48px] leading-normal'>Student</h2>
             <p className='text-[16px] font-outfit font-normal leading-[160%]'>Learn directly from professionals, expand your cooking skills, and interact with passionate chefs from all around the world.</p>
           </div>
         </div>
-        <div className='w-[641px] h-[116px] border border-primaryLighten2 rounded-[8px] p-[16px] flex gap-[20px] mt-[20px] hover:scale-[1.02] transition-all duration-200 cursor-pointer' style={{ boxShadow: '0px 0px 0px 0px rgba(39, 122, 3, 0.03), 0px 5px 11px 0px rgba(39, 122, 3, 0.03), 0px 21px 21px 0px rgba(39, 122, 3, 0.03), 0px 47px 28px 0px rgba(39, 122, 3, 0.02), 0px 83px 33px 0px rgba(39, 122, 3, 0.00), 0px 130px 36px 0px rgba(39, 122, 3, 0.00)' }}>
+
+        <div onClick={() => accountTypeHandler("chef")} className='w-[641px] h-[116px] border border-primaryLighten2 rounded-[8px] p-[16px] flex gap-[20px] mt-[20px] hover:scale-[1.02] transition-all duration-200 cursor-pointer' style={{ boxShadow: '0px 0px 0px 0px rgba(39, 122, 3, 0.03), 0px 5px 11px 0px rgba(39, 122, 3, 0.03), 0px 21px 21px 0px rgba(39, 122, 3, 0.03), 0px 47px 28px 0px rgba(39, 122, 3, 0.02), 0px 83px 33px 0px rgba(39, 122, 3, 0.00), 0px 130px 36px 0px rgba(39, 122, 3, 0.00)' }}>
           <Image src={GroupIcon} className='w-[64px] h-[64px]' alt=''></Image>
           <div>
             <h2 className='text-[24px] font-rubik font-semibold tracking-[-0.48px] leading-normal'>Chef</h2>

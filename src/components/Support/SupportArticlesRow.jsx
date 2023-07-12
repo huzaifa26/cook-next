@@ -3,7 +3,6 @@ import { useRouter } from "next/navigation"
 
 export default function SupportArticlesRow({ articleTitle,category }) {
   const router=useRouter()
-  console.log(articleTitle,category)
   return (
     <div onClick={() => {router.push(`/support/${category}/${articleTitle.articleTitle}`)}} className='cursor-pointer flex justify-between items-center pl-[10px] pt-[24px]'>
       <p className='min-w-[60vw] font-outfit font-medium text-[18px] leading-[22.68px] py-[10.5px]'>{articleTitle.articleTitle}</p>

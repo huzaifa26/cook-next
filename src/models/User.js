@@ -6,7 +6,8 @@ const userSchema = new mongoose.Schema({
   email_verified: { type: Boolean, required: true },
   password: { type: String },
   picture: { type: String },
-  provider: { type: String, required: true }
+  provider: { type: String, required: true },
+  accountType: { type: String }
 });
 
 export const User = mongoose.models.User || mongoose.model('User', userSchema)

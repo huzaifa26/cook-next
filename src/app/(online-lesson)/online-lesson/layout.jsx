@@ -69,7 +69,6 @@ export default function RootLayout({ children }) {
     // event.dataTransfer.setDragImage(img, 0, 0);
   };
 
-  console.log(imgRef.current)
 
   const handleDragEnd = (event) => {
     event.target.style.opacity = '1';

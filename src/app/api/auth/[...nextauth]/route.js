@@ -6,8 +6,9 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import LinkedInProvider from "next-auth/providers/linkedin";
+import { getServerSession } from "next-auth";
 
-export const handler = NextAuth({
+export const authOptions={
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
@@ -56,7 +57,12 @@ export const handler = NextAuth({
     maxAge: 14 * 24 * 60 * 60,
   },
   callbacks: {
-    async redirect({ url, baseUrl }) {
+    async jwt({token,user, account, profile, isNewUser}){
+      console.log(token,user, account, profile, isNewUser)
+      token.user=user
+      return token
+    },
+    async redirect({ url, baseUrl  }) {
       return baseUrl + '/student-dashboard';
     },
     async signIn({ profile, account }) {
@@ -65,6 +71,7 @@ export const handler = NextAuth({
       }
 
       await connect();
+
       try {
         const user = await User.findOne({ email: profile.email })
         if (account.provider === 'google' || account.provider === 'facebook' || account.provider === 'linkedin') {
@@ -108,8 +115,11 @@ export const handler = NextAuth({
       // session.expires=expirationTime.toISOString()
       session.data = dbUser
       return session
-    }
+    },
+
   },
-})
+}
+
+export const handler = NextAuth(authOptions)
 
 export { handler as GET, handler as POST }

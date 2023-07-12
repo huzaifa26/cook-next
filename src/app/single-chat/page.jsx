@@ -9,7 +9,6 @@ import { useSelector } from 'react-redux';
 export default function Page () {
   const router=useRouter()
   const singleChat=useSelector((state)=> state.chat.singleChat)
-  console.log(singleChat)
   let userId = 1
 
   return (

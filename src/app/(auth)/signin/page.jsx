@@ -16,7 +16,6 @@ export default function Page() {
   const session = useSession()
   const router = useRouter();
 
-  console.log(session);
 
   const formSubmitHandler = async (e) => {
     e.preventDefault();
@@ -26,7 +25,6 @@ export default function Page() {
     }
 
     const result = await signIn('credentials', data);
-    console.log(result)
   }
 
   const googleSigninHandler = async () => {
@@ -40,7 +38,6 @@ export default function Page() {
   }
 
   // useLayoutEffect(()=>{
-  //   console.log(session.status)
   //   if(session.status === 'authenticated'){
   //     router.push('/student-dashboard');
   //   }

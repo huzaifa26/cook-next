@@ -1,8 +1,33 @@
-import Image from 'next/image'
-import React from 'react'
+'use client'
+
 import VerifyEmail from "@/assets/VerifyEmail.png"
+import Image from 'next/image'
+import { useSearchParams } from 'next/navigation'
+import { useEffect } from 'react'
+import emailjs from '@emailjs/browser';
 
 export default function page() {
+  const searchParams = useSearchParams();
+
+  const sendEmail = () => {
+    var templateParams = {
+      userName: searchParams.get("name"),
+      email: searchParams.get("email"),
+      link: `http://localhost:3000/mail-verified?name=${searchParams.get("name")}&email=${searchParams.get("email")}`
+    };
+
+    emailjs.send('service_yojp3ta', 'template_esjz3t3', templateParams,'PCrkZDdTgRVPTxMHf')
+      .then(function (response) {
+        console.log('SUCCESS!', response.status, response.text);
+      }, function (error) {
+        console.log('FAILED...', error);
+      });
+  }
+
+  useEffect(() => {
+    sendEmail();
+  }, [])
+
   return (
     <div className='flex flex-col items-center justify-center w-scree h-screen relative'>
       <svg className='absolute top-[0px] left-[0px] max-h-screen min-h-screen md:hidden sm:hidden xsm:hidden' viewBox="0 0 266 833" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -22,7 +47,7 @@ export default function page() {
         <Image className='w-[202px]' src={VerifyEmail} alt='' />
         <h1 className='font-rubik text-[42px] font-medium leading-[-0.84px] mt-[38px]'>Verify your email</h1>
         <p className='font-outfit text-[24px] font-normal leading-[-0.48px] mt-[16px] lg:w-[500px] text-center'>Check your email & click the link to activate your account.</p>
-        <button className='hover:text-primary2 hover:bg-[white] transition-all duration-200 group bg-primary2 text-[white] border rounded-[4px] border-primary2 px-[16px] py-[6px] font-outfit text-[18px] font-medium leading-normal flex gap-[8px] items-center mt-[38px]'>
+        <button onClick={() => sendEmail()} className='hover:text-primary2 hover:bg-[white] transition-all duration-200 group bg-primary2 text-[white] border rounded-[4px] border-primary2 px-[16px] py-[6px] font-outfit text-[18px] font-medium leading-normal flex gap-[8px] items-center mt-[38px]'>
           Resend Email
         </button>
       </div>

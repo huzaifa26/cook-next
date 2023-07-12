@@ -195,7 +195,6 @@ export default function Page() {
   const userId = 1;
   const handleCardClick = (chatId) => {
     const selectedChat = allChats.find((chat) => chat.id === chatId);
-    console.log(selectedChat)
     if (window.innerWidth < 577) {
       dispatch(addSingleChat(selectedChat))
       router.push('/single-chat')

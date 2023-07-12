@@ -12,7 +12,6 @@ import ProfileDropDown from '../DropDowns/ProfileDropDown'
 
 export default function LandingNav() {
   const session = useSession();
-  console.log(session);
 
   const [currencyModal, setCurrencyModal] = useState(false);
   const [languageModal, setLanguageModal] = useState(false);

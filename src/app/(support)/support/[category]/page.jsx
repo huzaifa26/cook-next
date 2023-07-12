@@ -9,7 +9,6 @@ import { useParams } from 'next/navigation';
 export default function SupportArticles() {
   const router = useRouter()
   const params = useParams();
-  console.log(params.category)
 
   return (
     <>
