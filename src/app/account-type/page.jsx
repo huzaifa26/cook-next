@@ -6,13 +6,13 @@ import Image from 'next/image'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 export default function page() {
-  const searchParams=useSearchParams();
-  const router=useRouter()
+  const searchParams = useSearchParams();
+  const router = useRouter()
 
   const accountTypeHandler = async (type) => {
     const data = {
-      name:searchParams.get('name'),
-      email:searchParams.get('email'),
+      name: searchParams.get('name'),
+      email: searchParams.get('email'),
       accountType: type
     }
 
@@ -24,9 +24,17 @@ export default function page() {
         },
         body: JSON.stringify(data)
       })
-      res= await res.json()
+      res = await res.json()
 
-      res.status === 201 && router.push(`/verify-mail?name=${data.name}&email=${data.email}`);
+      if (res.status === 201) {
+        if(searchParams.get('email_verified')){
+          setTimeout(()=>{
+            router.push(`/student-dashboard`);
+          },3000)
+        }else{
+          router.push(`/verify-mail?name=${data.name}&email=${data.email}`);
+        }
+      }
     } catch (error) {
       console.log(error);
     }

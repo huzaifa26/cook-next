@@ -23,6 +23,12 @@ export default function RootLayout({ children }) {
     ) 
   }
 
+  if(!session?.data?.data.accountType){
+    redirect(`/account-type?name=${session?.data?.data.name}&email=${session?.data?.data.email}&email_verified=${session?.data?.data.email_verified}`)
+  }
+
+
+
   return (
     <>
       <DashboardLayout />
