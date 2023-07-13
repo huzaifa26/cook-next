@@ -5,7 +5,7 @@ import StudentIcon from "@/assets/AccountType/StudentIcon.png"
 import Image from 'next/image'
 import { useRouter, useSearchParams } from 'next/navigation'
 
-export default function page() {
+export default function Page() {
   const searchParams = useSearchParams();
   const router = useRouter()
 

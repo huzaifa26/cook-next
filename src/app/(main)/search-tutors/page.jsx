@@ -43,7 +43,7 @@ export default function TutorList() {
     return () => {
       window.removeEventListener('resize', windowWidthHandler);
     };
-  }, [])
+  })
 
   const handleScroll = () => {
     const currentScrollLeft = scrollRef.current.scrollLeft;

@@ -8,7 +8,7 @@ export default function Notes() {
     if (targetRef.current) {
       targetRef.current.scrollIntoView({ behavior: 'smooth' });
     }
-  }, []);
+  });
 
   return (
     <div className='hideScrollbar pr-[64px] flex flex-col gap-[21px] pl-[20px] py-[46px] overflow-scroll max-h-[calc(100vh-114px)] overflow-x-hidden'>

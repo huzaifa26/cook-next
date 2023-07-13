@@ -6,7 +6,7 @@ import "@/app/globals.css"
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation'
 
-export default function page() {
+export default function Page() {
   const [loading, setLoading] = useState(true);
   const [counter, setCounter] = useState(5);
   const router = useRouter();
@@ -22,7 +22,7 @@ export default function page() {
       clearTimeout(timeoutRef.current)
       clearInterval(intervalRef.current)
     }
-  }, [])
+  })
 
   const [error, setError] = useState(null);
 

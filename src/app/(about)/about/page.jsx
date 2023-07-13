@@ -47,7 +47,7 @@ export default function Page() {
     return () => {
       document.removeEventListener('scroll', onScrollHandler)
     }
-  }, [])
+  })
   const [showMenu, setShowMenu] = useState(false);
   return (
     <div>

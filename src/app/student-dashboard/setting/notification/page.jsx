@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-export default function page() {
+export default function Page() {
 
   return (
     <div className='border border-primaryLighten2 min-h-[492px] rounded-[8px] w-full pl-[2.569vw] pr-[3.056vw] pt-[46px]'>

@@ -6,7 +6,7 @@ import { useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 import emailjs from '@emailjs/browser';
 
-export default function page() {
+export default function Page() {
   const searchParams = useSearchParams();
 
   const sendEmail = () => {
@@ -26,7 +26,7 @@ export default function page() {
 
   useEffect(() => {
     sendEmail();
-  }, [])
+  })
 
   return (
     <div className='flex flex-col items-center justify-center w-scree h-screen relative'>

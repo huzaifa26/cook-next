@@ -3,7 +3,7 @@ import Facebook from "@/assets/Signup/Facebook.svg";
 import Google from "@/assets/Signup/Google.svg";
 import Image from 'next/image';
 
-export default function page() {
+export default function Page() {
   return (
     <div className='border border-primaryLighten2 min-h-[648px] rounded-[8px] w-full pl-[2.569vw] pr-[3.056vw] pt-[46px]'>
       <div className='flex justify-between items-center'>
