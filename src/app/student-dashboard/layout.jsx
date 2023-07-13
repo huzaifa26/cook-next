@@ -3,11 +3,12 @@
 import '@/app/globals.css'
 import DashboardLayout from '@/components/layout/DashboardLayout'
 import { useSession } from 'next-auth/react'
-import { redirect } from 'next/navigation'
+import { redirect, useSearchParams } from 'next/navigation'
 import Loading from "@/assets/Loading.svg"
 import Image from 'next/image'
 
 export default function RootLayout({ children }) {
+  const searchParams=useSearchParams()
   const session=useSession({
     required:true,
     onUnauthenticated(){
@@ -22,8 +23,10 @@ export default function RootLayout({ children }) {
       </div>
     ) 
   }
-
-  if(!session?.data?.data.accountType){
+  // console.log(!session?.data?.data.accountType && !searchParams.get("accountType"));
+  // console.log(!searchParams.get("accountType"))
+  // console.log(searchParams.get("name"))
+  if(!session?.data?.data.accountType && !searchParams.get("accountType")){
     redirect(`/account-type?name=${session?.data?.data.name}&email=${session?.data?.data.email}&email_verified=${session?.data?.data.email_verified}`)
   }
 
