@@ -2,6 +2,7 @@
 import "@/app/globals.css"
 import GroupIcon from "@/assets/AccountType/GroupIcon.png"
 import StudentIcon from "@/assets/AccountType/StudentIcon.png"
+import { API_URL } from "@/utils/consts"
 import Image from 'next/image'
 import { useRouter, useSearchParams } from 'next/navigation'
 
@@ -17,7 +18,7 @@ export default function Page() {
     }
 
     try {
-      let res = await fetch('http://localhost:3000/api/auth/account-type', {
+      let res = await fetch(API_URL+'/api/auth/account-type', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

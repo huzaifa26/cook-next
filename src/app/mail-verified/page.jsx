@@ -5,6 +5,7 @@ import VerifyEmail from "@/assets/VerifyEmail.png"
 import "@/app/globals.css"
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation'
+import { API_URL } from '@/utils/consts'
 
 export default function Page() {
   const [loading, setLoading] = useState(true);
@@ -33,7 +34,7 @@ export default function Page() {
     }
 
     try {
-      let res = await fetch('http://localhost:3000/api/auth/verify-mail', {
+      let res = await fetch(API_URL+'api/auth/verify-mail', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

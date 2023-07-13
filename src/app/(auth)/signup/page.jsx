@@ -12,6 +12,7 @@ import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 import "@/app/globals.css"
 import Loading from '@/components/utils/Loading'
+import { API_URL } from '@/utils/consts'
 
 
 export default function Page() {
@@ -48,7 +49,7 @@ export default function Page() {
     }
 
     try {
-      let res = await fetch('http://localhost:3000/api/auth/signup', {
+      let res = await fetch(API_URL+'api/auth/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

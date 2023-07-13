@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 import emailjs from '@emailjs/browser';
+import { API_URL } from "@/utils/consts"
 
 export default function Page() {
   const searchParams = useSearchParams();
@@ -13,7 +14,7 @@ export default function Page() {
     var templateParams = {
       userName: searchParams.get("name"),
       email: searchParams.get("email"),
-      link: `http://localhost:3000/mail-verified?name=${searchParams.get("name")}&email=${searchParams.get("email")}`
+      link: `${API_URL}mail-verified?name=${searchParams.get("name")}&email=${searchParams.get("email")}`
     };
 
     emailjs.send('service_yojp3ta', 'template_esjz3t3', templateParams,'PCrkZDdTgRVPTxMHf')
