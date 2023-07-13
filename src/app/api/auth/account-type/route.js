@@ -5,23 +5,39 @@ import { User } from "@/models/User";
 import mongoose from "mongoose";
 
 export const POST = async (request) => {
-  const { userId, accountType } = await request.json();
+  const { name, email, accountType } = await request.json();
+
 
   await connect();
   try {
-    const result = await User.updateOne({ _id: mongoose.Types.ObjectId(userId) }, {
+    const result = await User.updateOne({ email: email, name: name }, {
       $set: {
         accountType: accountType
       }
     });
 
-    return new NextResponse("User has been updated", {
-      status: 201,
-      data: result
-    })
+    return new NextResponse(
+      JSON.stringify({
+        message: "Account type added",
+        status: 201,
+        data: result
+      }),
+      {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
   } catch (error) {
-    return new NextResponse(error.message, {
-      status: 500,
-    })
+    return new NextResponse(
+      JSON.stringify({
+        message: "Adding account type failed",
+        error: error,
+        status: 500,
+      }),
+      {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
   }
 }

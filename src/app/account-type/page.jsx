@@ -1,35 +1,32 @@
 'use client'
-import Image from 'next/image'
-import React from 'react'
-import VerifyEmail from "@/assets/VerifyEmail.png"
 import "@/app/globals.css"
-import StudentIcon from "@/assets/AccountType/StudentIcon.png"
 import GroupIcon from "@/assets/AccountType/GroupIcon.png"
-import { useSession } from 'next-auth/react'
+import StudentIcon from "@/assets/AccountType/StudentIcon.png"
+import Image from 'next/image'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 export default function page() {
-
-  const session = useSession()
+  const searchParams=useSearchParams();
+  const router=useRouter()
 
   const accountTypeHandler = async (type) => {
-
     const data = {
-      userId: session?.data?.data?._id,
+      name:searchParams.get('name'),
+      email:searchParams.get('email'),
       accountType: type
     }
 
-    return
     try {
-      const res = await fetch('http://localhost:3000/api/auth/account-type', {
+      let res = await fetch('http://localhost:3000/api/auth/account-type', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data)
       })
+      res= await res.json()
 
-      res.status === 201 && router.push("/account-type");
-      res.status === 500 && setError("Error occured while creating account");
+      res.status === 201 && router.push(`/verify-mail?name=${data.name}&email=${data.email}`);
     } catch (error) {
       console.log(error);
     }

@@ -57,7 +57,7 @@ export default function Page() {
       })
       res= await res.json();
 
-      res.status === 201 && router.push(`/verify-mail?name=${data.name}&email=${data.email}`);
+      res.status === 201 && router.push(`/account-type?name=${data.name}&email=${data.email}`);
       res.status === 409 && setError("Account with this email already exists");
       res.status === 500 && setError("Error occured while creating account");
       setLoading(false);
