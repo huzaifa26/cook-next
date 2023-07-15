@@ -18,7 +18,7 @@ export default function Page() {
     }
 
     try {
-      let res = await fetch(API_URL+'/api/auth/account-type', {
+      let res = await fetch(API_URL+'api/auth/account-type', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

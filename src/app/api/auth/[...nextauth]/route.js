@@ -8,7 +8,7 @@ import FacebookProvider from "next-auth/providers/facebook";
 import LinkedInProvider from "next-auth/providers/linkedin";
 import { getServerSession } from "next-auth";
 
-export const authOptions={
+export const authOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
@@ -21,6 +21,7 @@ export const authOptions={
     LinkedInProvider({
       clientId: process.env.LINKEDIN_CLIENT_ID,
       clientSecret: process.env.LINKEDIN_CLIENT_SECRET,
+      scope: 'r_liteprofile',
     }),
     CredentialsProvider({
       id: "credentials",
@@ -57,18 +58,20 @@ export const authOptions={
     maxAge: 14 * 24 * 60 * 60,
   },
   callbacks: {
-    async jwt({token,user, account, profile, isNewUser}){
-      console.log(token,user, account, profile, isNewUser)
-      token.user=user
+    async jwt({ token, user, account, profile, isNewUser }) {
+      console.log(token, user, account, profile, isNewUser)
+      token.user = user
       return token
     },
-    async redirect({ url, baseUrl  }) {
+    async redirect({ url, baseUrl }) {
       return baseUrl + '/student-dashboard';
     },
-    async signIn({ profile, account }) {
+    async signIn({ user, account, profile, email, credentials }) {
       if (account.provider === "credentials") {
         return true
       }
+
+      const authUser = user;
 
       await connect();
 
@@ -82,11 +85,13 @@ export const authOptions={
               return '/signin'
             }
           } else {
+
+
             const newUser = new User({
-              email: profile.email,
-              email_verified: profile.email_verified,
-              picture: profile.picture,
-              name: profile.name,
+              email: authUser.email,
+              email_verified: account?.email_verified || true,
+              picture: authUser.image,
+              name: authUser.name,
               provider: account.provider,
             })
 
