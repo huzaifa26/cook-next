@@ -17,7 +17,6 @@ export default function RootLayout({ children }) {
     },
   })
 
-  console.log(session?.status);
 
   if (session.status === "loading") {
     return (

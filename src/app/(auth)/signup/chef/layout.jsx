@@ -2,11 +2,14 @@
 import CurrencyModal from '@/components/layout/CurrencyModal';
 import LanguageModal from '@/components/layout/LanguageModal';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import React, { useState } from 'react';
 
-export default function RootLayout() {
+export default function RootLayout({children}) {
   const [currencyModal, setCurrencyModal] = useState(false);
   const [languageModal, setLanguageModal] = useState(false);
+
+  const pathname = usePathname();
 
   return (
     <>
@@ -45,17 +48,66 @@ export default function RootLayout() {
         </div>
       </nav>
 
-      <main>
-        <div className='w-[727px] h-[45px]'>
+      <main className='w-full '>
+        <div className='w-[727px] h-[45px] flex gap-[6px] m-auto mt-[36px]'>
           <div className='flex gap-[8px] items-center'>
-            <p className='w-[25px] h-[25px] text-primaryLighten2 border border-primaryLighten2 flex justify-center items-center rounded-full font-outfit text-[14px] font-medium leading-normal'>1</p>
-            <p className='text-[14px] font-medium leading-normal text-TextColor opacity-[0.4]'>About</p>
+            <p className={pathname === '/signup/chef' ? 'w-[25px] h-[25px] text-[white] bg-primary2 border border-primary2 flex justify-center items-center rounded-full font-outfit text-[14px] font-medium leading-normal' : 'w-[25px] h-[25px] text-primaryLighten2 border border-primaryLighten2 flex justify-center items-center rounded-full font-outfit text-[14px] font-medium leading-normal'}>1</p>
+            <p className={pathname === '/signup/chef' ? 'text-[14px] font-medium leading-normal text-primary2' : 'text-[14px] font-medium leading-normal text-TextColor opacity-[0.4]'}>Photo</p>
             <div className='w-[22px] h-[23px] ml-[-2px] flex justify-center items-center'>
-              <svg className='stroke-primaryLighten2' width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg className={pathname === '/signup/chef' ? 'stroke-primary2' : 'stroke-primaryLighten2'} width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1.5 9L5.5 5L1.5 1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </div>
           </div>
+
+          <div className='flex gap-[8px] items-center'>
+            <p className={pathname === '/signup/chef/photo' ? 'w-[25px] h-[25px] text-[white] bg-primary2 border border-primary2 flex justify-center items-center rounded-full font-outfit text-[14px] font-medium leading-normal' : 'w-[25px] h-[25px] text-primaryLighten2 border border-primaryLighten2 flex justify-center items-center rounded-full font-outfit text-[14px] font-medium leading-normal'}>2</p>
+            <p className={pathname === '/signup/chef/photo' ? 'text-[14px] font-medium leading-normal text-primary2' : 'text-[14px] font-medium leading-normal text-TextColor opacity-[0.4]'}>Description</p>
+            <div className='w-[22px] h-[23px] ml-[-2px] flex justify-center items-center'>
+              <svg className={pathname === '/signup/chef/photo' ? 'stroke-primary2' : 'stroke-primaryLighten2'} width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.5 9L5.5 5L1.5 1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </div>
+          </div>
+
+          <div className='flex gap-[8px] items-center'>
+            <p className={pathname === '/signup/chef/description' ? 'w-[25px] h-[25px] text-[white] bg-primary2 border border-primary2 flex justify-center items-center rounded-full font-outfit text-[14px] font-medium leading-normal' : 'w-[25px] h-[25px] text-primaryLighten2 border border-primaryLighten2 flex justify-center items-center rounded-full font-outfit text-[14px] font-medium leading-normal'}>3</p>
+            <p className={pathname === '/signup/chef/description' ? 'text-[14px] font-medium leading-normal text-primary2' : 'text-[14px] font-medium leading-normal text-TextColor opacity-[0.4]'}>Video</p>
+            <div className='w-[22px] h-[23px] ml-[-2px] flex justify-center items-center'>
+              <svg className={pathname === '/signup/chef/description' ? 'stroke-primary2' : 'stroke-primaryLighten2'} width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.5 9L5.5 5L1.5 1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </div>
+          </div>
+
+          <div className='flex gap-[8px] items-center'>
+            <p className={pathname === '/signup/chef/video' ? 'w-[25px] h-[25px] text-[white] bg-primary2 border border-primary2 flex justify-center items-center rounded-full font-outfit text-[14px] font-medium leading-normal' : 'w-[25px] h-[25px] text-primaryLighten2 border border-primaryLighten2 flex justify-center items-center rounded-full font-outfit text-[14px] font-medium leading-normal'}>4</p>
+            <p className={pathname === '/signup/chef/video' ? 'text-[14px] font-medium leading-normal text-primary2' : 'text-[14px] font-medium leading-normal text-TextColor opacity-[0.4]'}>Availability</p>
+            <div className='w-[22px] h-[23px] ml-[-2px] flex justify-center items-center'>
+              <svg className={pathname === '/signup/chef/video' ? 'stroke-primary2' : 'stroke-primaryLighten2'} width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.5 9L5.5 5L1.5 1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </div>
+          </div>
+
+          <div className='flex gap-[8px] items-center'>
+            <p className={pathname === '/signup/chef/availability' ? 'w-[25px] h-[25px] text-[white] bg-primary2 border border-primary2 flex justify-center items-center rounded-full font-outfit text-[14px] font-medium leading-normal' : 'w-[25px] h-[25px] text-primaryLighten2 border border-primaryLighten2 flex justify-center items-center rounded-full font-outfit text-[14px] font-medium leading-normal'}>5</p>
+            <p className={pathname === '/signup/chef/availability' ? 'text-[14px] font-medium leading-normal text-primary2' : 'text-[14px] font-medium leading-normal text-TextColor opacity-[0.4]'}>Pricing</p>
+            <div className='w-[22px] h-[23px] ml-[-2px] flex justify-center items-center'>
+              <svg className={pathname === '/signup/chef/availability' ? 'stroke-primary2' : 'stroke-primaryLighten2'} width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.5 9L5.5 5L1.5 1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </div>
+          </div>
+
+          <div className='flex gap-[8px] items-center'>
+            <p className={pathname === '/signup/chef/pricing' ? 'w-[25px] h-[25px] text-[white] bg-primary2 border border-primary2 flex justify-center items-center rounded-full font-outfit text-[14px] font-medium leading-normal' : 'w-[25px] h-[25px] text-primaryLighten2 border border-primaryLighten2 flex justify-center items-center rounded-full font-outfit text-[14px] font-medium leading-normal'}>6</p>
+            <p className={pathname === '/signup/chef/pricing' ? 'text-[14px] font-medium leading-normal text-primary2' : 'text-[14px] font-medium leading-normal text-TextColor opacity-[0.4]'}>About</p>
+          </div>
+        </div>
+
+        <div className='w-[58.472vw] border border-primaryLighten2 rounded-[16px] min-h-[667px] m-auto mb-[112px] mt-[90px] '>
+          {children}
         </div>
       </main>
     </>
