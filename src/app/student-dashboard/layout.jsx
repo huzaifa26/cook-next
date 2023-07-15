@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
   // console.log(!session?.data?.data.accountType && !searchParams.get("accountType"));
   // console.log(!searchParams.get("accountType"))
   // console.log(searchParams.get("name"))
-  if(!session?.data?.data.accountType && !searchParams.get("accountType")){
+  if(!session?.data?.data?.accountType && !searchParams.get("accountType")){
     redirect(`/account-type?name=${session?.data?.data.name}&email=${session?.data?.data.email}&email_verified=${session?.data?.data.email_verified}`)
   }
 
