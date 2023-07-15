@@ -1,14 +1,27 @@
-import React from 'react'
+'use client'
+import React, { useEffect, useState } from 'react'
 import Facebook from "@/assets/Signup/Facebook.svg";
 import Google from "@/assets/Signup/Google.svg";
 import Image from 'next/image';
+import { useSession } from 'next-auth/react';
 
 export default function Page() {
+
+  const session = useSession({
+    required: true
+  });
+  const [user, setUser] = useState(session?.data?.data);
+
+  useEffect(() => {
+    setUser(session?.data?.data)
+  }, [session.status, session?.data?.data])
+
+
   return (
     <div className='border border-primaryLighten2 min-h-[648px] rounded-[8px] w-full pl-[2.569vw] pr-[3.056vw] pt-[46px]'>
       <div className='flex justify-between items-center'>
         <h1 className='font-outfit text-[32px] font-semibold leading-[113.3%]'>Account Settings</h1>
-        <p className='text-primary2 font-outfit text-[20px] font-semibold leading-[150%]'>Student</p>
+        <p className='text-primary2 font-outfit text-[20px] font-semibold leading-[150%]'>{user?.accountType === "student"?"Student":"Chef"}</p>
       </div>
       <div className='w-[7.431vw] border-[2px] border-primaryLighten2 rounded-[20px] mt-[20px] mb-[46px]'></div>
 
@@ -16,7 +29,7 @@ export default function Page() {
         <div className='flex flex-col gap-[32px]'>
           <div className='flex flex-col gap-[12px]'>
             <label className='text-TextColorSec font-outfit text-[16px] font-semibold leading-[113.3%]'>Name</label>
-            <input className='w-[26.875vw] font-outfit text-[20px] font-normal leading-[113.3%] p-[12px] rounded-[4px] border border-primaryLighten2' placeholder='Name' />
+            <input className='w-[26.875vw] font-outfit text-[20px] font-normal leading-[113.3%] p-[12px] rounded-[4px] border border-primaryLighten2' placeholder='Name' defaultValue={user?.name} />
           </div>
           <div className='flex flex-col gap-[12px]'>
             <label className='text-TextColorSec font-outfit text-[16px] font-semibold leading-[113.3%]'>Timezone</label>
@@ -30,9 +43,10 @@ export default function Page() {
 
           </div>
         </div>
-        <svg width="226" height="226" viewBox="0 0 226 226" fill="none" xmlns="http://www.w3.org/2000/svg">
+        {/* <svg width="226" height="226" viewBox="0 0 226 226" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="113" cy="113" r="113" fill="#D9D9D9" />
-        </svg>
+        </svg> */}
+        <Image loader={() => user?.picture} className='rounded-full object-cover max-w-[226px] max-h-[226px]' width={226} height={226} src={user?.picture} alt='' priority />
       </div>
 
       <div className='mt-[29px] flex flex-col gap-[29px]'>
@@ -44,19 +58,35 @@ export default function Page() {
               <path d="M27.2655 26.9967H22.5241V19.6446C22.5241 17.8914 22.4925 15.6345 20.0581 15.6345C17.5886 15.6345 17.2108 17.5447 17.2108 19.517V26.9962H12.4694V11.8773H17.0211V13.9435H17.0848C17.5404 13.1723 18.1986 12.5379 18.9895 12.1078C19.7803 11.6777 20.6742 11.4681 21.5758 11.5013C26.3815 11.5013 27.2675 14.6311 27.2675 18.7027L27.2655 26.9967ZM7.1195 9.81067C6.57531 9.81076 6.04329 9.65108 5.59076 9.3518C5.13822 9.05252 4.7855 8.62708 4.57716 8.1293C4.36882 7.63152 4.31421 7.08375 4.42029 6.55525C4.52636 6.02675 4.78833 5.54126 5.17307 5.16018C5.5578 4.7791 6.04803 4.51954 6.58174 4.41432C7.11546 4.3091 7.66869 4.36296 8.1715 4.56907C8.67431 4.77519 9.10409 5.1243 9.40651 5.57227C9.70893 6.02024 9.87041 6.54695 9.87051 7.08578C9.87057 7.44356 9.79945 7.79784 9.66124 8.1284C9.52302 8.45896 9.32043 8.75933 9.06497 9.01236C8.80952 9.26539 8.50621 9.46612 8.17241 9.6031C7.8386 9.74007 7.48083 9.8106 7.1195 9.81067ZM9.4902 26.9967H4.74386V11.8773H9.4902V26.9967ZM29.6293 0.00215867H2.36132C1.74241 -0.0047569 1.14602 0.231903 0.703253 0.660134C0.260483 1.08837 0.00755341 1.67313 0 2.28594V29.3974C0.00729489 30.0105 0.260076 30.5956 0.702831 31.0243C1.14559 31.453 1.74211 31.6901 2.36132 31.6836H29.6293C30.2497 31.6913 30.8479 31.4548 31.2924 31.0262C31.7369 30.5975 31.9914 30.0117 32 29.3974V2.28398C31.9912 1.66996 31.7365 1.08453 31.292 0.656308C30.8475 0.228088 30.2494 -0.00789643 29.6293 0.000201749" fill="#0A66C2" />
             </svg>
             Linkedin
-            <div className='flex-1 flex justify-end'>
-              <svg className='' width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M20 6L9 17L4 12" stroke="#D27722" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </div>
+            {user?.provider === 'linkedin' &&
+              <div className='flex-1 flex justify-end'>
+                <svg className='' width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20 6L9 17L4 12" stroke="#D27722" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+            }
           </button>
           <button className='flex hover:bg-primaryLighten2  transition-all duration-200 items-center justify-left px-[12px] gap-[14px] w-[15.625vw] xsm:w-full py-[6px] border border-[rgba(255,219,184,1)] font-outfit font-normal text-[20px] leading-[150%]'>
             <Image src={Facebook} alt="" />
             Facebook
+            {user?.provider === 'facebook' &&
+              <div className='flex-1 flex justify-end'>
+                <svg className='' width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20 6L9 17L4 12" stroke="#D27722" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+            }
           </button>
           <button className='hover:bg-primaryLighten2 transition-all duration-200 flex items-center justify-left px-[12px] gap-[14px] w-[15.625vw] xsm:min-w-[90vw] xsm:w-full py-[6px] border border-[rgba(255,219,184,1)] font-outfit font-normal text-[20px] leading-[150%]'>
             <Image src={Google} alt="" />
             Google
+            {user?.provider === 'google' &&
+              <div className='flex-1 flex justify-end'>
+                <svg className='' width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20 6L9 17L4 12" stroke="#D27722" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+            }
           </button>
         </div>
       </div>

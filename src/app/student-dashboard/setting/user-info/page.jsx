@@ -1,10 +1,13 @@
 'use client'
 
+import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 
 export default function Page() {
   const [showPassword, setShowPassword] = useState(false)
   const [showPassword2, setShowPassword2] = useState(false)
+
+  const session=useSession()
 
   return (
     <div className='border border-primaryLighten2 min-h-[492px] rounded-[8px] w-full pl-[2.569vw] pr-[3.056vw] pt-[46px]'>
@@ -15,8 +18,8 @@ export default function Page() {
       <div className='flex flex-col w-fit gap-[14px]'>
         <div className='flex flex-col gap-[32px] w-fit'>
           <div className='flex flex-col gap-[12px]'>
-            <label className='text-TextColorSec font-outfit text-[16px] font-semibold leading-[113.3%]'>Email</label>
-            <input className='w-[26.875vw] font-outfit text-[20px] font-normal leading-[113.3%] p-[12px] rounded-[4px] border border-primaryLighten2' placeholder='Email' />
+            <label className='text-TextColorSec font-outfit text-[16px] font-semibold leading-[113.3%] '>Email</label>
+            <input className='w-[26.875vw] font-outfit text-[20px] font-normal leading-[113.3%] p-[12px] rounded-[4px] border border-primaryLighten2 outline-primary2' placeholder='Email' value={session?.data?.data?.email} />
           </div>
 
           <div className='flex gap-[32px]'>
@@ -45,7 +48,7 @@ export default function Page() {
               </div>
             </div>
             <div className='flex flex-col gap-[12px]'>
-              <label className='text-TextColorSec font-outfit text-[16px] font-semibold leading-[113.3%]'>New Password</label>
+              <label className='text-TextColorSec font-outfit text-[16px] font-semibold leading-[113.3%] '>New Password</label>
               <div className='w-[21.806vw] pr-[10px] flex items-center center rounded-[4px] gap-[10px] outline-primary2 overflow-hidden border border-[rgba(255,219,184,1)]'>
                 <input type={showPassword2 ? "text" : "password"} className='font-outfit text-[20px] font-normal leading-[113.3%] pl-[10px] m-0 w-full p-[12px] outline-none' />
                 {!showPassword2 ?

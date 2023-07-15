@@ -11,6 +11,7 @@ import { usePathname } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
 import ProfileDropDown from "../DropDowns/ProfileDropDown"
+import { useSession } from "next-auth/react"
 
 const DashboardLayout = () => {
   const pathname = usePathname()
@@ -19,6 +20,8 @@ const DashboardLayout = () => {
   const [profileModal, setProfileModal] = useState(false);
 
   const [showMenu, setShowMenu] = useState(false);
+
+  const session=useSession()
 
   return (
     <div>
@@ -95,7 +98,7 @@ const DashboardLayout = () => {
               </div>
               <div className='h-[15px] border border-primaryLighten2 rouded-[16px]'></div>
               <div onClick={(e) => { setProfileModal(!profileModal); setLanguageModal(false); setCurrencyModal(false); e.stopPropagation(); }} className='relative'>
-                <Image className='w-[48px] h-[48px]' src={user} alt='' />
+                <Image loader={()=> session?.data?.data?.picture} className='max-w-[48px] max-h-[48px] rounded-full object-cover cursor-pointer' width={48} height={48} priority src={session?.data?.data?.picture} alt='' />
                 <ProfileDropDown state={profileModal} closeModal={() => setProfileModal(false)} />
               </div>
             </div>

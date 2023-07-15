@@ -13,9 +13,8 @@ import { useRouter } from 'next/navigation';
 import "@/app/globals.css"
 
 export default function Page() {
-  const session = useSession()
+  const session = useSession();
   const router = useRouter();
-
 
   const formSubmitHandler = async (e) => {
     e.preventDefault();
