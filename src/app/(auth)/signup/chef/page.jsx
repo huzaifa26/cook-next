@@ -4,13 +4,13 @@ import Image from 'next/image'
 
 export default function Page() {
   return (
-    <>
+    <div>
       <div className='ml-[60.998px] mr-[4.931vw] flex flex-col gap-[12px] pt-[37px]'>
         <h1 className='text-primary2 text-center font-rubik text-[32px] font-semibold leading-[normal]'>About</h1>
         <p className='text-[#ADABAB] text-center font-outfit text-[16px] font-normal leading-[normal]'>Start making your tutor profile. It saves your progress as you go. You can finish your sign-up any time.</p>
       </div>
 
-      <form className='flex flex-col gap-[52px] ml-[3.264vw] mr-[3.889vw] mt-[43px]' action="">
+      <form className='flex flex-col gap-[52px] ml-[3.264vw] mr-[3.889vw] my-[43px]' action="">
         <div className='grid gap-[22px] grid-cols-2'>
           <div className='flex flex-col gap-[12px]'>
             <label className='font-outfit text-[14px] font-semibold leading-[normal]' htmlFor="">First Name</label>
@@ -83,6 +83,6 @@ export default function Page() {
           <button className="transition-all duration-200 bg-primary2 hover:bg-[white] border border-primary2 text-[white] hover:text-primary w-[128px] py-[8px] font-outfit text-[18px] leading-normal font-medium rounded-[4px]">Next</button>
         </div>
       </form>
-    </>
+    </div>
   )
 }
