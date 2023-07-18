@@ -1,8 +1,42 @@
-import React from 'react'
-import ChangeImage from "@/assets/Signup/ChangeImage.png"
-import Image from 'next/image'
+'use client'
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useRouter } from 'next/navigation';
+import { addSignup } from '@/redux/signupSlice'
+import * as Yup from 'yup';
+
+const schema = Yup.object().shape({
+  introduction: Yup.string().trim().required('Introduction is required'),
+  professionalExperience: Yup.string().trim().required('Professional Experience is required'),
+  headline: Yup.string().trim().required('Headline is required'),
+}).strict();
 
 export default function Page() {
+  const state = useSelector((state) => state.signup.signup);
+  const dispatch=useDispatch()
+  const [error,setError]=useState()
+
+  const descriptionFormHandler = async (e) => {
+    e.preventDefault();
+
+    let data = {
+      introduction: e.target[0].value,
+      professionalExperience: e.target[1].value,
+      headline: e.target[2].value,
+    }
+
+    try {
+      await schema.validate(data, { abortEarly: false });
+      console.log(data);
+      dispatch(addSignup(data));
+      // router.push('/signup/chef/video')
+    } catch (errors) {
+      console.log(errors?.inner[0]);
+      setError(errors?.inner[0].message + "")
+    }
+
+  }
+
   return (
     <>
       <div className='w-fit m-auto flex flex-col gap-[12px] pt-[37px] px-[5.139vw]'>
@@ -10,7 +44,7 @@ export default function Page() {
         <p className='text-[#ADABAB] text-center font-outfit text-[16px] font-normal leading-[normal]'>The information you provide will be displayed on your public profile. Please ensure to write it in the language you intend to teach</p>
       </div>
 
-      <div className='ml-[3.264vw] mr-[3.889vw] my-[43px]'>
+      <form onSubmit={descriptionFormHandler} className='ml-[3.264vw] mr-[3.889vw] my-[43px]'>
         <div className='flex flex-col gap-[91px] items-center h-fit'>
 
           <div className='w-full flex flex-col gap-[24px] '>
@@ -44,11 +78,16 @@ export default function Page() {
           </div>
         </div>
 
-        <div className='mt-[95px] flex justify-between'>
-          <button className="transition-all duration-200 bg-[white] hover:bg-primary2 border-2 border-primary2 text-primary2 hover:text-[white] w-[128px] py-[8px] font-outfit text-[18px] leading-normal font-medium rounded-[4px]">Back</button>
-          <button className="transition-all duration-200 bg-primary2 hover:bg-[white] border-2 border-primary2 text-[white] hover:text-primary2 w-[128px] py-[8px] font-outfit text-[18px] leading-normal font-medium rounded-[4px]">Next</button>
+        <div className='mt-[95px] flex justify-between relative'>
+          <button type='button' className="transition-all duration-200 bg-[white] hover:bg-primary2 border-2 border-primary2 text-primary2 hover:text-[white] w-[128px] py-[8px] font-outfit text-[18px] leading-normal font-medium rounded-[4px]">Back</button>
+          <button type='submit' className="transition-all duration-200 bg-primary2 hover:bg-[white] border-2 border-primary2 text-[white] hover:text-primary2 w-[128px] py-[8px] font-outfit text-[18px] leading-normal font-medium rounded-[4px]">Next</button>
+          {error &&
+            <div className='absolute top-full right-0 flex justify-end items-center'>
+              <p className='font-outfit text-[16px] leading-normal font-normal text-primary2'>{error}</p>
+            </div>
+          }
         </div>
-      </div>
+      </form>
     </>
   )
 }
