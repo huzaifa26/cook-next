@@ -10,26 +10,29 @@ import AuthProvider from '@/utils/AuthProvider'
 import TutorDashboardLayout from '@/components/layout/TutorDashboardLayout'
 
 export default function RootLayout({ children }) {
-  // const searchParams = useSearchParams()
-  // const session = useSession({
-  //   required: true,
-  //   onUnauthenticated() {
-  //     redirect('/signin')
-  //   },
-  // })
+  const searchParams = useSearchParams()
+  const session = useSession({
+    required: true,
+    onUnauthenticated() {
+      redirect('/signin')
+    },
+  })
 
+  if (session.status === "loading") {
+    return (
+      <div className='w-screen h-screen flex justify-center items-center'>
+        <Image className='m-auto' src={Loading} alt='' />
+      </div>
+    )
+  }
 
-  // if (session.status === "loading") {
-  //   return (
-  //     <div className='w-screen h-screen flex justify-center items-center'>
-  //       <Image className='m-auto' src={Loading} alt='' />
-  //     </div>
-  //   )
-  // }
+  if (!session?.data?.data?.accountType && !searchParams.get("accountType")) {
+    redirect(`/account-type?name=${session?.data?.data.name}&email=${session?.data?.data.email}&email_verified=${session?.data?.data.email_verified}`)
+  }
 
-  // if (!session?.data?.data?.accountType && !searchParams.get("accountType")) {
-  //   redirect(`/account-type?name=${session?.data?.data.name}&email=${session?.data?.data.email}&email_verified=${session?.data?.data.email_verified}`)
-  // }
+  if (session?.data?.data?.accountType === 'chef' && !session?.data?.data?.isProfileComplete) {
+    redirect(`/signup/chef`)
+  }
 
   return (
     <>

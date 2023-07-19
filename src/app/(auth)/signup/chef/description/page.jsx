@@ -1,17 +1,18 @@
 'use client'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation'
 import { addSignup } from '@/redux/signupSlice'
 import * as Yup from 'yup';
 
 const schema = Yup.object().shape({
-  introduction: Yup.string().trim().required('Introduction is required'),
-  professionalExperience: Yup.string().trim().required('Professional Experience is required'),
-  headline: Yup.string().trim().required('Headline is required'),
-}).strict();
+  introduction: Yup.string().required('Introduction is required'),
+  professionalExperience: Yup.string().required('Professional Experience is required'),
+  headline: Yup.string().required('Headline is required'),
+})
 
 export default function Page() {
+  const router=useRouter()
   const state = useSelector((state) => state.signup.signup);
   const dispatch=useDispatch()
   const [error,setError]=useState()
@@ -29,10 +30,11 @@ export default function Page() {
       await schema.validate(data, { abortEarly: false });
       console.log(data);
       dispatch(addSignup(data));
-      // router.push('/signup/chef/video')
+      router.push('/signup/chef/video')
     } catch (errors) {
-      console.log(errors?.inner[0]);
-      setError(errors?.inner[0].message + "")
+      console.log(errors);
+      console.log(errors?.inner && errors?.inner[0]);
+      setError(errors?.inner && (errors?.inner[0].message + ""))
     }
 
   }
@@ -79,7 +81,7 @@ export default function Page() {
         </div>
 
         <div className='mt-[95px] flex justify-between relative'>
-          <button type='button' className="transition-all duration-200 bg-[white] hover:bg-primary2 border-2 border-primary2 text-primary2 hover:text-[white] w-[128px] py-[8px] font-outfit text-[18px] leading-normal font-medium rounded-[4px]">Back</button>
+          <button onClick={()=> router.back()} type='button' className="transition-all duration-200 bg-[white] hover:bg-primary2 border-2 border-primary2 text-primary2 hover:text-[white] w-[128px] py-[8px] font-outfit text-[18px] leading-normal font-medium rounded-[4px]">Back</button>
           <button type='submit' className="transition-all duration-200 bg-primary2 hover:bg-[white] border-2 border-primary2 text-[white] hover:text-primary2 w-[128px] py-[8px] font-outfit text-[18px] leading-normal font-medium rounded-[4px]">Next</button>
           {error &&
             <div className='absolute top-full right-0 flex justify-end items-center'>

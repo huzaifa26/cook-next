@@ -6,7 +6,6 @@ import Image from 'next/image'
 
 export default function Page (){
 
-
   return (
     <>
       <div className='flex flex-col mt-[95px] sm:mt-[76px] md:mt-[76px] xsm:mt-[59px] px-[19.86111111111111vw] sm:px-[48px] md:px-[48px] xsm:px-[32px] mb-[172px] sm:mb-[201px] md:mb-[201px] xsm:mb-[68px]'>

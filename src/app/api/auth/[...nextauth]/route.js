@@ -8,6 +8,8 @@ import FacebookProvider from "next-auth/providers/facebook";
 import LinkedInProvider from "next-auth/providers/linkedin";
 import { getServerSession } from "next-auth";
 
+var globalUser = null
+
 export const authOptions = {
   providers: [
     GoogleProvider({
@@ -63,6 +65,10 @@ export const authOptions = {
       return token
     },
     async redirect({ url, baseUrl }) {
+      // if(globalUser?._doc.accountType === 'chef'){
+      //   return baseUrl + '/tutor-dashboard';
+      // }
+      // globalUser=null
       return baseUrl + '/student-dashboard';
     },
     async signIn({ user, account, profile, email, credentials }) {
@@ -76,6 +82,7 @@ export const authOptions = {
 
       try {
         const user = await User.findOne({ email: profile.email })
+        globalUser = {...user}
         if (account.provider === 'google' || account.provider === 'facebook' || account.provider === 'linkedin') {
           if (user) {
             if (user.provider === account.provider) {

@@ -25,7 +25,7 @@ export default function Page() {
 
 
   const imageFileHandler = (e) => {
-    const file = event.target.files[0];
+    const file = e.target.files[0];
 
     if (file) {
       const allowedTypes = ['image/png', 'image/jpeg', 'image/svg+xml'];
@@ -78,7 +78,7 @@ export default function Page() {
         </div>
 
         <div className='mt-[95px] flex justify-between'>
-          <button className="transition-all duration-200 bg-[white] hover:bg-primary2 border-2 border-primary2 text-primary2 hover:text-[white] w-[128px] py-[8px] font-outfit text-[18px] leading-normal font-medium rounded-[4px]">Back</button>
+          <button onClick={()=> router.back()} className="transition-all duration-200 bg-[white] hover:bg-primary2 border-2 border-primary2 text-primary2 hover:text-[white] w-[128px] py-[8px] font-outfit text-[18px] leading-normal font-medium rounded-[4px]">Back</button>
           <button onClick={imageSubmitHandler} className="transition-all duration-200 bg-primary2 hover:bg-[white] border-2 border-primary2 text-[white] hover:text-primary2 w-[128px] py-[8px] font-outfit text-[18px] leading-normal font-medium rounded-[4px]">Next</button>
         </div>
       </div>

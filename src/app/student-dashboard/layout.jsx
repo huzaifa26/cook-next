@@ -7,6 +7,7 @@ import { redirect, useSearchParams } from 'next/navigation'
 import Loading from "@/assets/Loading.svg"
 import Image from 'next/image'
 import AuthProvider from '@/utils/AuthProvider'
+import Page from '../tutor-dashboard/page'
 
 export default function RootLayout({ children }) {
   const searchParams = useSearchParams()
@@ -28,6 +29,10 @@ export default function RootLayout({ children }) {
 
   if (!session?.data?.data?.accountType && !searchParams.get("accountType")) {
     redirect(`/account-type?name=${session?.data?.data.name}&email=${session?.data?.data.email}&email_verified=${session?.data?.data.email_verified}`)
+  }
+
+  if (session?.data?.data?.accountType === 'chef') {
+      redirect(`/tutor-dashboard`)
   }
 
   return (
