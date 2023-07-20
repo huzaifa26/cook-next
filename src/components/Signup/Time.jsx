@@ -4,13 +4,15 @@ import { v4 as uuidv4 } from 'uuid';
 import DropDown from './DropDown';
 
 
-export default function Time({setTimings,index,array,setArray,removeItem}) {
+export default function Time({ setTimings, index, array, setArray, removeItem, propId, proptimeZone, proptimeZone2 }) {
 
-  const [timeZone, setTimeZone] = useState([]);
+  const [timeZone, setTimeZone] = useState(proptimeZone || null);
 
-  const [timeZone2, setTimeZone2] = useState(null);
+  const [timeZone2, setTimeZone2] = useState(proptimeZone2 || null);
 
-  const [id, setId] = useState(uuidv4());
+  console.log(timeZone,timeZone2)
+
+  const [id, setId] = useState(propId || uuidv4());
 
   useEffect(() => {
     if (timeZone !== null && timeZone2 !== null) {
@@ -31,7 +33,7 @@ export default function Time({setTimings,index,array,setArray,removeItem}) {
           <path d="M12 7V17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
           <path d="M7 12H17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
         </svg> :
-        <svg className='cursor-pointer' onClick={(e) => {setArray((prev) => { return prev.filter((it, ind) => { return ind !== index }) });removeItem(id)}} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg className='cursor-pointer' onClick={(e) => { setArray((prev) => { return prev.filter((it, ind) => { return ind !== index }) }); removeItem(id) }} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect width="24" height="24" rx="12" fill="#FFDBB8" />
           <path d="M7 12H17" stroke="#D27722" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
         </svg>

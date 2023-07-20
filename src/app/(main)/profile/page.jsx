@@ -7,6 +7,7 @@ import StarIcon2 from "@/assets/TutorList/StarIcon2.svg"
 import ProfileReviewCard from '@/components/Profile/ProfileReviewCard'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useSearchParams } from 'next/navigation'
 
 export default function Page() {
   const [resumeTab, setResumeTab] = useState('education');
@@ -44,13 +45,19 @@ export default function Page() {
       top: 0,
     });
   }
+
+
+  const searchParams = useSearchParams();
+  const [tutor, setTutor] = useState(JSON.parse(searchParams.get("data")))
+  console.log(typeof tutor);
+
   return (
     <main className='px-[12.153vw] md:px-[5.749vw] sm:px-[5.749vw] xsm:px-[8.205vw] flex justify-start gap-[23px] pt-[79px]'>
       <div>
         <div className='w-[52.361vw] md:w-full sm:w-full xsm:w-full flex gap-[20px]'>
           <div className='flex gap-[66px] min-w-[52.361vw] md:w-full sm:w-full xsm:w-full sm:flex-col xsm:flex-col'>
             <div className='relative w-fit'>
-              <Image className='w-[267px] relative' src={ProfilePicture} alt="" />
+              <Image className='w-[267px] relative rounded-[32px]' width={267} height={262} loader={() => tutor?.image} src={tutor?.image} alt="" />
               <svg className='absolute bottom-[13px] right-[15px]' width="67" height="67" viewBox="0 0 67 67" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="67" height="67" rx="33.5" fill="#D27722" />
                 <path d="M25 20L45.4167 33.125L25 46.25V20Z" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
@@ -58,7 +65,7 @@ export default function Page() {
             </div>
             <div>
               <div>
-                <h1 className='font-rubik font-semibold text-[42px] leading-[49.77px] tracking-[-0.02em]'>Sarah Doe</h1>
+                <h1 className='font-rubik font-semibold text-[42px] leading-[49.77px] tracking-[-0.02em]'>{tutor?.name}</h1>
                 <p className='font-outfit font-normal text-[18px] leading-[27px]'>Lorem ipsum dolor sit amet consectetur</p>
               </div>
               <div className='flex flex-col gap-[6px] mt-[30px]'>
@@ -105,16 +112,18 @@ export default function Page() {
           <div>
             <div className='flex items-center justify-center gap-[20px]'>
               <div className='flex flex-col justify-center items-center'>
-                <p className='font-rubik font-bold text-[32px] leading-[37.92px]'>$1000</p>
-                <p className='font-outfit font-[300] text-[18px] leading-[22.68px] text-TextColorSec'>50-minutes</p>
+                <p className='font-rubik font-bold text-[32px] leading-[37.92px]'>$+{tutor?.price}</p>
+                <p className='font-outfit font-[300] text-[18px] leading-[22.68px] text-TextColorSec'>60-minutes</p>
               </div>
-              <div className='flex flex-col justify-center items-center'>
-                <div className='flex items-center gap-[4px]'>
-                  <p className='font-rubik font-bold text-[32px] leading-[37.92px]'>5</p>
-                  <Image className='w-[27px]' src={StarIcon2} alt="" />
+              {tutor?.reviews &&
+                <div className='flex flex-col justify-center items-center'>
+                  <div className='flex items-center gap-[4px]'>
+                    <p className='font-rubik font-bold text-[32px] leading-[37.92px]'>5</p>
+                    <Image className='w-[27px]' src={StarIcon2} alt="" />
+                  </div>
+                  <p className='font-outfit font-[300] text-[18px] leading-[22.68px] text-TextColorSec'>{tutor?.reviews?.length || 0} reviews</p>
                 </div>
-                <p className='font-outfit font-[300] text-[18px] leading-[22.68px] text-TextColorSec'>100 reviews</p>
-              </div>
+              }
             </div>
             <div className='flex gap-[13px] mt-[27px] xsm:flex-col sm:flex-col xsm:items-center sm:items-center justify-center'>
               <button className='w-[242px] h-[39px] border-2 border-primary rounded-[4px] font-outfit font-normal text-[18px] leading-[22.68px] text-primary2 '>Send A Message</button>
@@ -130,7 +139,7 @@ export default function Page() {
             <button className='px-[21px] min-h-[43px] border border-[rgba(255,219,184,1)] rounded-[8px] font-outfit font-normal text-[18px] leading-[27px]'>Availability</button>
           </a>
           <a href="#reviews" onClick={(e) => handleScroll(e, "reviews")}>
-            <button className='px-[21px] min-h-[43px] border border-[rgba(255,219,184,1)] rounded-[8px] font-outfit font-normal text-[18px] leading-[27px]'>Reviews (100)</button>
+            <button className='px-[21px] min-h-[43px] border border-[rgba(255,219,184,1)] rounded-[8px] font-outfit font-normal text-[18px] leading-[27px]'>Reviews ({tutor?.reviews?.length || 0})</button>
           </a>
           <a href="#resume" onClick={(e) => handleScroll(e, "resume")}>
             <button className='px-[21px] min-h-[43px] border border-[rgba(255,219,184,1)] rounded-[8px] font-outfit font-normal text-[18px] leading-[27px]'>Resume</button>
@@ -351,8 +360,8 @@ export default function Page() {
         <div id='resume' className='w-[52.361vw] md:w-full sm:w-full xsm:w-full  border border-[rgba(255,219,184,1)] mt-[50px] min-h-[110px] rounded-[12px] px-[32px] bg-[rgba(255,253,244,1)] py-[24px]'>
           <h4 className='font-rubik font-semibold text-[24px] leading-[28.44px] tracking-[-0.02em] mb-[20px]'>Resume</h4>
           <div className='flex items-center gap-[15px]'>
-            <button onClick={() => setResumeTab("education")} style={resumeTab === "education" ? { background: "#D27722", color: "#fff",border: "1px solid #D27722" } : { border: "1px solid #D27722", color: "#D27722" }} className='transition-all duration-200 h-[35px] px-[16px] rounded-[4px] font-kanit font-normal text-[18px] leading-[26.91px] '>Education</button>
-            <button onClick={() => setResumeTab("experience")} style={resumeTab === "experience" ? { background: "#D27722", color: "#fff",border: "1px solid #D27722" } : { border: "1px solid #D27722", color: "#D27722" }} className='transition-all duration-200 h-[35px] px-[16px] rounded-[4px]  font-kanit font-normal text-[18px] leading-[26.91px]'>Experience</button>
+            <button onClick={() => setResumeTab("education")} style={resumeTab === "education" ? { background: "#D27722", color: "#fff", border: "1px solid #D27722" } : { border: "1px solid #D27722", color: "#D27722" }} className='transition-all duration-200 h-[35px] px-[16px] rounded-[4px] font-kanit font-normal text-[18px] leading-[26.91px] '>Education</button>
+            <button onClick={() => setResumeTab("experience")} style={resumeTab === "experience" ? { background: "#D27722", color: "#fff", border: "1px solid #D27722" } : { border: "1px solid #D27722", color: "#D27722" }} className='transition-all duration-200 h-[35px] px-[16px] rounded-[4px]  font-kanit font-normal text-[18px] leading-[26.91px]'>Experience</button>
           </div>
           <p className='font-outfit font-normal text-[16px] leading-[24.8px] mt-[20px] w-full'>Lorem ipsum dolor sit amet consectetur. Nisi urna arcu tempor in dui. At rhoncus senectus vel ullamcorper eget at id est. Imperdiet penatibus purus augue ut vitae interdum. Sit netus tincidunt massa fames id iaculis molestie at. Egestas duis et id tincidunt eros elit urna. Sed nunc nec fringilla gravida faucibus consequat feugiat fermentum tempus. Eleifend tempus mauris ac metus quis tellus feugiat. At libero pellentesque enim senectus odio suscipit augue eu pulvinar. Nisl integer quis tellus id hendrerit.</p>
         </div>
@@ -491,18 +500,20 @@ export default function Page() {
       </div>
       <div className='w-[313px] md:hidden sm:hidden xsm:hidden sticky h-[243px] top-[140px] rounded-[12px] py-[30px] px-[37px] bg-[rgba(255,253,244,1)] border border-[rgba(255,219,184,1)]'>
         <div>
-          <div className='flex items-center justify-between gap-[20px]'>
+          <div className='flex items-center justify-center gap-[3.194vw]'>
             <div className='flex flex-col justify-center items-center'>
-              <p className='font-rubik font-bold text-[32px] leading-[37.92px]'>$1000</p>
+              <p className='font-rubik font-bold text-[32px] leading-[37.92px]'>${tutor?.price}</p>
               <p className='font-outfit font-[300] text-[18px] leading-[22.68px] text-TextColorSec'>50-minutes</p>
             </div>
-            <div className='flex flex-col justify-center items-center'>
-              <div className='flex items-center gap-[4px]'>
-                <p className='font-rubik font-bold text-[32px] leading-[37.92px]'>5</p>
-                <Image className='w-[27px]' src={StarIcon2} alt="" />
+            {tutor?.reviews &&
+              <div className='flex flex-col justify-center items-center'>
+                <div className='flex items-center gap-[4px]'>
+                  <p className='font-rubik font-bold text-[32px] leading-[37.92px]'>5</p>
+                  <Image className='w-[27px]' src={StarIcon2} alt="" />
+                </div>
+                <p className='font-outfit font-[300] text-[18px] leading-[22.68px] text-TextColorSec'>{tutor?.reviews?.length || 0} reviews</p>
               </div>
-              <p className='font-outfit font-[300] text-[18px] leading-[22.68px] text-TextColorSec'>100 reviews</p>
-            </div>
+            }
           </div>
           <button className='w-full h-[39px] border-2 border-primary2 rounded-[4px] font-outfit font-normal text-[18px] leading-[22.68px] text-primary2 mt-[27px] hover:bg-primary2 hover:text-[white] transition-all duration-200'>Send A Message</button>
           <button className='w-full h-[39px] border-2 border-primary2 rounded-[4px] font-kanit font-normal text-[18px] leading-[26.91px] bg-primary2 text-[white] mt-[12px] hover:bg-[rgba(0,0,0,0)] hover:text-primary2 transition-all duration-200'>Book A Trial Lesson</button>

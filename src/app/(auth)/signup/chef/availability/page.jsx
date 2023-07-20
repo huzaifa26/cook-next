@@ -3,7 +3,7 @@ import AvailabilityCard from "@/components/Signup/AvailabilityCard";
 import { addSignup } from "@/redux/signupSlice";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import * as yup from 'yup';
 
@@ -49,17 +49,18 @@ const schema = yup.object().shape({
 export default function Page() {
   const router = useRouter();
   const dispatch = useDispatch();
-
-  const [timeZone, setTimeZone] = useState(null);
+  const state=useSelector(state => state.signup.signup);
+  console.log(state);
+  const [timeZone, setTimeZone] = useState(state?.timeZone || null);
   const [showTimeZone, setShowTimeZone] = useState(false);
 
-  const [monday, setMonday] = useState([]);
-  const [tuesday, settuesday] = useState([]);
-  const [wednesday, setwednesday] = useState([]);
-  const [thursday, setthursday] = useState([]);
-  const [friday, setfriday] = useState([]);
-  const [saturday, setsaturday] = useState([]);
-  const [sunday, setsunday] = useState([]);
+  const [monday, setMonday] = useState(state?.availability?.monday || []);
+  const [tuesday, settuesday] = useState(state?.availability?.tuesday || []);
+  const [wednesday, setwednesday] = useState(state?.availability?.wednesday || []);
+  const [thursday, setthursday] = useState(state?.availability?.thursday || []);
+  const [friday, setfriday] = useState(state?.availability?.friday || []);
+  const [saturday, setsaturday] = useState(state?.availability?.saturday || []);
+  const [sunday, setsunday] = useState(state?.availability?.sunday || []);
 
 
   const availabilityFormHandler = async () => {
@@ -136,7 +137,7 @@ export default function Page() {
                 return [...prev, time];
               }
             })} title={"Monday"}
-              removeItem={(id) => { setMonday((prev) => prev.filter((time) => time.id !== id)) }}
+              removeItem={(id) => { setMonday((prev) => prev.filter((time) => time.id !== id)) }} arrayLength={monday.length} data={monday}
             />
 
             <AvailabilityCard clearTimings={() => settuesday([])} setTimings={(time) => settuesday((prev) => {
@@ -149,7 +150,7 @@ export default function Page() {
                 return [...prev, time];
               }
             })} title={"Tuesday"}
-              removeItem={(id) => { settuesday((prev) => prev.filter((time) => time.id !== id)) }}
+              removeItem={(id) => { settuesday((prev) => prev.filter((time) => time.id !== id)) }} arrayLength={tuesday.length} data={tuesday}
             />
 
             <AvailabilityCard clearTimings={() => setwednesday([])} setTimings={(time) => setwednesday((prev) => {
@@ -162,7 +163,7 @@ export default function Page() {
                 return [...prev, time];
               }
             })} title={"Wednesday"}
-              removeItem={(id) => { setwednesday((prev) => prev.filter((time) => time.id !== id)) }}
+              removeItem={(id) => { setwednesday((prev) => prev.filter((time) => time.id !== id)) }} arrayLength={wednesday.length} data={wednesday}
             />
 
 
@@ -176,7 +177,7 @@ export default function Page() {
                 return [...prev, time];
               }
             })} title={"Thursday"}
-              removeItem={(id) => { setthursday((prev) => prev.filter((time) => time.id !== id)) }}
+              removeItem={(id) => { setthursday((prev) => prev.filter((time) => time.id !== id)) }} arrayLength={thursday.length} data={thursday}
             />
 
 
@@ -190,7 +191,7 @@ export default function Page() {
                 return [...prev, time];
               }
             })} title={"Friday"}
-              removeItem={(id) => { setfriday((prev) => prev.filter((time) => time.id !== id)) }}
+              removeItem={(id) => { setfriday((prev) => prev.filter((time) => time.id !== id)) }} arrayLength={friday.length} data={friday}
             />
 
             <AvailabilityCard clearTimings={() => setsaturday([])} setTimings={(time) => setsaturday((prev) => {
@@ -203,7 +204,7 @@ export default function Page() {
                 return [...prev, time];
               }
             })} title={"Saturday"}
-              removeItem={(id) => { setsaturday((prev) => prev.filter((time) => time.id !== id)) }}
+              removeItem={(id) => { setsaturday((prev) => prev.filter((time) => time.id !== id)) }} arrayLength={saturday.length} data={saturday}
             />
 
             <AvailabilityCard clearTimings={() => setsunday([])} setTimings={(time) => setsunday((prev) => {
@@ -216,7 +217,7 @@ export default function Page() {
                 return [...prev, time];
               }
             })} title={"Sunday"}
-              removeItem={(id) => { setsunday((prev) => prev.filter((time) => time.id !== id)) }}
+              removeItem={(id) => { setsunday((prev) => prev.filter((time) => time.id !== id)) }} arrayLength={sunday.length} data={sunday}
             />
 
           </div>

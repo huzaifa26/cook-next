@@ -183,7 +183,7 @@ export default function LandingNav() {
             <div>
               {session.status === "authenticated" ?
                 <div onClick={(e) => { setProfileModal(!profileModal);setLanguageModal(false); setCurrencyModal(false); e.stopPropagation(); }} className='relative'>
-                  <Image className='w-[48px] h-[48px]' src={LoginProfile} alt='' />
+                  <Image loader={()=> session?.data?.data?.picture} className='w-[48px] h-[48px] rounded-full' height={48} width={48} src={session?.data?.data?.image} alt='' />
                   <ProfileDropDown state={profileModal} closeModal={()=> setProfileModal(false)}/>
                 </div>
                 :

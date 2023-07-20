@@ -51,7 +51,7 @@ export default function Page() {
 
           <div className='w-full flex flex-col gap-[24px] '>
             <h2 className='font-rubik text-[20px] font-semibold leading-normal'>1. Introduce yourself</h2>
-            <textarea className='resize-none border border-primaryLighten2 p-[16px] rounded-[8px] w-full font-outfit text-[16px] font-normal leading-normal' placeholder='Start writing here...' name="" id="" cols="30" rows="10"></textarea>
+            <textarea defaultValue={state?.introduction} className='resize-none border border-primaryLighten2 p-[16px] rounded-[8px] w-full font-outfit text-[16px] font-normal leading-normal' placeholder='Start writing here...' name="" id="" cols="30" rows="10"></textarea>
             <div className='flex gap-[8px] items-center mt-[-4px]'>
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_1617_48979)">
@@ -71,12 +71,12 @@ export default function Page() {
 
           <div className='w-full flex flex-col gap-[24px] '>
             <h2 className='font-rubik text-[20px] font-semibold leading-normal'>2. Professional experience</h2>
-            <textarea className='resize-none border border-primaryLighten2 p-[16px] rounded-[8px] w-full font-outfit text-[16px] font-normal leading-normal' placeholder='Start writing here...' name="" id="" cols="30" rows="10"></textarea>
+            <textarea defaultValue={state?.professionalExperience} className='resize-none border border-primaryLighten2 p-[16px] rounded-[8px] w-full font-outfit text-[16px] font-normal leading-normal' placeholder='Start writing here...' name="" id="" cols="30" rows="10"></textarea>
           </div>
 
           <div className='w-full flex flex-col gap-[24px] '>
             <h2 className='font-rubik text-[20px] font-semibold leading-normal'>3. Create a catchy headline</h2>
-            <textarea className='resize-none border border-primaryLighten2 p-[16px] rounded-[8px] w-full font-outfit text-[16px] font-normal leading-normal' placeholder='Start writing here...' name="" id="" cols="30" rows="10"></textarea>
+            <textarea defaultValue={state?.headline} className='resize-none border border-primaryLighten2 p-[16px] rounded-[8px] w-full font-outfit text-[16px] font-normal leading-normal' placeholder='Start writing here...' name="" id="" cols="30" rows="10"></textarea>
           </div>
         </div>
 

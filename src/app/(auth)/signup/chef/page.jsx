@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import AmericaIcon from "@/assets/Signup/AmericaIcon.png"
 import Image from 'next/image'
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addSignup } from '@/redux/signupSlice';
 import { useRouter } from 'next/navigation';
 
@@ -22,13 +22,15 @@ const schema = Yup.object().shape({
 
 export default function Page() {
   const dispatch=useDispatch();
-  const router=useRouter()
+  const router=useRouter();
 
-  const [country, setCountry] = useState(null);
-  const [level, setLevel] = useState(null);
-  const [language, setLanguage] = useState(null);
-  const [experience, setExperience] = useState(null)
-  const [subject, setSubject] = useState(null);
+  const state=useSelector((state)=> state.signup.signup);
+
+  const [country, setCountry] = useState(state?.country || null);
+  const [level, setLevel] = useState(state?.level || null);
+  const [language, setLanguage] = useState(state?.language || null);
+  const [experience, setExperience] = useState(state?.experience || null)
+  const [subject, setSubject] = useState(state?.subject || null);
 
   const [showcountry, setshowcountry] = useState(false);
   const [showlevel, setshowlevel] = useState(false);
@@ -79,15 +81,15 @@ export default function Page() {
         <div className='grid gap-[22px] grid-cols-2'>
           <div className='flex flex-col gap-[12px]'>
             <label className='font-outfit text-[14px] font-semibold leading-[normal]' htmlFor="">First Name</label>
-            <input className='h-[40px] border border-primaryLighten2 outline-primary2 rounded-[4px] font-outfit text-[16px] font-normal leading-normal p-[8px] ' />
+            <input defaultValue={state?.firstName} className='h-[40px] border border-primaryLighten2 outline-primary2 rounded-[4px] font-outfit text-[16px] font-normal leading-normal p-[8px] ' />
           </div>
           <div className='flex flex-col gap-[12px]'>
             <label className='font-outfit text-[14px] font-semibold leading-[normal]' htmlFor="">Last Name</label>
-            <input className='h-[40px] border border-primaryLighten2 outline-primary2 rounded-[4px] font-outfit text-[16px] font-normal leading-normal p-[8px] ' />
+            <input defaultValue={state?.lastName} className='h-[40px] border border-primaryLighten2 outline-primary2 rounded-[4px] font-outfit text-[16px] font-normal leading-normal p-[8px] ' />
           </div>
           <div className='flex flex-col gap-[12px]'>
             <label className='font-outfit text-[14px] font-semibold leading-[normal]' htmlFor="">Email</label>
-            <input className='h-[40px] border border-primaryLighten2 outline-primary2 rounded-[4px] font-outfit text-[16px] font-normal leading-normal p-[8px] ' />
+            <input defaultValue={state?.email} className='h-[40px] border border-primaryLighten2 outline-primary2 rounded-[4px] font-outfit text-[16px] font-normal leading-normal p-[8px] ' />
           </div>
 
           <div className='flex flex-col gap-[12px] relative'>
@@ -184,7 +186,7 @@ export default function Page() {
 
         <div className='flex justify-between items-center relative'>
           <div className='flex items-center gap-[12px]'>
-            <input className='myCheckbox min-w-[23px] min-h-[23px]' type="checkbox" name="" id="ageConsent" />
+            <input defaultChecked={state?.ageConsent} className='myCheckbox min-w-[23px] min-h-[23px]' type="checkbox" name="" id="ageConsent" />
             <label className='font-outfit font-normal text-[18px] leading-normal cursor-pointer select-none' htmlFor="ageConsent">I confirm I'm over 18</label>
           </div>
           <button className="transition-all duration-200 bg-primary2 hover:bg-[white] border border-primary2 text-[white] hover:text-primary w-[128px] py-[8px] font-outfit text-[18px] leading-normal font-medium rounded-[4px]">Next</button>

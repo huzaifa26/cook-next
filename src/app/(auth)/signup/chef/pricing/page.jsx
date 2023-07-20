@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 
 export default function Page() {
   const state = useSelector((state) => state.signup.signup)
+  console.log(state);
   const [price, setPrice] = useState(20);
 
   const [loading, setLoading] = useState(false);
@@ -32,7 +33,6 @@ export default function Page() {
       console.log(url)
       data.video = url;
     }
-    console.log(data);
 
     try {
       let res = await fetch(API_URL + 'api/auth/tutor-profile', {

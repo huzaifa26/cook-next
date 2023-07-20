@@ -54,7 +54,7 @@ export default function Page() {
               <iframe width="375" height="265" src={video}></iframe>
               : (video instanceof File) ?
                 <video src={URL.createObjectURL(video)} className='w-[375px] h-[265px]' controls></video>
-                : <Image src={ChangeVideo} alt='' className='w-[375px] h-[265px]' />
+                : <iframe width="375" height="265" src={video}></iframe>
             )
             : <Image src={ChangeVideo} alt='' className='w-[375px] h-[265px]' />
           }
@@ -69,13 +69,13 @@ export default function Page() {
             </label>
             <div className='mt-[51px] flex flex-col gap-[22px]'>
               <p className='font-outfit text-[16px] font-normal leading-[160%]'>Or paste a youtube link</p>
-              <input onChange={youtubeLinkHandler} className='w-[23.889vw] h-[46px] p-[10px] border border-primaryLighten2 outline-primary2 rounded-[8px] font-outfit text-[16px] font-normal leading-[160%]' placeholder={'https:'} />
+              <input defaultValue={video instanceof File ? null : video} onChange={youtubeLinkHandler} className='w-[23.889vw] h-[46px] p-[10px] border border-primaryLighten2 outline-primary2 rounded-[8px] font-outfit text-[16px] font-normal leading-[160%]' placeholder={'https:'} />
             </div>
           </div>
         </div>
 
         <div className='mt-[95px] flex justify-between relative'>
-          <button onClick={()=> router.back()} className="transition-all duration-200 bg-[white] hover:bg-primary2 border-2 border-primary2 text-primary2 hover:text-[white] w-[128px] py-[8px] font-outfit text-[18px] leading-normal font-medium rounded-[4px]">Back</button>
+          <button onClick={() => router.back()} className="transition-all duration-200 bg-[white] hover:bg-primary2 border-2 border-primary2 text-primary2 hover:text-[white] w-[128px] py-[8px] font-outfit text-[18px] leading-normal font-medium rounded-[4px]">Back</button>
           <button onClick={imageSubmitHandler} className="transition-all duration-200 bg-primary2 hover:bg-[white] border-2 border-primary2 text-[white] hover:text-primary2 w-[128px] py-[8px] font-outfit text-[18px] leading-normal font-medium rounded-[4px]">Next</button>
           {error &&
             <div className='absolute top-full right-0 flex justify-end items-center'>

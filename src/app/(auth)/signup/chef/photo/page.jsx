@@ -11,7 +11,7 @@ export default function Page() {
   const dispatch=useDispatch();
   const router=useRouter()
 
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState(state?.image || null);
   const [error, setError] = useState(null);
 
   const imageSubmitHandler = () => {

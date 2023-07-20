@@ -12,6 +12,7 @@ import TutorCard from '@/components/TutorList/TutorCard'
 import Pagination from '@/components/utils/Pagination'
 import Image from 'next/image'
 import Link from 'next/link'
+import { API_URL } from '@/utils/consts'
 
 export default function TutorList() {
   const [iWantToLearn, setIWantToLearn] = useState(false);
@@ -66,6 +67,37 @@ export default function TutorList() {
   };
 
   const [showMobileFilter, setShowMobileFilter] = useState(false);
+
+
+  const getTutors = async (e) => {
+    try {
+      let res = await fetch(API_URL + '/api/tutor', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      res = await res.json();
+      console.log(res?.data);
+      let data = res?.data;
+      if (data.length < 3) {
+        data.push({ type: "Group" });
+      } else {
+        data.splice(3, 0, { type: "Group" });
+      }
+      setTutors(data);
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const [tutors, setTutors] = useState(null)
+  useEffect(() => {
+    getTutors();
+  }, [])
+
+  console.log(tutors)
 
   return (
     <main className='w-full pt-[43px] xsm:pt-[72px] '>
@@ -168,7 +200,7 @@ export default function TutorList() {
             </div>
 
             <div className='flex items-center justify-between mt-[14px] xsm:mb-[17px] mb-[58px] cursor-pointer'>
-              <div onClick={()=> setShowMobileFilter(!showMobileFilter)} className='flex gap-[12px] items-center'>
+              <div onClick={() => setShowMobileFilter(!showMobileFilter)} className='flex gap-[12px] items-center'>
 
                 {!showMobileFilter ? <Image src={FilterIcon} alt="" /> :
                   <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -261,46 +293,43 @@ export default function TutorList() {
 
           <div className="ml-[11.528vw] mr-[11.597vw] md:mx-[0px] sm:mx-[0px] xsm:mx-[0px] w-fit m-auto flex flex-col">
             <div className='flex flex-col gap-[35px]'>
-              <TutorCard />
-              <TutorCard />
-              <TutorCard />
+              {tutors?.map((tutor, index) => {
+                if (tutor?.type === "Group") {
+                  return (
+                    <div className='mt-[122px] mb-[103px]'>
+                      <div className='flex items-center justify-between'>
+                        <div className='flex items-center'>
+                          <svg width="28" height="33" viewBox="0 0 23 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="11.5" cy="10.5" rx="11.5" ry="10.5" fill="#FFDBB8" />
+                          </svg>
+                          <p className='font-rubik font-semibold text-[24px] leading-[18.96px] relative left-[-13px]'>Group Lesson</p>
+                        </div>
+                        <Link href='/group'>
+                          <p className='font-rubik font-semibold text-[16px] leading-[18.96px] relative left-[-13px]'>View all</p>
+                        </Link>
+                      </div>
+                      <div className='w-fit relative mt-[21px]'>
+                        <Image onClick={handleScroll} className='cursor-pointer z-[999] opacity-80 hover:opacity-100 transition-all duration-150 absolute right-[-5%] xsm:right-[-0%] xsm:left-[100%] top-[50%] translate-x-[-50%]' src={ScrollArrow} alt="" />
+                        <Image onClick={handleScrollLeft} className='cursor-pointer z-[999] opacity-80 hover:opacity-100 transition-all duration-150 absolute left-[-0%] rotate-180 top-[50%] translate-x-[-50%]' src={ScrollArrow} alt="" />
+                        <div ref={scrollRef} className='pb-[50px] flex gap-[20px] w-full max-w-[67.986vw] md:max-w-[88.383vw] xsm:max-w-[83.077vw] overflow-scroll hideScrollbar'>
+                          <GroupCardScroll divRef={divRef} />
+                          <GroupCardScroll />
+                          <GroupCardScroll />
+                          <GroupCardScroll />
+                          <GroupCardScroll />
+                          <GroupCardScroll />
+                          <GroupCardScroll />
+                          <GroupCardScroll />
+                        </div>
+                      </div>
+                    </div>
+                  )
+                }
+                return (
+                  <TutorCard tutor={tutor}/>
+                )
+              })}
             </div>
-
-            <div className='mt-[122px]'>
-              <div className='flex items-center justify-between'>
-                <div className='flex items-center'>
-                  <svg width="28" height="33" viewBox="0 0 23 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <ellipse cx="11.5" cy="10.5" rx="11.5" ry="10.5" fill="#FFDBB8" />
-                  </svg>
-                  <p className='font-rubik font-semibold text-[24px] leading-[18.96px] relative left-[-13px]'>Group Lesson</p>
-                </div>
-                <Link href='/group'>
-                  <p className='font-rubik font-semibold text-[16px] leading-[18.96px] relative left-[-13px]'>View all</p>
-                </Link>
-              </div>
-              <div className='w-fit relative mt-[21px]'>
-                <Image onClick={handleScroll} className='cursor-pointer z-[999] opacity-80 hover:opacity-100 transition-all duration-150 absolute right-[-5%] xsm:right-[-0%] xsm:left-[100%] top-[50%] translate-x-[-50%]' src={ScrollArrow} alt="" />
-                <Image onClick={handleScrollLeft} className='cursor-pointer z-[999] opacity-80 hover:opacity-100 transition-all duration-150 absolute left-[-0%] rotate-180 top-[50%] translate-x-[-50%]' src={ScrollArrow} alt="" />
-                <div ref={scrollRef} className='pb-[50px] flex gap-[20px] w-full max-w-[67.986vw] md:max-w-[88.383vw] xsm:max-w-[83.077vw] overflow-scroll hideScrollbar'>
-                  <GroupCardScroll divRef={divRef} />
-                  <GroupCardScroll />
-                  <GroupCardScroll />
-                  <GroupCardScroll />
-                  <GroupCardScroll />
-                  <GroupCardScroll />
-                  <GroupCardScroll />
-                  <GroupCardScroll />
-                </div>
-              </div>
-
-            </div>
-
-            <div className='flex flex-col gap-[35px] mt-[103px]'>
-              <TutorCard />
-              <TutorCard />
-              <TutorCard />
-            </div>
-
           </div>
           <Pagination currentPage={1} totalPages={6} />
         </div>

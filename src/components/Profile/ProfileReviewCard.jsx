@@ -1,8 +1,11 @@
+
 import React from 'react'
 import ReviewProfilePic from "@/assets/Profile/ReviewProfilePic.png"
 import Image from 'next/image'
+import { useSearchParams } from 'next/navigation'
 
 export default function ProfileReviewCard() {
+
   return (
     <div className='flex items-start gap-[19px] xsm:flex-col'>
       <Image className='w-[86px]' src={ReviewProfilePic} alt="" />
