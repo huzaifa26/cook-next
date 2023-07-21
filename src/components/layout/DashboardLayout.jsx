@@ -3,7 +3,7 @@
 import arrow from "@/assets/StudentDashboard/arrow.svg"
 import search from "@/assets/StudentDashboard/search.svg"
 import user from "@/assets/StudentDashboard/user.svg"
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import CurrencyModal from './CurrencyModal'
 import LanguageModal from './LanguageModal'
 import Menu from './Menu'
@@ -12,6 +12,9 @@ import Link from "next/link"
 import Image from "next/image"
 import ProfileDropDown from "../DropDowns/ProfileDropDown"
 import { useSession } from "next-auth/react"
+import { API_URL } from "@/utils/consts"
+import { useDispatch } from "react-redux"
+import { addConversations } from "@/redux/conversationsSlice"
 
 const DashboardLayout = () => {
   const pathname = usePathname()
@@ -21,7 +24,34 @@ const DashboardLayout = () => {
 
   const [showMenu, setShowMenu] = useState(false);
 
-  const session=useSession()
+  const session = useSession();
+  const dispatch = useDispatch();
+
+  const getConversations = async () => {
+    let data = {
+      userId: session?.data?.data?._id
+    }
+
+    try {
+      const result = await fetch(API_URL + 'api/get-conversation', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      })
+
+      const res = await result.json();
+      res.status === 200 && res?.data?.length > 0 && dispatch(addConversations(res.data));
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    getConversations();
+  })
+
 
   return (
     <div>
@@ -40,7 +70,7 @@ const DashboardLayout = () => {
               <div className='sm:hidden xsm:hidden md:hidden flex gap-[24px]'>
                 <Link href='/search-tutors'>
                   <div className='flex gap-[7px]'>
-                    <Image src={search} alt=""/>
+                    <Image src={search} alt="" />
                     <p className='font-outfit font-normal text-lg leading-[22.68px] text-TextColor'>Find Tutors</p>
                   </div>
                 </Link>
@@ -98,7 +128,7 @@ const DashboardLayout = () => {
               </div>
               <div className='h-[15px] border border-primaryLighten2 rouded-[16px]'></div>
               <div onClick={(e) => { setProfileModal(!profileModal); setLanguageModal(false); setCurrencyModal(false); e.stopPropagation(); }} className='relative'>
-                <Image loader={()=> session?.data?.data?.picture} className='max-w-[48px] max-h-[48px] rounded-full object-cover cursor-pointer' width={48} height={48} priority src={session?.data?.data?.picture} alt='' />
+                <Image loader={() => session?.data?.data?.picture} className='max-w-[48px] max-h-[48px] rounded-full object-cover cursor-pointer' width={48} height={48} priority src={session?.data?.data?.picture} alt='' />
                 <ProfileDropDown state={profileModal} closeModal={() => setProfileModal(false)} />
               </div>
             </div>

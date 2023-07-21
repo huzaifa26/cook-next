@@ -2,16 +2,17 @@
 
 import React, { useState } from 'react';
 import user from '@/assets/StudentDashboard/user.svg';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 // import { useRouter } from 'next/router';
 import Image from 'next/image';
 import querystring from 'querystring';
 import { useDispatch } from 'react-redux';
 import { addSingleChat } from '@/redux/chatSlice';
+import { useSession } from 'next-auth/react';
 
 export default function Page() {
   const [currentChat, setCurrentChat] = useState({});
-  const router = useRouter()
+  const router = useRouter();
   const dispatch=useDispatch();
 
   const [allChats, setAllChats] = useState([

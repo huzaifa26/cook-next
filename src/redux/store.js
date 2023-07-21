@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-// Import your reducers
 import chatSlice from './chatSlice';
 import signupSlice from './signupSlice';
+import conversationsSlice from './conversationsSlice';
 
 export const store = configureStore({
   reducer: {
-    // Add your reducers here
     chat: chatSlice,
-    signup: signupSlice
+    signup: signupSlice,
+    conversations: conversationsSlice
   },
 });

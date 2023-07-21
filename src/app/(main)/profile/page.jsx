@@ -1,5 +1,5 @@
 'use client'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import ProfileBakerIcon from '@/assets/Profile/ProfileBakerIcon.svg'
 import ProfilePicture from "@/assets/Profile/ProfilePicture.png"
 import ReviewProfilePic from "@/assets/Profile/ReviewProfilePic.png"
@@ -8,10 +8,13 @@ import ProfileReviewCard from '@/components/Profile/ProfileReviewCard'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 export default function Page() {
+  const router=useRouter();
   const [resumeTab, setResumeTab] = useState('education');
   const scrollRef = useRef(null);
+
   const handleScrollRight = () => {
     const currentScrollLeft = scrollRef.current.scrollLeft;
     const targetScrollLeft = currentScrollLeft + 256.33;
@@ -20,6 +23,7 @@ export default function Page() {
       behavior: 'smooth',
     });
   };
+
   const handleScrollLeft = () => {
     const currentScrollLeft = scrollRef.current.scrollLeft;
     const targetScrollLeft = currentScrollLeft - 256.33;
@@ -46,10 +50,8 @@ export default function Page() {
     });
   }
 
-
   const searchParams = useSearchParams();
   const [tutor, setTutor] = useState(JSON.parse(searchParams.get("data")))
-  console.log(typeof tutor);
 
   return (
     <main className='px-[12.153vw] md:px-[5.749vw] sm:px-[5.749vw] xsm:px-[8.205vw] flex justify-start gap-[23px] pt-[79px]'>
@@ -57,7 +59,7 @@ export default function Page() {
         <div className='w-[52.361vw] md:w-full sm:w-full xsm:w-full flex gap-[20px]'>
           <div className='flex gap-[66px] min-w-[52.361vw] md:w-full sm:w-full xsm:w-full sm:flex-col xsm:flex-col'>
             <div className='relative w-fit'>
-              <Image className='w-[267px] relative rounded-[32px]' width={267} height={262} loader={() => tutor?.image} src={tutor?.image} alt="" />
+              <Image priority className='w-[267px] relative rounded-[32px]' width={267} height={262} loader={() => tutor?.image || tutor?.picture} src={tutor?.image || tutor?.picture} alt="" />
               <svg className='absolute bottom-[13px] right-[15px]' width="67" height="67" viewBox="0 0 67 67" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="67" height="67" rx="33.5" fill="#D27722" />
                 <path d="M25 20L45.4167 33.125L25 46.25V20Z" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
@@ -126,7 +128,7 @@ export default function Page() {
               }
             </div>
             <div className='flex gap-[13px] mt-[27px] xsm:flex-col sm:flex-col xsm:items-center sm:items-center justify-center'>
-              <button className='w-[242px] h-[39px] border-2 border-primary rounded-[4px] font-outfit font-normal text-[18px] leading-[22.68px] text-primary2 '>Send A Message</button>
+              <button onClick={()=> router.push("/student-dashboard/chat?data="+encodeURIComponent(JSON.stringify(tutor)))} className='w-[242px] h-[39px] border-2 border-primary rounded-[4px] font-outfit font-normal text-[18px] leading-[22.68px] text-primary2 '>Send A Message</button>
               <button className='w-[242px] h-[39px] border-2 border-primary rounded-[4px] font-kanit font-normal text-[18px] leading-[26.91px] bg-primary2 text-[white] '>Book A Trial Lesson</button>
             </div>
           </div>
@@ -515,7 +517,7 @@ export default function Page() {
               </div>
             }
           </div>
-          <button className='w-full h-[39px] border-2 border-primary2 rounded-[4px] font-outfit font-normal text-[18px] leading-[22.68px] text-primary2 mt-[27px] hover:bg-primary2 hover:text-[white] transition-all duration-200'>Send A Message</button>
+          <button onClick={()=> router.push("/student-dashboard/chat?data="+encodeURIComponent(JSON.stringify(tutor)))} className='w-full h-[39px] border-2 border-primary2 rounded-[4px] font-outfit font-normal text-[18px] leading-[22.68px] text-primary2 mt-[27px] hover:bg-primary2 hover:text-[white] transition-all duration-200'>Send A Message</button>
           <button className='w-full h-[39px] border-2 border-primary2 rounded-[4px] font-kanit font-normal text-[18px] leading-[26.91px] bg-primary2 text-[white] mt-[12px] hover:bg-[rgba(0,0,0,0)] hover:text-primary2 transition-all duration-200'>Book A Trial Lesson</button>
         </div>
       </div>

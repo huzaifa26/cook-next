@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 export default function TutorCard({ tutor }) {
+  console.log(tutor);
   return (
     <div className='w-full md:w-[88.383vw] sm:w-[88.383vw] border-2 border-[rgba(255,219,184,1)] px-[29.5px] py-[45px] rounded-[16px] flex sm:flex-col xsm:flex-col xsm:items-center gap-[46px] sm:gap-[5.509vw] items-start'>
       <Link className='rounded-full' href={'/profile?data='+encodeURIComponent(JSON.stringify(tutor))}>
@@ -34,7 +35,7 @@ export default function TutorCard({ tutor }) {
         <div className='min-w-[35.347vw] xsm:w-full'>
           <p className='font-outfit font-normal text-[16px] leading-[24px] mt-[30px]'>{tutor?.introduction}</p>
           {/* <p className='font-outfit font-normal text-[16px] leading-[24px] mt-[30px]'>Lorem ipsum dolor sit amet consectetur. Massa consequat cras tortor cras morbi amet massa amet fermentum. Et malesuada posuere sem dictumst ultricies ut varius. Sagittis arcu sit dictum adipiscing a sapien.</p> */}
-          <Link href='/profile'>
+          <Link href={'/profile?data='+encodeURIComponent(JSON.stringify(tutor))}>
             <p className='font-outfit font-semibold text-[16px] leading-[24px] text-primary2 mt-[10px] hover:underline'>Learn more</p>
           </Link>
         </div>
@@ -57,10 +58,10 @@ export default function TutorCard({ tutor }) {
           </div>
         </div>
         <div className='flex flex-col gap-[15px] mt-[15px] xsm:w-full'>
-          <Link href='/profile'>
+          <Link href={'/profile?data='+encodeURIComponent(JSON.stringify(tutor))}>
             <button className='hover:bg-primary2 hover:text-[white] transition-all duration-200 w-[165px] xsm:w-full h-[39px] border-2 border-primary2 rounded-[4px] font-outfit font-medium text-[18px] leading-[22.68px] text-primary2'>Write a message</button>
           </Link>
-          <Link href='/profile'>
+          <Link href={'/profile?data='+encodeURIComponent(JSON.stringify(tutor))}>
             <button className='hover:bg-[white] hover:border-2 hover:border-primary2 hover:text-primary2 transition-all duration-200 w-[165px] xsm:w-full h-[39px] border-2 border-primary2 rounded-[4px] font-outfit font-medium text-[18px] leading-[22.68px] bg-primary2 text-[white]'>Book a lesson</button>
           </Link>
         </div>
