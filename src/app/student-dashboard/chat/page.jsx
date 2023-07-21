@@ -216,7 +216,7 @@ export default function Page() {
 
     try {
       socket = io(undefined, {
-        path: '/api/socket_io'
+        path: '/api/socket'
       })
 
       socket.on('connected', socket.id);

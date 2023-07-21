@@ -9,7 +9,6 @@ import { useSelector } from "react-redux";
 
 export default function Page() {
   const state = useSelector((state) => state.signup.signup)
-  console.log(state);
   const [price, setPrice] = useState(20);
 
   const [loading, setLoading] = useState(false);

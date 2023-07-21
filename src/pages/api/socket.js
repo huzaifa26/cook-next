@@ -8,7 +8,7 @@ export default function handler(req, res) {
     return;
   }
   const io = new Server(res.socket.server, {
-    path: '/api/socket_io',
+    path: '/api/socket',
     addTrailingSlash: false
   })
   res.socket.server.io = io;
@@ -32,5 +32,4 @@ export default function handler(req, res) {
 
   console.log("Socket server started successfully");
   res.end();
-
 }

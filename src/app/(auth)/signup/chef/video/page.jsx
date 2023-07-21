@@ -24,7 +24,6 @@ export default function Page() {
     let data = {
       video,
     }
-    console.log(data);
     dispatch(addSignup(data));
     router.push('/signup/chef/availability')
   }

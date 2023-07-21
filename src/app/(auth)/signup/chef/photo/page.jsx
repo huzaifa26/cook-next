@@ -15,7 +15,6 @@ export default function Page() {
   const [error, setError] = useState(null);
 
   const imageSubmitHandler = () => {
-    console.log(state)
     let data = {
       image,
     }

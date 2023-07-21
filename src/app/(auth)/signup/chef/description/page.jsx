@@ -28,7 +28,6 @@ export default function Page() {
 
     try {
       await schema.validate(data, { abortEarly: false });
-      console.log(data);
       dispatch(addSignup(data));
       router.push('/signup/chef/video')
     } catch (errors) {

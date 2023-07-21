@@ -50,7 +50,6 @@ export default function Page() {
   const router = useRouter();
   const dispatch = useDispatch();
   const state=useSelector(state => state.signup.signup);
-  console.log(state);
   const [timeZone, setTimeZone] = useState(state?.timeZone || null);
   const [showTimeZone, setShowTimeZone] = useState(false);
 
@@ -84,7 +83,6 @@ export default function Page() {
       router.push('/signup/chef/pricing')
     } catch (errors) {
       console.log(errors)
-      console.log(errors?.inner[0]);
       setError(errors?.inner[0].message + "")
     }
   }

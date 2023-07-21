@@ -78,7 +78,6 @@ export default function TutorList() {
         },
       })
       res = await res.json();
-      console.log(res?.data);
       let data = res?.data;
       if (data.length < 3) {
         data.push({ type: "Group" });
