@@ -37,7 +37,7 @@ export default function Page() {
     setVideo(e.target.value)
   }
 
-  const checkFileType=(file)=>{
+  const checkFileType = (file) => {
     return file instanceof File
   }
 
@@ -51,9 +51,9 @@ export default function Page() {
       <div className='ml-[3.264vw] mr-[3.889vw] my-[43px]'>
         <div className='flex gap-[21px] items-center h-fit'>
           {video ?
-            (!checkFileType(video) && video?.includes('www.youtube.com') ?
+            ((typeof window !== "undefined" && !checkFileType(video)) && video?.includes('www.youtube.com') ?
               <iframe width="375" height="265" src={video}></iframe>
-              : (checkFileType(video)) ?
+              : (typeof window !== "undefined" && checkFileType(video)) ?
                 <video src={URL.createObjectURL(video)} className='w-[375px] h-[265px]' controls></video>
                 : <iframe width="375" height="265" src={video}></iframe>
             )
@@ -70,7 +70,7 @@ export default function Page() {
             </label>
             <div className='mt-[51px] flex flex-col gap-[22px]'>
               <p className='font-outfit text-[16px] font-normal leading-[160%]'>Or paste a youtube link</p>
-              <input defaultValue={checkFileType(video) ? null : video} onChange={youtubeLinkHandler} className='w-[23.889vw] h-[46px] p-[10px] border border-primaryLighten2 outline-primary2 rounded-[8px] font-outfit text-[16px] font-normal leading-[160%]' placeholder={'https:'} />
+              <input defaultValue={(typeof window !== "undefined" && checkFileType(video)) ? null : video} onChange={youtubeLinkHandler} className='w-[23.889vw] h-[46px] p-[10px] border border-primaryLighten2 outline-primary2 rounded-[8px] font-outfit text-[16px] font-normal leading-[160%]' placeholder={'https:'} />
             </div>
           </div>
         </div>
