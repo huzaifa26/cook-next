@@ -29,7 +29,6 @@ export default function Page() {
     router.push('/signup/chef/availability')
   }
 
-
   const videoFileHandler = (e) => {
     setVideo(e.target.files[0])
   }
@@ -38,7 +37,9 @@ export default function Page() {
     setVideo(e.target.value)
   }
 
-  console.log(video);
+  const checkFileType=(file)=>{
+    return file instanceof File
+  }
 
   return (
     <>
@@ -50,9 +51,9 @@ export default function Page() {
       <div className='ml-[3.264vw] mr-[3.889vw] my-[43px]'>
         <div className='flex gap-[21px] items-center h-fit'>
           {video ?
-            (!video instanceof File && video?.includes('www.youtube.com') ?
+            (!checkFileType(video) && video?.includes('www.youtube.com') ?
               <iframe width="375" height="265" src={video}></iframe>
-              : (video instanceof File) ?
+              : (checkFileType(video)) ?
                 <video src={URL.createObjectURL(video)} className='w-[375px] h-[265px]' controls></video>
                 : <iframe width="375" height="265" src={video}></iframe>
             )
@@ -69,7 +70,7 @@ export default function Page() {
             </label>
             <div className='mt-[51px] flex flex-col gap-[22px]'>
               <p className='font-outfit text-[16px] font-normal leading-[160%]'>Or paste a youtube link</p>
-              <input defaultValue={video instanceof File ? null : video} onChange={youtubeLinkHandler} className='w-[23.889vw] h-[46px] p-[10px] border border-primaryLighten2 outline-primary2 rounded-[8px] font-outfit text-[16px] font-normal leading-[160%]' placeholder={'https:'} />
+              <input defaultValue={checkFileType(video) ? null : video} onChange={youtubeLinkHandler} className='w-[23.889vw] h-[46px] p-[10px] border border-primaryLighten2 outline-primary2 rounded-[8px] font-outfit text-[16px] font-normal leading-[160%]' placeholder={'https:'} />
             </div>
           </div>
         </div>
