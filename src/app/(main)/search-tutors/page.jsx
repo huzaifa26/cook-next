@@ -296,7 +296,7 @@ export default function TutorList() {
               {tutors?.map((tutor, index) => {
                 if (tutor?.type === "Group") {
                   return (
-                    <div className='mt-[122px] mb-[103px]'>
+                    <div key={index} className='mt-[122px] mb-[103px]'>
                       <div className='flex items-center justify-between'>
                         <div className='flex items-center'>
                           <svg width="28" height="33" viewBox="0 0 23 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -326,7 +326,7 @@ export default function TutorList() {
                   )
                 }
                 return (
-                  <TutorCard tutor={tutor}/>
+                  <TutorCard key={index} tutor={tutor}/>
                 )
               })}
             </div>

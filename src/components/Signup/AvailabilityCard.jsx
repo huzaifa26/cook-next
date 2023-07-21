@@ -17,7 +17,7 @@ export default function AvailabilityCard({ title, setTimings, clearTimings, remo
         showTime &&
         array.map((a, index) => {
           return (
-            <Time setTimings={setTimings} index={index} setArray={setArray} array={array} removeItem={removeItem} propId={a?.id} proptimeZone={a?.startTime} proptimeZone2={a?.endTime}/>
+            <Time key={index} setTimings={setTimings} index={index} setArray={setArray} array={array} removeItem={removeItem} propId={a?.id} proptimeZone={a?.startTime} proptimeZone2={a?.endTime}/>
           )
         })
       }

@@ -103,9 +103,9 @@ export default function Page() {
             </div>
             <div style={showcountry ? { maxHeight: "1000px" } : { maxHeight: "0px", border: "0px solid #000" }} className='overflow-hidden z-[2000]  absolute w-full left-0 top-full border border-t-0 bg-[white] divide-y divide-primaryLighten2 border-primaryLighten2 rounded-br-[4px] rounded-bl-[4px]'>
               <p onClick={() => { setCountry("Select option"); setshowcountry(false) }} className='px-[8px] py-[8px] cursor-pointer font-outfit text-[16px] font-normal leading-normal flex-1'>{"Select option"}</p>
-              {['United States', 'Pakistan'].map((item) => {
+              {['United States', 'Pakistan'].map((item,index) => {
                 return (
-                  <p onClick={() => { setCountry(item); setshowcountry(false) }} className='px-[8px] py-[8px] cursor-pointer font-outfit text-[16px] font-normal leading-normal flex-1'>{item}</p>
+                  <p key={item+index} onClick={() => { setCountry(item); setshowcountry(false) }} className='px-[8px] py-[8px] cursor-pointer font-outfit text-[16px] font-normal leading-normal flex-1'>{item}</p>
                 )
               })}
             </div>
@@ -123,9 +123,9 @@ export default function Page() {
             </div>
             <div style={showlevel ? { maxHeight: "1000px" } : { maxHeight: "0px", border: "0px solid #000" }} className='overflow-hidden z-[2000]  absolute w-full left-0 top-full border border-t-0 bg-[white] divide-y divide-primaryLighten2 border-primaryLighten2 rounded-br-[4px] rounded-bl-[4px]'>
               <p onClick={() => { setLevel("Select option"); setshowlevel(false) }} className='px-[8px] py-[8px] cursor-pointer font-outfit text-[16px] font-normal leading-normal flex-1'>{"Select option"}</p>
-              {['B2', 'B3'].map((item) => {
+              {['B2', 'B3'].map((item,index) => {
                 return (
-                  <p onClick={() => { setLevel(item); setshowlevel(false) }} className='px-[8px] py-[8px] cursor-pointer font-outfit text-[16px] font-normal leading-normal flex-1'>{item}</p>
+                  <p key={item+index} onClick={() => { setLevel(item); setshowlevel(false) }} className='px-[8px] py-[8px] cursor-pointer font-outfit text-[16px] font-normal leading-normal flex-1'>{item}</p>
                 )
               })}
             </div>
@@ -141,9 +141,9 @@ export default function Page() {
             </div>
             <div style={showlanguage ? { maxHeight: "1000px" } : { maxHeight: "0px", border: "0px solid #000" }} className='overflow-hidden z-[2000]  absolute w-full left-0 top-full border border-t-0 bg-[white] divide-y divide-primaryLighten2 border-primaryLighten2 rounded-br-[4px] rounded-bl-[4px]'>
               <p onClick={() => { setLanguage("Select option"); setshowlanguage(false) }} className='px-[8px] py-[8px] cursor-pointer font-outfit text-[16px] font-normal leading-normal flex-1'>{"Select option"}</p>
-              {['English', 'German'].map((item) => {
+              {['English', 'German'].map((item,index) => {
                 return (
-                  <p onClick={() => { setLanguage(item); setshowlanguage(false) }} className='px-[8px] py-[8px] cursor-pointer font-outfit text-[16px] font-normal leading-normal flex-1'>{item}</p>
+                  <p key={item+index} onClick={() => { setLanguage(item); setshowlanguage(false) }} className='px-[8px] py-[8px] cursor-pointer font-outfit text-[16px] font-normal leading-normal flex-1'>{item}</p>
                 )
               })}
             </div>
@@ -158,9 +158,9 @@ export default function Page() {
             </div>
             <div style={showexperience ? { maxHeight: "1000px" } : { maxHeight: "0px", border: "0px solid #000" }} className='overflow-hidden z-[2000] absolute w-full left-0 top-full border border-t-0 bg-[white] divide-y divide-primaryLighten2 border-primaryLighten2 rounded-br-[4px] rounded-bl-[4px]'>
               <p onClick={() => { setExperience("Select option"); setshowexperience(false) }} className='px-[8px] py-[8px] cursor-pointer font-outfit text-[16px] font-normal leading-normal flex-1'>{"Select option"}</p>
-              {['1-2 years', '2-3 years'].map((item) => {
+              {['1-2 years', '2-3 years'].map((item,index) => {
                 return (
-                  <p onClick={() => { setExperience(item); setshowexperience(false) }} className='px-[8px] py-[8px] cursor-pointer font-outfit text-[16px] font-normal leading-normal flex-1'>{item}</p>
+                  <p key={item+index} onClick={() => { setExperience(item); setshowexperience(false) }} className='px-[8px] py-[8px] cursor-pointer font-outfit text-[16px] font-normal leading-normal flex-1'>{item}</p>
                 )
               })}
             </div>
@@ -175,9 +175,9 @@ export default function Page() {
             </div>
             <div style={showsubject ? { maxHeight: "1000px" } : { maxHeight: "0px", border: "0px solid #000" }} className='overflow-hidden z-[2000] absolute w-full left-0 top-full border border-t-0 bg-[white] divide-y divide-primaryLighten2 border-primaryLighten2 rounded-br-[4px] rounded-bl-[4px]'>
               <p onClick={() => { setSubject("Select option"); setshowsubject(false) }} className='px-[8px] py-[8px] cursor-pointer font-outfit text-[16px] font-normal leading-normal flex-1'>{"Select option"}</p>
-              {['Baking', 'Cooking'].map((item) => {
+              {['Baking', 'Cooking'].map((item,index) => {
                 return (
-                  <p onClick={() => { setSubject(item); setshowsubject(false) }} className='px-[8px] py-[8px] cursor-pointer font-outfit text-[16px] font-normal leading-normal flex-1'>{item}</p>
+                  <p key={item+index} onClick={() => { setSubject(item); setshowsubject(false) }} className='px-[8px] py-[8px] cursor-pointer font-outfit text-[16px] font-normal leading-normal flex-1'>{item}</p>
                 )
               })}
             </div>

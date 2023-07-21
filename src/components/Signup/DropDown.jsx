@@ -13,9 +13,9 @@ export default function DropDown({timeZone,setTimeZone,timing}) {
         </svg>
       </div>
       <div style={showTimeZone ? { maxHeight: "204px" } : { maxHeight: "0px", border: "0px solid #000" }} className='overflow-auto overflow-x-hidden z-[2000] absolute w-full left-0 top-full border border-t-0 bg-[white] divide-y divide-primaryLighten2 border-primaryLighten2 rounded-br-[4px] rounded-bl-[4px]'>
-        {timing.map((item) => {
+        {timing.map((item,index) => {
           return (
-            <p onClick={() => { setTimeZone(item); setShowTimeZone(false) }} className='px-[8px] py-[8px] cursor-pointer font-outfit text-[16px] font-medium leading-normal flex-1'>{item}</p>
+            <p key={item+index} onClick={() => { setTimeZone(item); setShowTimeZone(false) }} className='px-[8px] py-[8px] cursor-pointer font-outfit text-[16px] font-medium leading-normal flex-1'>{item}</p>
           )
         })}
       </div>
