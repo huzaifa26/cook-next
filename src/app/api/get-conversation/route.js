@@ -16,9 +16,6 @@ export const POST = async (request) => {
     }).populate('user1')
       .populate('user2')
 
-
-      console.log(conversations)
-
     return new NextResponse(
       JSON.stringify({
         message: "Data fetched successfully",

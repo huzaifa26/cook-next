@@ -35,6 +35,10 @@ const conversationSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
       },
+      senderId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+      }
     },
   ],
 });

@@ -1,29 +1,35 @@
 import { Server } from "socket.io";
 
-
 export default function handler(req, res) {
   if (res.socket.server.io) {
-    console.log('Server already started');
     res.end();
     return;
+  } else {
+    console.log("not running..........");
   }
-  const io = new Server(res.socket.server, {
-    path: '/api/socket',
-    addTrailingSlash: false
-  })
+
+  const httpServer = res.socket.server
+
+  const io = new Server(httpServer, {
+    path: "/api/socket",
+    addTrailingSlash: false,
+    pingInterval: 5000,
+    pingTimeout: 10000,
+  });
+
   res.socket.server.io = io;
 
   io.on('connection', (socket) => {
-    console.log('A new client connected.');
+    console.log('A new client connected.')
 
-    // Handle events from the client
-    socket.on('message', (data) => {
-      console.log('Received message:', data);
-      // Broadcast the message to all connected clients
-      io.emit('message', data);
+    socket.on('joinRoom', (roomId) => {
+      socket.join(roomId);
     });
 
-    // Handle disconnection
+    socket.on('message', (data) => {
+      io.emit('new-message', { receiverId: data?.receiverId, data: data.data });
+    })
+
     socket.on('disconnect', () => {
       console.log('A client disconnected.');
     });

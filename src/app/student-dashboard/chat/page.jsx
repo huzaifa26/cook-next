@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import user from '@/assets/StudentDashboard/user.svg';
 import { useRouter, useSearchParams } from 'next/navigation';
 // import { useRouter } from 'next/router';
@@ -12,6 +12,7 @@ import { API_URL } from '@/utils/consts'
 import { io } from 'socket.io-client'
 import { useSession } from 'next-auth/react';
 import { addConversations } from '@/redux/conversationsSlice';
+import { v4 as uuidv4 } from 'uuid';
 
 let socket;
 
@@ -20,189 +21,10 @@ export default function Page() {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const [allChats, setAllChats] = useState([
-    {
-      id: 1,
-      name: 'Tutor 1',
-      message: 'Hey, how can I assist you today?',
-      chats: [
-        {
-          id: 1,
-          senderId: 1,
-          message: 'Hi there! I need help with my math assignment.',
-        },
-        {
-          id: 2,
-          senderId: 2,
-          message: 'Sure, I\'d be happy to help. Can you provide me with the details?',
-        },
-        {
-          id: 3,
-          senderId: 1,
-          message: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, vitae repellendus? Placeat, similique, doloremque recusandae pariatur corrupti inventore ut dicta omnis asperiores aliquid non aspernatur eius vitae, optio esse laborum!',
-        },
-        {
-          id: 4,
-          senderId: 2,
-          message: 'No problem. Let me explain it to you step by step.',
-        },
-        {
-          id: 5,
-          senderId: 1,
-          message: 'Thank you for the explanation. It\'s much clearer now.',
-        },
-        {
-          id: 6,
-          senderId: 2,
-          message: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, vitae repellendus? Placeat, similique, doloremque recusandae pariatur corrupti inventore ut dicta omnis asperiores aliquid non aspernatur eius vitae, optio esse laborum!',
-        },
-        {
-          id: 7,
-          senderId: 1,
-          message: 'I also need help with the last problem. It involves logarithms.',
-        },
-        {
-          id: 8,
-          senderId: 2,
-          message: 'Logarithms can be tricky. Let\'s go through it step by step as well.',
-        },
-        {
-          id: 9,
-          senderId: 1,
-          message: 'I think I understand it now. Thanks for your help!',
-        },
-        {
-          id: 10,
-          senderId: 2,
-          message: 'You\'re welcome! I\'m glad I could assist you. If you need further assistance, don\'t hesitate to reach out.',
-        },
-        // Additional chat messages
-      ],
-    },
-    {
-      id: 2,
-      name: 'Tutor 2',
-      message: 'Let me know if you have any questions.',
-      chats: [
-        {
-          id: 1,
-          senderId: 1,
-          message: 'Hello, I have a question about the literature assignment.',
-        },
-        {
-          id: 2,
-          senderId: 2,
-          message: 'Sure, go ahead and ask. I\'ll do my best to help you.',
-        },
-        {
-          id: 3,
-          senderId: 1,
-          message: 'I\'m struggling to analyze the symbolism in this novel.',
-        },
-        {
-          id: 4,
-          senderId: 2,
-          message: 'Symbolism can be complex. Let\'s break it down and discuss the key symbols.',
-        },
-        {
-          id: 5,
-          senderId: 1,
-          message: 'Thank you for guiding me through the symbolism. It makes more sense now.',
-        },
-        {
-          id: 6,
-          senderId: 2,
-          message: 'You\'re welcome! If you have more questions or need further analysis, feel free to ask.',
-        },
-        {
-          id: 7,
-          senderId: 1,
-          message: 'I\'m also curious about the historical context of the novel.',
-        },
-        {
-          id: 8,
-          senderId: 2,
-          message: 'The historical context plays a significant role. Let\'s explore it together.',
-        },
-        {
-          id: 9,
-          senderId: 1,
-          message: 'I appreciate your insights into the historical context. It enriches my understanding of the novel.',
-        },
-        {
-          id: 10,
-          senderId: 2,
-          message: 'I\'m glad I could help. If you have more questions or need further analysis, feel free to reach out.',
-        },
-        // Additional chat messages
-      ],
-    },
-    {
-      id: 3,
-      name: 'Tutor 3',
-      message: 'Looking forward to our session.',
-      chats: [
-        {
-          id: 1,
-          senderId: 1,
-          message: 'Hi, I would like to schedule a tutoring session for next week.',
-        },
-        {
-          id: 2,
-          senderId: 2,
-          message: 'Great! Let me check my availability and get back to you.',
-        },
-        {
-          id: 3,
-          senderId: 1,
-          message: 'Sure, take your time. I\'m available on weekdays after 4 PM.',
-        },
-        {
-          id: 4,
-          senderId: 2,
-          message: 'I have a slot available on Thursday at 5 PM. Does that work for you?',
-        },
-        {
-          id: 5,
-          senderId: 1,
-          message: 'Thursday at 5 PM works for me. Let\'s schedule it.',
-        },
-        {
-          id: 6,
-          senderId: 2,
-          message: 'Excellent! I have booked the session for Thursday at 5 PM. Looking forward to it.',
-        },
-        {
-          id: 7,
-          senderId: 1,
-          message: 'Thank you for scheduling the session. I\'m excited to learn from you.',
-        },
-        {
-          id: 8,
-          senderId: 2,
-          message: 'You\'re welcome! I\'m excited to work with you and assist you in your learning journey.',
-        },
-        {
-          id: 9,
-          senderId: 1,
-          message: 'See you on Thursday! Have a great day.',
-        },
-        {
-          id: 10,
-          senderId: 2,
-          message: 'See you on Thursday! Take care and have a wonderful day as well.',
-        },
-        // Additional chat messages
-      ],
-    },
-    // Add more chat objects as needed
-  ]);
-
-  const userId = 1;
   const handleCardClick = (conversation) => {
     if (window.innerWidth < 577) {
       dispatch(addSingleChat(conversation))
-      router.push('/single-chat?data='+encodeURI(JSON.stringify(conversation)))
+      router.push('/single-chat?data=' + encodeURI(JSON.stringify(conversation)))
     }
     else
       setCurrentChat(conversation);
@@ -216,13 +38,18 @@ export default function Page() {
 
     try {
       socket = io(undefined, {
-        path: '/api/socket'
-      })
+        path: '/api/socket',
+        addTrailingSlash: false,
+      });
 
       socket.on('connected', socket.id);
 
-      socket.on('message', (data) => {
-        setReceivedMessage(data);
+      socket.emit('joinRoom', session?.data?.data?._id);
+
+      socket.on('new-message', (data) => {
+        if (session?.data?.data?._id === data?.receiverId) {
+          setCurrentChat(data)
+        }
       });
 
       console.log('connected');
@@ -230,12 +57,6 @@ export default function Page() {
       console.log(err)
     }
   }
-
-  const handleMessageSend = () => {
-    const socket = io();
-    socket.emit('message', message);
-    setMessage('');
-  };
 
   useEffect(() => {
     socketInitializer();
@@ -270,15 +91,12 @@ export default function Page() {
     }
   }
 
+  const [created, setCreated] = useState(false)
+
   const checkConversation = () => {
     let found = false;
 
-    if (conversationState?.length === 0) {
-      return
-    }
-
     conversationState.forEach((conversation) => {
-      console.log(conversation.user1?._id === session?.data?.data?._id && conversation.user2?._id === tutor?._id) || (conversation.user2?._id === session?.data?.data?._id && conversation.user1?._id === tutor?._id);
       if ((conversation.user1?._id === session?.data?.data?._id && conversation.user2?._id === tutor?._id) || (conversation.user2?._id === session?.data?.data?._id && conversation.user1?._id === tutor?._id)) {
         setCurrentChat(conversation);
         found = true;
@@ -286,16 +104,41 @@ export default function Page() {
       }
     });
 
-    if (!found) {
-      console.log('creating conversation');
+    if (found === false && created === false && tutor !== undefined) {
+      setCreated(true);
       createConversation();
     }
   }
 
-
   useEffect(() => {
     checkConversation();
   }, [])
+
+  const sendMessageHandler = async () => {
+    let data = {
+      id: uuidv4(),
+      conversationId: currentChat._id,
+      senderId: session?.data?.data?._id,
+      message
+    }
+
+    const result = await fetch(API_URL + 'api/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    });
+
+    const res = await result.json();
+
+    if (res.status === 201 || res.status === 200) {
+      socket.emit('message', { receiverId: secondUserRef.current?._id, data: res.data });
+      setCurrentChat(res.data);
+    }
+  }
+
+  const secondUserRef = useRef()
 
   return (
     <div className='flex min-h-[calc(100vh-142.3px)]'>
@@ -335,29 +178,44 @@ export default function Page() {
             <div className='flex flex-col '>
               <div className='z-10 max-h-[calc(100vh-228.3px)] min-h-[calc(100vh-228.3px)] sm:max-h-[calc(100vh-213.3px)] md:max-h-[calc(100vh-213.3px)] sm:min-h-[calc(100vh-213.3px)] md:min-h-[calc(100vh-213.3px)]  overflow-auto'>
                 <div className='ml-[26px] mr-[41px] mt-[38px] flex flex-col sm:ml-[20px] sm:mr-[20px] md:ml-[20px] md:mr-[20px]'>
-                  {currentChat?.messages?.map((chat, index) =>
-                    userId === chat?.senderId ? (
-                      <div className='flex  my-[12px] justify-center ml-auto items-start' key={index}>
-                        <div className='flex flex-col gap-[5px]'>
-                          <div style={{ borderRadius: '16px 16px 0px 16px' }} className='flex justify-center items-center py-[12px] px-[16px] bg-primary'>
-                            <p className='max-w-[528px] sm:max-w-[320px] md:max-w-[320px] xsm:text-[0.75em] text-[white] text-[16px] font-[400] font-outfit '>{chat.message}</p>
+                  {currentChat?.messages?.map((chat, index) => {
+                    let otherUser = null
+
+                    if (session?.data?.data?._id === currentChat?.user1._id) {
+                      otherUser = currentChat?.user2
+                      secondUserRef.current = currentChat?.user2
+                    }
+                    if (session?.data?.data?._id === currentChat?.user2._id) {
+                      otherUser = currentChat?.user1
+                      secondUserRef.current = currentChat?.user1
+                    }
+
+                    if (session?.data?.data?._id === chat?.senderId) {
+                      return (
+                        <div className='flex  my-[12px] justify-center ml-auto items-start' key={index}>
+                          <div className='flex flex-col gap-[5px]'>
+                            <div style={{ borderRadius: '16px 16px 0px 16px' }} className='flex justify-center items-center py-[12px] px-[16px] bg-primary'>
+                              <p className='max-w-[528px] sm:max-w-[320px] md:max-w-[320px] xsm:text-[0.75em] text-[white] text-[16px] font-[400] font-outfit '>{chat.message}</p>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ) : (
-                      <div className='flex my-[12px]' key={index}>
-                        <Image src={user} className='mr-[11px] h-[42px] w-[42px] cursor-pointer rounded-full' alt='user' />
-                        <div className='flex flex-col gap-[5px] mt-[10px]'>
-                          <div style={{ borderRadius: '0px 12px 12px 12px' }} className='flex justify-center items-center py-[12px] px-[16px] bg-backSec'>
-                            <p className='max-w-[528px] sm:max-w-[320px] md:max-w-[320px] xsm:text-[0.75em] text-[black] text-[16px] font-[400] font-outfit'>{chat.message}</p>
+                      )
+                    } else {
+                      return (
+                        <div className='flex my-[12px]' key={index}>
+                          <Image loader={() => otherUser?.image || otherUser?.picture} src={otherUser?.image || otherUser?.picture} width={42} height={42} className='mr-[11px] h-[42px] w-[42px] cursor-pointer rounded-full' alt='user' />
+                          <div className='flex flex-col gap-[5px] mt-[10px]'>
+                            <div style={{ borderRadius: '0px 12px 12px 12px' }} className='flex justify-center items-center py-[12px] px-[16px] bg-backSec'>
+                              <p className='max-w-[528px] sm:max-w-[320px] md:max-w-[320px] xsm:text-[0.75em] text-[black] text-[16px] font-[400] font-outfit'>{chat.message}</p>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    )
-                  )}
+                      )
+                    }
+                  })}
                 </div>
               </div>
-              
+
               <div className='h-[86px] sm:h-[71px] md:h-[71px] pl-[27px] pr-[40px] sm:pl-[36px] md:pl-[36px] sm:pr-[46px] md:pr-[46px]'>
                 <div className='flex gap-[16px] items-center'>
                   <svg width="50" height="51" viewBox="0 0 50 51" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -366,7 +224,7 @@ export default function Page() {
                   </svg>
                   <div className='flex items-center flex-1 border-[2px] border-primaryLighten2 rounded-[4px] h-[44px] px-[15px] '>
                     <input onChange={(e) => setMessage(e.target.value)} placeholder='Send a message' type="text" className='outline-none h-[40px]  flex-1' />
-                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg onClick={sendMessageHandler} width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M22.4384 2.3053L11.4384 13.3053" stroke="#D27722" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                       <path d="M22.4384 2.3053L15.4384 22.3053L11.4384 13.3053L2.43835 9.3053L22.4384 2.3053Z" stroke="#D27722" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
