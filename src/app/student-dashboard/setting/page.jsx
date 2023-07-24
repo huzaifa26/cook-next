@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Facebook from "@/assets/Signup/Facebook.svg";
 import Google from "@/assets/Signup/Google.svg";
 import Image from 'next/image';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import LoginProfile from "@/assets/LoginProfile.svg"
 import { API_URL } from '@/utils/consts';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
@@ -54,7 +54,7 @@ export default function Page() {
 
   const formSubmitHandler = async (e) => {
     const data = {
-      userId:session?.data?.data?._id,
+      userId: session?.data?.data?._id,
       name: name,
       timeZone: timeZone,
       picture: image || session?.data?.data?.picture,
@@ -63,7 +63,7 @@ export default function Page() {
     if (data.picture instanceof File) {
       const url = await uploadImage(data.picture);
       console.log(url);
-      data. picture = url
+      data.picture = url
     }
 
     try {
@@ -76,7 +76,7 @@ export default function Page() {
       })
       res = await res.json();
 
-      if(res.status === 201){
+      if (res.status === 201) {
         console.log("updated");
         session.update(data)
       }
@@ -96,6 +96,34 @@ export default function Page() {
     return url;
   }
 
+  const deleteHandler = async () => {
+    const data = {
+      userId: session?.data?.data?._id,
+    }
+
+    try {
+      let res = await fetch(API_URL + 'api/user/delete', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      })
+      res = await res.json();
+
+      if (res.status === 200) {
+        console.log("deleted");
+        signOut();        
+      }
+
+      if (res.status === 404 || res.status === 500) {
+        console.log("error deleting");
+      }
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div className='border border-primaryLighten2 min-h-[648px] rounded-[8px] w-full pl-[2.569vw] pr-[3.056vw] pt-[46px]'>
@@ -198,7 +226,7 @@ export default function Page() {
 
       <div className='flex justify-between mt-[74px] mb-[66px]'>
         <button onClick={() => formSubmitHandler()} className='hover:bg-primary2 hover:text-[white] outline-primary2 transition-all duration-200 text-primary2 border rounded-[4px] border-primary2 px-[16px] py-[6px] font-outfit text-[18px] font-medium leading-normal '>Update</button>
-        <button className='hover:text-primary2 hover:bg-[white] transition-all duration-200 group outline-primary2 bg-primary2 text-[white] border rounded-[4px] border-primary2 px-[16px] py-[6px] font-outfit text-[18px] font-medium leading-normal flex gap-[8px] items-center'>
+        <button onClick={()=> deleteHandler()} className='hover:text-primary2 hover:bg-[white] transition-all duration-200 group outline-primary2 bg-primary2 text-[white] border rounded-[4px] border-primary2 px-[16px] py-[6px] font-outfit text-[18px] font-medium leading-normal flex gap-[8px] items-center'>
           Delete
           <svg className='group-hover:stroke-primary2 transition-all duration-200 stroke-[white]' width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M2.25 5H3.75H15.75" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
