@@ -15,6 +15,7 @@ import { useSession } from "next-auth/react"
 import { API_URL } from "@/utils/consts"
 import { useDispatch } from "react-redux"
 import { addConversations } from "@/redux/conversationsSlice"
+import LoginProfile from "@/assets/LoginProfile.svg"
 
 const DashboardLayout = () => {
   const pathname = usePathname()
@@ -52,6 +53,7 @@ const DashboardLayout = () => {
     getConversations();
   })
 
+  console.log(session?.data?.data?.picture)
 
   return (
     <div>
@@ -128,7 +130,10 @@ const DashboardLayout = () => {
               </div>
               <div className='h-[15px] border border-primaryLighten2 rouded-[16px]'></div>
               <div onClick={(e) => { setProfileModal(!profileModal); setLanguageModal(false); setCurrencyModal(false); e.stopPropagation(); }} className='relative'>
-                <Image loader={() => session?.data?.data?.picture} className='max-w-[48px] max-h-[48px] rounded-full object-cover cursor-pointer' width={48} height={48} priority src={session?.data?.data?.picture} alt='' />
+                {(session?.data?.data?.image || session?.data?.data?.picture) ?
+                  <Image loader={() => session?.data?.data?.image || session?.data?.data?.picture} className='cursor-pointer w-[48px] h-[48px] rounded-full' height={48} width={48} src={session?.data?.data?.image || session?.data?.data?.picture} alt='' />
+                  : <Image className='cursor-pointer w-[48px] h-[48px] rounded-full' height={48} width={48} src={LoginProfile} alt='' />
+                }
                 <ProfileDropDown state={profileModal} closeModal={() => setProfileModal(false)} />
               </div>
             </div>

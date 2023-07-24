@@ -7,7 +7,7 @@ import LanguageModal from './LanguageModal'
 import Link from 'next/link';
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
-import LoginProfile from "@/assets/LoginProfile.png"
+import LoginProfile from "@/assets/LoginProfile.svg"
 import ProfileDropDown from '../DropDowns/ProfileDropDown'
 
 export default function LandingNav() {
@@ -154,7 +154,7 @@ export default function LandingNav() {
                       </svg>
                     </div>
                   </Link>
-                  <Link href='chat'>
+                  <Link href='/student-dashboard/chat'>
                     <div className='custom-tooltip' data-tooltip="Messages">
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M21 11.5C21.0034 12.8199 20.6951 14.1219 20.1 15.3C19.3944 16.7118 18.3098 17.8992 16.9674 18.7293C15.6251 19.5594 14.0782 19.9994 12.5 20C11.1801 20.0035 9.87812 19.6951 8.7 19.1L3 21L4.9 15.3C4.30493 14.1219 3.99656 12.8199 4 11.5C4.00061 9.92179 4.44061 8.37488 5.27072 7.03258C6.10083 5.69028 7.28825 4.6056 8.7 3.90003C9.87812 3.30496 11.1801 2.99659 12.5 3.00003H13C15.0843 3.11502 17.053 3.99479 18.5291 5.47089C20.0052 6.94699 20.885 8.91568 21 11V11.5Z" stroke="#D27722" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -182,9 +182,12 @@ export default function LandingNav() {
             <div className='h-[15px] border border-primary2 rouded-[16px]'></div>
             <div>
               {session.status === "authenticated" ?
-                <div onClick={(e) => { setProfileModal(!profileModal);setLanguageModal(false); setCurrencyModal(false); e.stopPropagation(); }} className='relative'>
-                  <Image loader={()=> session?.data?.data?.image || session?.data?.data?.picture} className='w-[48px] h-[48px] rounded-full' height={48} width={48} src={session?.data?.data?.image || session?.data?.data?.picture} alt='' />
-                  <ProfileDropDown state={profileModal} closeModal={()=> setProfileModal(false)}/>
+                <div onClick={(e) => { setProfileModal(!profileModal); setLanguageModal(false); setCurrencyModal(false); e.stopPropagation(); }} className='relative'>
+                  {(session?.data?.data?.image || session?.data?.data?.picture) ?
+                    <Image loader={() => session?.data?.data?.image || session?.data?.data?.picture} className='cursor-pointer w-[48px] h-[48px] rounded-full' height={48} width={48} src={session?.data?.data?.image || session?.data?.data?.picture} alt='' />
+                    : <Image className='cursor-pointer w-[48px] h-[48px] rounded-full' height={48} width={48} src={LoginProfile} alt='' />
+                  }
+                  <ProfileDropDown state={profileModal} closeModal={() => setProfileModal(false)} />
                 </div>
                 :
                 <Link href='/signin'>

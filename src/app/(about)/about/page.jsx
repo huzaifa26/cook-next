@@ -19,7 +19,7 @@ import Menu from '../../../components/layout/Menu'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useSession } from 'next-auth/react'
-import LoginProfile from "@/assets/LoginProfile.png"
+import LoginProfile from "@/assets/LoginProfile.svg"
 import ProfileDropDown from '@/components/DropDowns/ProfileDropDown'
 
 export default function Page() {
@@ -27,7 +27,7 @@ export default function Page() {
   const [currencyModal, setCurrencyModal] = useState(false);
   const [languageModal, setLanguageModal] = useState(false);
   const [profileModal, setProfileModal] = useState(false);
-  
+
   const mainDiv = useRef();
   const [showNav, setShowNav] = useState(false)
   useEffect(() => {
@@ -166,7 +166,7 @@ export default function Page() {
           <div>
             {session.status === "authenticated" ?
               <div onClick={(e) => { setProfileModal(!profileModal); setLanguageModal(false); setCurrencyModal(false); e.stopPropagation(); }} className='relative'>
-                <Image className='w-[48px] h-[48px]' src={LoginProfile} alt='' />
+                <Image loader={() => session?.data?.data?.image || session?.data?.data?.picture} className='cursor-pointer w-[48px] h-[48px] rounded-full' height={48} width={48} src={session?.data?.data?.image || session?.data?.data?.picture} alt='' />
                 <ProfileDropDown state={profileModal} closeModal={() => setProfileModal(false)} />
               </div> :
               <Link href='/signin' className='group transition-all duration-200 hover:bg-primaryLighten2 hover:text-primary2 w-[131px] h-[41px] border-[2px] border-primaryLighten2 text-backPri font-outfit font-[500] text-[20px] leading-[25px] flex justify-center items-center gap-[8px] rounded-[4px]'>
@@ -317,7 +317,7 @@ export default function Page() {
             <div className='h-[15px] border border-primaryLighten2 rouded-[16px]'></div>
             {session.status === "authenticated" ?
               <div onClick={(e) => { setProfileModal(!profileModal); setLanguageModal(false); setCurrencyModal(false); e.stopPropagation(); }} className='relative'>
-                <Image className='w-[48px] h-[48px]' src={LoginProfile} alt='' />
+                <Image loader={() => session?.data?.data?.image || session?.data?.data?.picture} className='cursor-pointer w-[48px] h-[48px] rounded-full' height={48} width={48} src={session?.data?.data?.image || session?.data?.data?.picture} alt='' />
                 <ProfileDropDown state={profileModal} closeModal={() => setProfileModal(false)} />
               </div> :
               <Link href='/signin' className='group transition-all duration-200 hover:bg-primaryLighten2 hover:text-primary2 w-[131px] h-[41px] border-[2px] border-primaryLighten2 text-backPri font-outfit font-[500] text-[20px] leading-[25px] flex justify-center items-center gap-[8px] rounded-[4px]'>

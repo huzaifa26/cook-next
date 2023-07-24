@@ -30,6 +30,10 @@ export default function RootLayout({ children }) {
     redirect(`/account-type?name=${session?.data?.data.name}&email=${session?.data?.data.email}&email_verified=${session?.data?.data.email_verified}`)
   }
 
+  if (session?.data?.data?.email_verified === undefined || session?.data?.data?.email_verified === false) {
+    redirect(`/verify-mail?name=${session?.data?.data?.name}&email=${session?.data?.data?.email}`);
+  }
+
   if (session?.data?.data?.accountType === 'chef' && !session?.data?.data?.isProfileComplete) {
     redirect(`/signup/chef`)
   }

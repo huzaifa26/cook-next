@@ -24,12 +24,10 @@ export default function Page() {
 
     if (data.image && data.image instanceof File) {
       const url = await uploadImage(data.image)
-      console.log(url)
       data.image = url;
     }
     if (data.video && data.video instanceof File) {
       const url = await uploadVideo(data.image)
-      console.log(url)
       data.video = url;
     }
 

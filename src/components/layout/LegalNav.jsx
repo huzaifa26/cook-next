@@ -6,7 +6,7 @@ import LanguageModal from './LanguageModal'
 import Menu from './Menu'
 import Link from 'next/link'
 import Image from 'next/image'
-import LoginProfile from "@/assets/LoginProfile.png"
+import LoginProfile from "@/assets/LoginProfile.svg"
 import { useSession } from 'next-auth/react'
 import ProfileDropDown from '../DropDowns/ProfileDropDown'
 
@@ -135,7 +135,7 @@ export default function LegalNav() {
           <div>
             {session.status === "authenticated" ?
               <div onClick={(e) => { setProfileModal(!profileModal); setLanguageModal(false); setCurrencyModal(false); e.stopPropagation(); }} className='relative'>
-                <Image className='w-[48px] h-[48px]' src={LoginProfile} alt='' />
+                <Image loader={() => session?.data?.data?.image || session?.data?.data?.picture} className='cursor-pointer w-[48px] h-[48px] rounded-full' height={48} width={48} src={session?.data?.data?.image || session?.data?.data?.picture} alt='' />
                 <ProfileDropDown state={profileModal} closeModal={() => setProfileModal(false)} />
               </div>
               :
