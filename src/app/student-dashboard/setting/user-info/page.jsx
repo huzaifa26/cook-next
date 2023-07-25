@@ -53,22 +53,23 @@ export default function Page() {
   }
 
   return (
-    <div className='border border-primaryLighten2 min-h-[492px] rounded-[8px] w-full pl-[2.569vw] pr-[3.056vw] pt-[46px]'>
+    <div className='border border-primaryLighten2 xsm:border-0 min-h-[492px] rounded-[8px] w-full pl-[2.569vw] pr-[3.056vw] pt-[46px]'>
       <div className='flex items-center'>
         <h1 className='font-outfit text-[32px] font-semibold leading-[113.3%]'>Email & Password</h1>
       </div>
-      <div className='w-[7.431vw] border-[2px] border-primaryLighten2 rounded-[20px] mt-[20px] mb-[46px]'></div>
-      <div className='flex flex-col w-fit gap-[14px]'>
-        <div className='flex flex-col gap-[32px] w-fit'>
+      <div className='w-[7.431vw] border-[2px] border-primaryLighten2 rounded-[20px] mt-[20px] mb-[46px] xsm:border-0'></div>
+
+      <div className='flex flex-col w-fit gap-[14px] xsm:w-full sm:w-full'>
+        <div className='flex flex-col gap-[32px] w-fit xsm:w-full sm:w-full'>
           <div className='flex flex-col gap-[12px]'>
-            <label className='text-TextColorSec font-outfit text-[16px] font-semibold leading-[113.3%] '>Email</label>
-            <input disabled className='cursor-not-allowed w-[26.875vw] font-outfit text-[20px] font-normal leading-[113.3%] p-[12px] rounded-[4px] border border-primaryLighten2 outline-primary2' placeholder='Email' value={session?.data?.data?.email} />
+            <label className='text-TextColorSec font-outfit text-[16px] font-semibold leading-[113.3%]'>Email</label>
+            <input disabled className='cursor-not-allowed w-[26.875vw] xsm:w-full sm:w-full font-outfit min-w-[320px] text-[20px] font-normal leading-[113.3%] p-[12px] rounded-[4px] border border-primaryLighten2 outline-primary2' placeholder='Email' value={session?.data?.data?.email} />
           </div>
 
-          <div className='flex gap-[32px]'>
+          <div className='flex gap-[2.222vw] xsm:flex-col sm:flex-col xsm:w-full sm:w-full'>
             <div className='flex flex-col gap-[12px]'>
               <label className='text-TextColorSec font-outfit text-[16px] font-semibold leading-[113.3%]'>Old Password</label>
-              <div className='w-[21.806vw] pr-[10px] flex items-center rounded-[4px] gap-[10px] outline-primary2 overflow-hidden border border-[rgba(255,219,184,1)]'>
+              <div className='w-[21.806vw] xsm:w-full sm:w-full pr-[10px] flex items-center rounded-[4px] gap-[10px] outline-primary2 overflow-hidden border border-[rgba(255,219,184,1)]'>
                 <input value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} type={showPassword ? "text" : "password"} className='font-outfit text-[20px] font-normal leading-[113.3%] pl-[10px] m-0 w-full p-[12px] outline-none' />
                 {!showPassword ?
                   <svg onClick={() => setShowPassword(true)} className='cursor-pointer' width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -92,7 +93,7 @@ export default function Page() {
             </div>
             <div className='flex flex-col gap-[12px]'>
               <label className='text-TextColorSec font-outfit text-[16px] font-semibold leading-[113.3%] '>New Password</label>
-              <div className='w-[21.806vw] pr-[10px] flex items-center center rounded-[4px] gap-[10px] outline-primary2 overflow-hidden border border-[rgba(255,219,184,1)]'>
+              <div className='w-[21.806vw] xsm:w-full sm:w-full pr-[10px] flex items-center center rounded-[4px] gap-[10px] outline-primary2 overflow-hidden border border-[rgba(255,219,184,1)]'>
                 <input value={newPassword} onChange={(e) => setNewPassword(e.target.value)} type={showPassword2 ? "text" : "password"} className='font-outfit text-[20px] font-normal leading-[113.3%] pl-[10px] m-0 w-full p-[12px] outline-none' />
                 {!showPassword2 ?
                   <svg onClick={() => setShowPassword2(true)} className='cursor-pointer' width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

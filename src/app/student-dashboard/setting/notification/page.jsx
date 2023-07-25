@@ -5,11 +5,11 @@ import { useState } from 'react';
 export default function Page() {
 
   return (
-    <div className='border border-primaryLighten2 min-h-[492px] rounded-[8px] w-full pl-[2.569vw] pr-[3.056vw] pt-[46px]'>
+    <div className='border border-primaryLighten2 xsm:border-0 min-h-[492px] rounded-[8px] w-full pl-[2.569vw] pr-[3.056vw] pt-[46px]'>
       <div className='flex items-center'>
         <h1 className='font-outfit text-[32px] font-semibold leading-[113.3%]'>Email notifications</h1>
       </div>
-      <div className='w-[7.431vw] border-[2px] border-primaryLighten2 rounded-[20px] mt-[20px] mb-[56px]'></div>
+      <div className='w-[7.431vw] border-[2px] border-primaryLighten2 rounded-[20px] mt-[20px] mb-[56px] xsm:border-0'></div>
       <div className='flex flex-col w-full gap-[32px] mb-[58px]'>
         <div>
           <div className='flex items-center gap-[12px]'>

@@ -166,7 +166,14 @@ export default function Page() {
           <div>
             {session.status === "authenticated" ?
               <div onClick={(e) => { setProfileModal(!profileModal); setLanguageModal(false); setCurrencyModal(false); e.stopPropagation(); }} className='relative'>
-                <Image loader={() => session?.data?.data?.image || session?.data?.data?.picture} className='cursor-pointer w-[48px] h-[48px] rounded-full' height={48} width={48} src={session?.data?.data?.image || session?.data?.data?.picture} alt='' />
+                {(session?.data?.data?.image || session?.data?.data?.picture) ?
+                  (session?.data?.data?.image ?
+                    <Image loader={() => session?.data?.data?.image} className='cursor-pointer w-[48px] h-[48px] rounded-full' height={48} width={48} src={session?.data?.data?.image} alt='' />
+                    :
+                    <Image loader={() => session?.data?.data?.picture} className='cursor-pointer w-[48px] h-[48px] rounded-full' height={48} width={48} src={session?.data?.data?.picture} alt='' />
+                  )
+                  : <Image className='cursor-pointer w-[48px] h-[48px] rounded-full' height={48} width={48} src={LoginProfile} alt='' />
+                }
                 <ProfileDropDown state={profileModal} closeModal={() => setProfileModal(false)} />
               </div> :
               <Link href='/signin' className='group transition-all duration-200 hover:bg-primaryLighten2 hover:text-primary2 w-[131px] h-[41px] border-[2px] border-primaryLighten2 text-backPri font-outfit font-[500] text-[20px] leading-[25px] flex justify-center items-center gap-[8px] rounded-[4px]'>
@@ -317,7 +324,14 @@ export default function Page() {
             <div className='h-[15px] border border-primaryLighten2 rouded-[16px]'></div>
             {session.status === "authenticated" ?
               <div onClick={(e) => { setProfileModal(!profileModal); setLanguageModal(false); setCurrencyModal(false); e.stopPropagation(); }} className='relative'>
-                <Image loader={() => session?.data?.data?.image || session?.data?.data?.picture} className='cursor-pointer w-[48px] h-[48px] rounded-full' height={48} width={48} src={session?.data?.data?.image || session?.data?.data?.picture} alt='' />
+                {(session?.data?.data?.image || session?.data?.data?.picture) ?
+                  (session?.data?.data?.image ?
+                    <Image loader={() => session?.data?.data?.image} className='cursor-pointer w-[48px] h-[48px] rounded-full' height={48} width={48} src={session?.data?.data?.image} alt='' />
+                    :
+                    <Image loader={() => session?.data?.data?.picture} className='cursor-pointer w-[48px] h-[48px] rounded-full' height={48} width={48} src={session?.data?.data?.picture} alt='' />
+                  )
+                  : <Image className='cursor-pointer w-[48px] h-[48px] rounded-full' height={48} width={48} src={LoginProfile} alt='' />
+                }
                 <ProfileDropDown state={profileModal} closeModal={() => setProfileModal(false)} />
               </div> :
               <Link href='/signin' className='group transition-all duration-200 hover:bg-primaryLighten2 hover:text-primary2 w-[131px] h-[41px] border-[2px] border-primaryLighten2 text-backPri font-outfit font-[500] text-[20px] leading-[25px] flex justify-center items-center gap-[8px] rounded-[4px]'>

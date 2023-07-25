@@ -27,6 +27,9 @@ export default function RootLayout({ children }) {
   }
 
   if (!session?.data?.data?.accountType && !searchParams.get("accountType")) {
+    if (session?.data?.data?.email === undefined ||session?.data?.data?.email_verified === undefined) {
+      redirect(`/signin`);
+    }
     redirect(`/account-type?name=${session?.data?.data.name}&email=${session?.data?.data.email}&email_verified=${session?.data?.data.email_verified}`)
   }
 

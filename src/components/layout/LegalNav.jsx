@@ -135,7 +135,14 @@ export default function LegalNav() {
           <div>
             {session.status === "authenticated" ?
               <div onClick={(e) => { setProfileModal(!profileModal); setLanguageModal(false); setCurrencyModal(false); e.stopPropagation(); }} className='relative'>
-                <Image loader={() => session?.data?.data?.image || session?.data?.data?.picture} className='cursor-pointer w-[48px] h-[48px] rounded-full' height={48} width={48} src={session?.data?.data?.image || session?.data?.data?.picture} alt='' />
+                {(session?.data?.data?.image || session?.data?.data?.picture) ?
+                  (session?.data?.data?.image ?
+                    <Image loader={() => session?.data?.data?.image} className='cursor-pointer w-[48px] h-[48px] rounded-full' height={48} width={48} src={session?.data?.data?.image} alt='' />
+                    :
+                    <Image loader={() => session?.data?.data?.picture} className='cursor-pointer w-[48px] h-[48px] rounded-full' height={48} width={48} src={session?.data?.data?.picture} alt='' />
+                  )
+                  : <Image className='cursor-pointer w-[48px] h-[48px] rounded-full' height={48} width={48} src={LoginProfile} alt='' />
+                }
                 <ProfileDropDown state={profileModal} closeModal={() => setProfileModal(false)} />
               </div>
               :

@@ -5,14 +5,14 @@ import { useState } from 'react';
 export default function Page() {
 
   return (
-    <div className='border border-primaryLighten2 min-h-[492px] rounded-[8px] w-full pl-[2.569vw] pr-[3.056vw] pt-[46px]'>
+    <div className='border border-primaryLighten2 xsm:border-0 min-h-[492px] rounded-[8px] w-full pl-[2.569vw] pr-[3.056vw] pt-[46px]'>
       <div className='flex items-center'>
         <h1 className='font-outfit text-[32px] font-semibold leading-[113.3%]'>Link a card</h1>
       </div>
-      <div className='w-[7.431vw] border-[2px] border-primaryLighten2 rounded-[20px] mt-[20px] mb-[56px]'></div>
+      <div className='w-[7.431vw] border-[2px] border-primaryLighten2 rounded-[20px] mt-[20px] mb-[56px] xsm:border-0'></div>
       <div className='flex flex-col w-full gap-[14px]'>
-        <div className='border border-primaryLighten2 px-[24px] py-[16px] flex justify-between items-center w-full'>
-          <div className='flex items-center gap-[22px]'>
+        <div className='border border-primaryLighten2 px-[1.667vw] py-[16px] flex justify-between items-center w-full'>
+          <div className='flex items-center gap-[1.528vw]'>
             <svg width="63" height="39" viewBox="0 0 63 39" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clipPath="url(#clip0_1456_47827)">
                 <path d="M40.0168 4.1709H22.9824V34.8292H40.0168V4.1709Z" fill="#FF5F00" />
@@ -32,8 +32,8 @@ export default function Page() {
             Remove
           </button>
         </div>
-        <div className='border border-primaryLighten2 px-[24px] py-[16px] flex justify-between items-center w-full'>
-          <div className='flex items-center gap-[22px]'>
+        <div className='border border-primaryLighten2 px-[1.667vw] py-[16px] flex justify-between items-center w-full'>
+          <div className='flex items-center gap-[1.528vw]'>
             <svg width="63" height="39" viewBox="0 0 63 39" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clipPath="url(#clip0_1456_47827)">
                 <path d="M40.0168 4.1709H22.9824V34.8292H40.0168V4.1709Z" fill="#FF5F00" />
@@ -54,7 +54,7 @@ export default function Page() {
           </button>
         </div>
 
-        <button className='hover:bg-primary2 self-end hover:text-[white] transition-all duration-200 text-primary2 border rounded-[4px] border-primary2 px-[16px] py-[6px] font-outfit text-[18px] font-medium leading-normal mt-[43px]'>Add new card</button>
+        <button className='hover:bg-primary2 self-end xsm:self-start hover:text-[white] transition-all duration-200 text-primary2 border rounded-[4px] border-primary2 px-[16px] py-[6px] font-outfit text-[18px] font-medium leading-normal mt-[43px]'>Add new card</button>
       </div>
     </div>
   )

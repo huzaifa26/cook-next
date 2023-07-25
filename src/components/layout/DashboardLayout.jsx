@@ -53,8 +53,6 @@ const DashboardLayout = () => {
     getConversations();
   })
 
-  console.log(session?.data?.data?.picture)
-
   return (
     <div>
       <Menu showMenu={showMenu} closeMenu={() => setShowMenu(false)} />
@@ -131,7 +129,11 @@ const DashboardLayout = () => {
               <div className='h-[15px] border border-primaryLighten2 rouded-[16px]'></div>
               <div onClick={(e) => { setProfileModal(!profileModal); setLanguageModal(false); setCurrencyModal(false); e.stopPropagation(); }} className='relative'>
                 {(session?.data?.data?.image || session?.data?.data?.picture) ?
-                  <Image loader={() => session?.data?.data?.image || session?.data?.data?.picture} className='cursor-pointer w-[48px] h-[48px] rounded-full' height={48} width={48} src={session?.data?.data?.image || session?.data?.data?.picture} alt='' />
+                  (session?.data?.data?.image ?
+                    <Image loader={() => session?.data?.data?.image} className='cursor-pointer w-[48px] h-[48px] rounded-full' height={48} width={48} src={session?.data?.data?.image} alt='' />
+                    :
+                    <Image loader={() => session?.data?.data?.picture} className='cursor-pointer w-[48px] h-[48px] rounded-full' height={48} width={48} src={session?.data?.data?.picture} alt='' />
+                  )
                   : <Image className='cursor-pointer w-[48px] h-[48px] rounded-full' height={48} width={48} src={LoginProfile} alt='' />
                 }
                 <ProfileDropDown state={profileModal} closeModal={() => setProfileModal(false)} />

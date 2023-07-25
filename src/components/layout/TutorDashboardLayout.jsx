@@ -24,7 +24,7 @@ const TutorDashboardLayout = () => {
 
   const [showMenu, setShowMenu] = useState(false);
 
-  const session=useSession();
+  const session = useSession();
 
   const dispatch = useDispatch();
 
@@ -70,7 +70,7 @@ const TutorDashboardLayout = () => {
               <div className='sm:hidden xsm:hidden md:hidden flex gap-[24px]'>
                 <Link href='/search-tutors'>
                   <div className='flex gap-[7px]'>
-                    <Image src={search} alt=""/>
+                    <Image src={search} alt="" />
                     <p className='font-outfit font-normal text-lg leading-[22.68px] text-TextColor'>Find Tutors</p>
                   </div>
                 </Link>
@@ -128,7 +128,14 @@ const TutorDashboardLayout = () => {
               </div>
               <div className='h-[15px] border border-primaryLighten2 rouded-[16px]'></div>
               <div onClick={(e) => { setProfileModal(!profileModal); setLanguageModal(false); setCurrencyModal(false); e.stopPropagation(); }} className='relative'>
-                <Image loader={()=> session?.data?.data?.picture} className='max-w-[48px] max-h-[48px] rounded-full object-cover cursor-pointer' width={48} height={48} priority src={session?.data?.data?.picture} alt='' />
+                {(session?.data?.data?.image || session?.data?.data?.picture) ?
+                  (session?.data?.data?.image ?
+                    <Image loader={() => session?.data?.data?.image} className='cursor-pointer w-[48px] h-[48px] rounded-full' height={48} width={48} src={session?.data?.data?.image} alt='' />
+                    :
+                    <Image loader={() => session?.data?.data?.picture} className='cursor-pointer w-[48px] h-[48px] rounded-full' height={48} width={48} src={session?.data?.data?.picture} alt='' />
+                  )
+                  : <Image className='cursor-pointer w-[48px] h-[48px] rounded-full' height={48} width={48} src={LoginProfile} alt='' />
+                }
                 <ProfileDropDown state={profileModal} closeModal={() => setProfileModal(false)} />
               </div>
             </div>
