@@ -12,22 +12,8 @@ export default function RootLayout({ children }) {
 
   const pathname = usePathname();
 
-  const [screenWidth, setScreenWidth] = useState();
-  useEffect(() => {
-    setScreenWidth(window.innerWidth)
-    // Function to update the screenWidth state whenever the window is resized
-    const handleResize = () => {
-      setScreenWidth(window.innerWidth);
-    };
+  const [screenWidth, setScreenWidth] = useState(1000);
 
-    // Attach the resize event listener
-    window.addEventListener('resize', handleResize);
-
-    // Clean up the event listener when the component is unmounted
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  });
 
   return (
     <>
