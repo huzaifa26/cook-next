@@ -8,7 +8,7 @@ export default function AvailabilityCard({ title, setTimings, clearTimings, remo
 
   return (
     <div className='flex flex-col gap-[16px]'>
-      <div className='flex items-center gap-[12px]'>
+      <div className='flex items-center gap-[11.995px]'>
         <input defaultChecked={arrayLength > 0} onChange={(e) => { setShowTime(e.target.checked); if (e.target.checked === false) { clearTimings() } }} className='myCheckbox min-w-[23px] min-h-[23px]' type="checkbox" name="" id="monday" />
         <label className='font-outfit font-normal text-[18px] leading-normal cursor-pointer select-none' htmlFor="monday">{title}</label>
       </div>

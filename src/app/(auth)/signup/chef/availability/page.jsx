@@ -91,11 +91,11 @@ export default function Page() {
 
   return (
     <>
-      <div className='w-fit m-auto flex flex-col gap-[12px] pt-[37px] px-[5.139vw]'>
+      <div className='w-fit m-auto flex flex-col gap-[12px] pt-[37px] px-[5.139vw] xsm:px-0'>
         <h1 className='text-primary2 text-center font-rubik text-[32px] font-semibold leading-[normal]'>Availability</h1>
       </div>
 
-      <div className='ml-[3.264vw] mr-[3.889vw] my-[43px]'>
+      <div className='ml-[3.264vw] mr-[3.889vw] my-[43px] xsm:ml-0 xsm:mr-0'>
         <div>
           <h2 className="font-rubik text-[20px] font-semibold leading-normal ">Choose your timezone</h2>
           <p className="text-[#ADABAB] font-outfit text-[20px] font-normal leading-[160%] mt-[12px]">To get more students to your profile, we recommend a base price of $ per hour for new tutors in your subject and with your experience level.</p>
@@ -221,9 +221,9 @@ export default function Page() {
           </div>
         </div>
 
-        <div className='mt-[95px] flex justify-between relative'>
-          <button onClick={() => router.back()} className="transition-all duration-200 bg-[white] hover:bg-primary2 border-2 border-primary2 text-primary2 hover:text-[white] w-[128px] py-[8px] font-outfit text-[18px] leading-normal font-medium rounded-[4px]">Back</button>
-          <button onClick={() => availabilityFormHandler()} className="transition-all duration-200 bg-primary2 hover:bg-[white] border-2 border-primary2 text-[white] hover:text-primary2 w-[128px] py-[8px] font-outfit text-[18px] leading-normal font-medium rounded-[4px]">Next</button>
+        <div className='mt-[95px] xsm:mt-[42px] flex justify-between relative'>
+          <button onClick={() => router.back()} className="transition-all duration-200 bg-[rgba(0,0,0,0)] hover:bg-primary2 border-2 border-primary2 text-primary2 hover:text-[white] w-[128px] py-[8px] font-outfit text-[18px] leading-normal font-medium rounded-[4px]">Back</button>
+          <button onClick={() => availabilityFormHandler()} className="transition-all duration-200 bg-primary2 hover:bg-[rgba(0,0,0,0)] border-2 border-primary2 text-[white] hover:text-primary2 w-[128px] py-[8px] font-outfit text-[18px] leading-normal font-medium rounded-[4px]">Next</button>
           {error &&
             <div className='absolute top-full right-0 flex justify-end items-center'>
               <p className='font-outfit text-[16px] leading-normal font-normal text-primary2'>{error}</p>

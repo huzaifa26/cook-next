@@ -21,7 +21,7 @@ export default function Time({ setTimings, index, array, setArray, removeItem, p
   }, [timeZone, timeZone2])
 
   return (
-    <div className='flex items-center h-fit gap-[16px] mt-[20px]'>
+    <div className='flex items-center h-fit gap-[16px] xsm:gap-[6px] mt-[20px]'>
       <DropDown timeZone={timeZone} setTimeZone={(item) => setTimeZone(item)} timing={['4:00 PM', '5:00 PM', '6:00 PM', '7:00 PM', '8:00 PM', '9:00 PM']} />
       <svg width="7" height="2" viewBox="0 0 7 2" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M0.188 1.684V0.154H6.11V1.684H0.188Z" fill="#D27722" />

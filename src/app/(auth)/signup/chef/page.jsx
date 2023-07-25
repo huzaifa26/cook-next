@@ -72,24 +72,24 @@ export default function Page() {
 
   return (
     <div>
-      <div className='ml-[60.998px] mr-[4.931vw] flex flex-col gap-[12px] pt-[37px]'>
+      <div className='ml-[4.236vw] mr-[4.931vw] xsm:ml-0 xsm:mr-0 flex flex-col gap-[12px] pt-[37px]'>
         <h1 className='text-primary2 text-center font-rubik text-[32px] font-semibold leading-[normal]'>About</h1>
         <p className='text-[#ADABAB] text-center font-outfit text-[16px] font-normal leading-[normal]'>Start making your tutor profile. It saves your progress as you go. You can finish your sign-up any time.</p>
       </div>
 
-      <form onSubmit={aboutFormHandler} className='flex flex-col gap-[52px] ml-[3.264vw] mr-[3.889vw] my-[43px]' action="">
-        <div className='grid gap-[22px] grid-cols-2'>
+      <form onSubmit={aboutFormHandler} className='flex flex-col gap-[52px] ml-[3.264vw] mr-[3.889vw] my-[43px] xsm:ml-0 xsm:mr-0' action="">
+        <div className='grid gap-[22px] grid-cols-2 xsm:grid-cols-1'>
           <div className='flex flex-col gap-[12px]'>
             <label className='font-outfit text-[14px] font-semibold leading-[normal]' htmlFor="">First Name</label>
-            <input defaultValue={state?.firstName} className='h-[40px] border border-primaryLighten2 outline-primary2 rounded-[4px] font-outfit text-[16px] font-normal leading-normal p-[8px] ' />
+            <input defaultValue={state?.firstName} className='h-[40px] border xsm:bg-[rgba(0,0,0,0)] border-primaryLighten2 outline-primary2 rounded-[4px] font-outfit text-[16px] font-normal leading-normal p-[8px] ' />
           </div>
           <div className='flex flex-col gap-[12px]'>
             <label className='font-outfit text-[14px] font-semibold leading-[normal]' htmlFor="">Last Name</label>
-            <input defaultValue={state?.lastName} className='h-[40px] border border-primaryLighten2 outline-primary2 rounded-[4px] font-outfit text-[16px] font-normal leading-normal p-[8px] ' />
+            <input defaultValue={state?.lastName} className='h-[40px] border xsm:bg-[rgba(0,0,0,0)] border-primaryLighten2 outline-primary2 rounded-[4px] font-outfit text-[16px] font-normal leading-normal p-[8px] ' />
           </div>
           <div className='flex flex-col gap-[12px]'>
             <label className='font-outfit text-[14px] font-semibold leading-[normal]' htmlFor="">Email</label>
-            <input defaultValue={state?.email} className='h-[40px] border border-primaryLighten2 outline-primary2 rounded-[4px] font-outfit text-[16px] font-normal leading-normal p-[8px] ' />
+            <input defaultValue={state?.email} className='h-[40px] border xsm:bg-[rgba(0,0,0,0)] border-primaryLighten2 outline-primary2 rounded-[4px] font-outfit text-[16px] font-normal leading-normal p-[8px] ' />
           </div>
 
           <div className='flex flex-col gap-[12px] relative'>
@@ -112,7 +112,7 @@ export default function Page() {
           </div>
         </div>
 
-        <div className='grid gap-[22px] grid-cols-2'>
+        <div className='grid gap-[22px] grid-cols-2 xsm:grid-cols-1'>
           <div className='flex flex-col gap-[12px] relative'>
             <label className='font-outfit text-[14px] font-semibold leading-[normal]' htmlFor="">Level</label>
             <div style={showlevel ? { borderBottomLeftRadius: 0, borderBottomRightRadius: 0 } : {}} onClick={() => setshowlevel(!showlevel)} className='cursor-pointer h-[40px] border gap-[10px] border-primaryLighten2 outline-primary2 rounded-[4px] flex items-center p-[8px]'>
@@ -185,11 +185,11 @@ export default function Page() {
         </div>
 
         <div className='flex justify-between items-center relative'>
-          <div className='flex items-center gap-[12px]'>
+          <div className='flex items-center gap-[0.833vw]'>
             <input defaultChecked={state?.ageConsent} className='myCheckbox min-w-[23px] min-h-[23px]' type="checkbox" name="" id="ageConsent" />
-            <label className='font-outfit font-normal text-[18px] leading-normal cursor-pointer select-none' htmlFor="ageConsent">I confirm I'm over 18</label>
+            <label className='font-outfit font-normal text-[18px] xsm:text-[16px] leading-normal cursor-pointer select-none' htmlFor="ageConsent">I confirm I'm over 18</label>
           </div>
-          <button className="transition-all duration-200 bg-primary2 hover:bg-[white] border border-primary2 text-[white] hover:text-primary w-[128px] py-[8px] font-outfit text-[18px] leading-normal font-medium rounded-[4px]">Next</button>
+          <button className="transition-all duration-200 bg-primary2 hover:bg-[rgba(0,0,0,0)] border border-primary2 text-[white] hover:text-primary w-[128px] xsm:w-[100px] xsm:py-[6px] py-[8px] font-outfit text-[18px] leading-normal font-medium rounded-[4px]">Next</button>
           {error &&
             <div className='absolute top-full right-0 flex justify-end items-center'>
               <p className='font-outfit text-[16px] leading-normal font-normal text-primary2'>{error}</p>

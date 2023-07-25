@@ -40,17 +40,17 @@ export default function Page() {
 
   return (
     <>
-      <div className='w-fit m-auto flex flex-col gap-[12px] pt-[37px] px-[5.139vw]'>
+      <div className='w-fit m-auto flex flex-col gap-[12px] pt-[37px] px-[5.139vw] xsm:px-[0px]'>
         <h1 className='text-primary2 text-center font-rubik text-[32px] font-semibold leading-[normal]'>Description</h1>
         <p className='text-[#ADABAB] text-center font-outfit text-[16px] font-normal leading-[normal]'>The information you provide will be displayed on your public profile. Please ensure to write it in the language you intend to teach</p>
       </div>
 
-      <form onSubmit={descriptionFormHandler} className='ml-[3.264vw] mr-[3.889vw] my-[43px]'>
+      <form onSubmit={descriptionFormHandler} className='ml-[3.264vw] mr-[3.889vw] xsm:ml-0 xsm:mr-0 my-[43px]'>
         <div className='flex flex-col gap-[91px] items-center h-fit'>
 
           <div className='w-full flex flex-col gap-[24px] '>
             <h2 className='font-rubik text-[20px] font-semibold leading-normal'>1. Introduce yourself</h2>
-            <textarea defaultValue={state?.introduction} className='resize-none border border-primaryLighten2 p-[16px] rounded-[8px] w-full font-outfit text-[16px] font-normal leading-normal' placeholder='Start writing here...' name="" id="" cols="30" rows="10"></textarea>
+            <textarea defaultValue={state?.introduction} className='resize-none bg-[rgba(0,0,0,0)] border border-primaryLighten2 p-[16px] rounded-[8px] w-full font-outfit text-[16px] font-normal leading-normal' placeholder='Start writing here...' name="" id="" cols="30" rows="10"></textarea>
             <div className='flex gap-[8px] items-center mt-[-4px]'>
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_1617_48979)">
@@ -70,18 +70,18 @@ export default function Page() {
 
           <div className='w-full flex flex-col gap-[24px] '>
             <h2 className='font-rubik text-[20px] font-semibold leading-normal'>2. Professional experience</h2>
-            <textarea defaultValue={state?.professionalExperience} className='resize-none border border-primaryLighten2 p-[16px] rounded-[8px] w-full font-outfit text-[16px] font-normal leading-normal' placeholder='Start writing here...' name="" id="" cols="30" rows="10"></textarea>
+            <textarea defaultValue={state?.professionalExperience} className='resize-none bg-[rgba(0,0,0,0)] border border-primaryLighten2 p-[16px] rounded-[8px] w-full font-outfit text-[16px] font-normal leading-normal' placeholder='Start writing here...' name="" id="" cols="30" rows="10"></textarea>
           </div>
 
           <div className='w-full flex flex-col gap-[24px] '>
             <h2 className='font-rubik text-[20px] font-semibold leading-normal'>3. Create a catchy headline</h2>
-            <textarea defaultValue={state?.headline} className='resize-none border border-primaryLighten2 p-[16px] rounded-[8px] w-full font-outfit text-[16px] font-normal leading-normal' placeholder='Start writing here...' name="" id="" cols="30" rows="10"></textarea>
+            <textarea defaultValue={state?.headline} className='resize-none bg-[rgba(0,0,0,0)] border border-primaryLighten2 p-[16px] rounded-[8px] w-full font-outfit text-[16px] font-normal leading-normal' placeholder='Start writing here...' name="" id="" cols="30" rows="10"></textarea>
           </div>
         </div>
 
-        <div className='mt-[95px] flex justify-between relative'>
-          <button onClick={()=> router.back()} type='button' className="transition-all duration-200 bg-[white] hover:bg-primary2 border-2 border-primary2 text-primary2 hover:text-[white] w-[128px] py-[8px] font-outfit text-[18px] leading-normal font-medium rounded-[4px]">Back</button>
-          <button type='submit' className="transition-all duration-200 bg-primary2 hover:bg-[white] border-2 border-primary2 text-[white] hover:text-primary2 w-[128px] py-[8px] font-outfit text-[18px] leading-normal font-medium rounded-[4px]">Next</button>
+        <div className='mt-[95px] xsm:mt-[42px] flex justify-between relative'>
+          <button onClick={()=> router.back()} type='button' className="transition-all duration-200 bg-[rgba(0,0,0,0)] hover:bg-primary2 border-2 border-primary2 text-primary2 hover:text-[white] w-[128px] py-[8px] font-outfit text-[18px] leading-normal font-medium rounded-[4px]">Back</button>
+          <button type='submit' className="transition-all duration-200 bg-primary2 hover:bg-[rgba(0,0,0,0)] border-2 border-primary2 text-[white] hover:text-primary2 w-[128px] py-[8px] font-outfit text-[18px] leading-normal font-medium rounded-[4px]">Next</button>
           {error &&
             <div className='absolute top-full right-0 flex justify-end items-center'>
               <p className='font-outfit text-[16px] leading-normal font-normal text-primary2'>{error}</p>
