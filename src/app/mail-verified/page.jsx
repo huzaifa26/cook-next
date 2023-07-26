@@ -34,7 +34,7 @@ export default function Page() {
     }
 
     try {
-      let res = await fetch(API_URL+'api/auth/verify-mail', {
+      let res = await fetch(API_URL + 'api/auth/verify-mail', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -44,10 +44,13 @@ export default function Page() {
 
       res = await res.json();
 
-
       if (res.status === 200) {
         setLoading(false);
         timeoutRef.current = setTimeout(() => {
+          if (searchParams.get('accountType') === 'chef') {
+            router.push(`/signup/chef?name=${searchParams.get("name")}&email=${searchParams.get("email")}&accountType=${searchParams.get("accountType")}`);
+            return
+          }
           router.push('/signin')
         }, 5000);
 
@@ -94,7 +97,13 @@ export default function Page() {
             <h1 className='font-rubik text-[42px] font-medium leading-[-0.84px] mt-[38px] xsm:text-[36px] xsm:leading-[135.5%] xsm:tracking-[-0.72px]'>Your email was verified!</h1>
             <p className='font-outfit text-[24px] font-normal leading-[-0.48px] mt-[16px] lg:w-[500px] text-center xsm:leading-[160%] xsm:tracking-[-0.48px]'>Thank you for verifying your email. You'll be redirected in {counter} seconds.</p>
             <p className='font-outfit text-[24px] font-normal leading-[-0.48px] mt-[16px] lg:w-[500px] text-center xsm:leading-[160%] xsm:tracking-[-0.48px]'>{error}</p>
-            <button className='hover:text-primary2 hover:bg-[white] transition-all duration-200 group bg-primary2 text-[white] border rounded-[4px] border-primary2 px-[16px] py-[6px] font-outfit text-[18px] font-medium leading-normal flex gap-[8px] items-center mt-[38px]'>
+            <button onClick={() => {
+              if (searchParams.get('accountType') === 'chef') {
+                router.push(`/signup/chef?name=${searchParams.get("name")}&email=${searchParams.get("email")}&accountType=${searchParams.get("accountType")}`);
+                return
+              }
+              router.push('/signin')
+            }} className='hover:text-primary2 hover:bg-[white] transition-all duration-200 group bg-primary2 text-[white] border rounded-[4px] border-primary2 px-[16px] py-[6px] font-outfit text-[18px] font-medium leading-normal flex gap-[8px] items-center mt-[38px]'>
               Continue
             </button>
           </>

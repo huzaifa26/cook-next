@@ -9,12 +9,26 @@ import Google from "@/assets/Signup/Google.svg";
 import Image from 'next/image';
 import Link from 'next/link';
 import { signIn, signOut, useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import "@/app/globals.css"
+import Loading from '@/components/utils/Loading';
 
 export default function Page() {
   const session = useSession();
   const router = useRouter();
+
+  if(session.status === "loading"){
+    return <Loading/>
+  }
+
+  if(session.status === 'authenticated'){
+    if(session?.data?.data?.accountType === 'student'){
+      redirect('/student-dashboard')
+    }
+    if(session?.data?.data?.accountType === 'student'){
+      redirect('/tutor-dashboard')
+    }
+  }
 
   const formSubmitHandler = async (e) => {
     e.preventDefault();

@@ -14,7 +14,7 @@ export default function Page() {
     var templateParams = {
       userName: searchParams.get("name"),
       email: searchParams.get("email"),
-      link: `${API_URL}mail-verified?name=${searchParams.get("name")}&email=${searchParams.get("email")}`
+      link: `${API_URL}mail-verified?name=${searchParams.get("name")}&email=${searchParams.get("email")}&accountType=${searchParams.get("accountType")}`
     };
 
     emailjs.send('service_yojp3ta', 'template_esjz3t3', templateParams,'PCrkZDdTgRVPTxMHf')
@@ -48,7 +48,7 @@ export default function Page() {
         <Image className='w-[202px]' src={VerifyEmail} alt='' />
         <h1 className='font-rubik text-[42px] font-medium leading-[-0.84px] mt-[38px]'>Verify your email</h1>
         <p className='font-outfit text-[24px] font-normal leading-[-0.48px] mt-[16px] lg:w-[500px] text-center'>Check your email & click the link to activate your account.</p>
-        <button onClick={() => sendEmail()} className='hover:text-primary2 hover:bg-[white] transition-all duration-200 group bg-primary2 text-[white] border rounded-[4px] border-primary2 px-[16px] py-[6px] font-outfit text-[18px] font-medium leading-normal flex gap-[8px] items-center mt-[38px]'>
+        <button onClick={() => sendEmail()} className='hover:text-primary2 outline-none hover:bg-[white] transition-all duration-200 group bg-primary2 text-[white] border rounded-[4px] border-primary2 px-[16px] py-[6px] font-outfit text-[18px] font-medium leading-normal flex gap-[8px] items-center mt-[38px]'>
           Resend Email
         </button>
       </div>

@@ -20,22 +20,22 @@ export default function Page() {
         </div>
         <div>
           <div className='flex items-center gap-[12px]'>
-            <input className='myCheckbox min-w-[23px] min-h-[23px]' type="checkbox" name="" id="Lesson scheduling" />
-            <label className='font-outfit font-medium text-[20px] leading-normal cursor-pointer select-none' htmlFor="Lesson scheduling">General reminders</label>
+            <input className='myCheckbox min-w-[23px] min-h-[23px]' type="checkbox" name="" id="GeneralReminder" />
+            <label className='font-outfit font-medium text-[20px] leading-normal cursor-pointer select-none' htmlFor="GeneralReminder">General reminders</label>
           </div>
           <p className='text-TextColorSec ml-[35px] mt-[11px] text-[16px] font-normal leading-normal font-outfit'>Notifications about lessons, tutor messages, and payments.</p>
         </div>
         <div>
           <div className='flex items-center gap-[12px]'>
-            <input className='myCheckbox min-w-[23px] min-h-[23px]' type="checkbox" name="" id="Lesson scheduling" />
-            <label className='font-outfit font-medium text-[20px] leading-normal cursor-pointer select-none' htmlFor="Lesson scheduling">Updates, tips and offers</label>
+            <input className='myCheckbox min-w-[23px] min-h-[23px]' type="checkbox" name="" id="updates" />
+            <label className='font-outfit font-medium text-[20px] leading-normal cursor-pointer select-none' htmlFor="updates">Updates, tips and offers</label>
           </div>
           <p className='text-TextColorSec ml-[35px] mt-[11px] text-[16px] font-normal leading-normal font-outfit'>Stay connected with product updates, helpful tips and special offers.</p>
         </div>
         <div>
           <div className='flex items-center gap-[12px]'>
-            <input className='myCheckbox min-w-[23px] min-h-[23px]' type="checkbox" name="" id="Lesson scheduling" />
-            <label className='font-outfit font-medium text-[20px] leading-normal cursor-pointer select-none' htmlFor="Lesson scheduling">COOK Blog</label>
+            <input className='myCheckbox min-w-[23px] min-h-[23px]' type="checkbox" name="" id="cookblog" />
+            <label className='font-outfit font-medium text-[20px] leading-normal cursor-pointer select-none' htmlFor="cookblog">COOK Blog</label>
           </div>
           <p className='text-TextColorSec ml-[35px] mt-[11px] text-[16px] font-normal leading-normal font-outfit'>Occasional newsletter with the latest posts.</p>
         </div>

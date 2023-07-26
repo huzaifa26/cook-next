@@ -8,8 +8,8 @@ import MDImage1 from '@/assets/Signup/MDImage1.png'
 import MDImage2 from '@/assets/Signup/MDImage2.png'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
-import { signIn } from 'next-auth/react'
+import { redirect, useRouter } from 'next/navigation'
+import { signIn, useSession } from 'next-auth/react'
 import "@/app/globals.css"
 import Loading from '@/components/utils/Loading'
 import { API_URL } from '@/utils/consts'
@@ -21,6 +21,21 @@ export default function Page() {
 
   const router = useRouter();
   const [error, setError] = useState(null)
+
+  const session = useSession();
+
+  if (session.status === "loading") {
+    return <Loading />
+  }
+
+  if (session.status === 'authenticated') {
+    if (session?.data?.data?.accountType === 'student') {
+      redirect('/student-dashboard')
+    }
+    if (session?.data?.data?.accountType === 'student') {
+      redirect('/tutor-dashboard')
+    }
+  }
 
   const formSubmitHandler = async (e) => {
     e.preventDefault();
@@ -34,7 +49,7 @@ export default function Page() {
       password: e.target[2].value,
     }
 
-    if(data.name.trim().length === 0){
+    if (data.name.trim().length === 0) {
       setPasswordError("Name cannot be empty.");
       setLoading(false)
       return
@@ -49,14 +64,14 @@ export default function Page() {
     }
 
     try {
-      let res = await fetch(API_URL+'api/auth/signup', {
+      let res = await fetch(API_URL + 'api/auth/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data)
       })
-      res= await res.json();
+      res = await res.json();
 
       res.status === 201 && router.push(`/account-type?name=${data.name}&email=${data.email}`);
       res.status === 409 && setError("Account with this email already exists");

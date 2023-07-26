@@ -37,19 +37,13 @@ const schema = yup.object().shape({
     friday: yup.array().of(yup.object()),
     saturday: yup.array().of(yup.object()),
     sunday: yup.array().of(yup.object()),
-  }).test('has-day', 'At least one day must have a value', function (value) {
-    const { monday, tuesday, wednesday, thursday, friday, saturday, sunday } = value;
-    if (monday.length === 0 && tuesday.length === 0 && wednesday.length === 0 && thursday.length === 0 && friday.length === 0 && saturday.length === 0 && sunday.length === 0) {
-      throw new yup.ValidationError('At least one day must have a value', null, this.path);
-    }
-    return true;
   })
 });
 
 export default function Page() {
   const router = useRouter();
   const dispatch = useDispatch();
-  const state=useSelector(state => state.signup.signup);
+  const state = useSelector(state => state.signup.signup);
   const [timeZone, setTimeZone] = useState(state?.timeZone || null);
   const [showTimeZone, setShowTimeZone] = useState(false);
 
@@ -107,11 +101,11 @@ export default function Page() {
                 <path d="M5.03306 4.96142C4.73955 5.25797 4.26045 5.25797 3.96694 4.96142L0.568333 1.52759C0.0996107 1.05401 0.435073 0.25 1.10139 0.25L7.89861 0.250001C8.56493 0.250001 8.90039 1.05401 8.43167 1.52759L5.03306 4.96142Z" fill="#D27722" />
               </svg>
             </div>
-            <div style={showTimeZone ? { maxHeight: "1000px" } : { maxHeight: "0px", border: "0px solid #000" }} className='overflow-hidden z-[2000] absolute w-full left-0 top-full border border-t-0 bg-[white] divide-y divide-primaryLighten2 border-primaryLighten2 rounded-br-[4px] rounded-bl-[4px]'>
+            <div style={showTimeZone ? { maxHeight: "400px" } : { maxHeight: "0px", border: "0px solid #000" }} className='overflow-auto z-[2000] absolute w-full left-0 top-full border border-t-0 bg-[white] divide-y divide-primaryLighten2 border-primaryLighten2 rounded-br-[4px] rounded-bl-[4px]'>
               <p onClick={() => { setTimeZone("Select option"); setShowTimeZone(false) }} className='px-[8px] py-[8px] cursor-pointer font-outfit text-[16px] font-medium leading-normal flex-1'>{"Select option"}</p>
-              {['GMT +4', 'GMT +5'].map((item,index) => {
+              {['GMT -12', 'GMT -11', 'GMT -10', 'GMT -9', 'GMT -8', 'GMT -7', 'GMT -6', 'GMT -5', 'GMT -4', 'GMT -3', 'GMT -2', 'GMT -1', 'GMT +0', 'GMT +1', 'GMT +2', 'GMT +3', 'GMT +4', 'GMT +5', 'GMT +6', 'GMT +7', 'GMT +8', 'GMT +9', 'GMT +10', 'GMT +11', 'GMT +12'].map((item, index) => {
                 return (
-                  <p key={item+index} onClick={() => { setTimeZone(item); setShowTimeZone(false) }} className='px-[8px] py-[8px] cursor-pointer font-outfit text-[16px] font-medium leading-normal flex-1'>{item}</p>
+                  <p key={item + index} onClick={() => { setTimeZone(item); setShowTimeZone(false) }} className='px-[8px] py-[8px] cursor-pointer font-outfit text-[16px] font-medium leading-normal flex-1'>{item}</p>
                 )
               })}
             </div>

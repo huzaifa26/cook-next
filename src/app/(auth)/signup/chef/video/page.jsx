@@ -16,11 +16,6 @@ export default function Page() {
 
   const imageSubmitHandler = () => {
 
-    if (video === null) {
-      setError("Please add video")
-      return
-    }
-
     let data = {
       video,
     }
@@ -42,14 +37,14 @@ export default function Page() {
 
   return (
     <>
-      <div className='w-fit m-auto flex flex-col gap-[12px] pt-[37px]'>
+      <div className='w-fit m-auto flex flex-col gap-[12px] pt-[37px] px-[5.139vw] xsm:px-0'>
         <h1 className='text-primary2 text-center font-rubik text-[32px] font-semibold leading-[normal]'>Video introduction</h1>
         <p className='text-[#ADABAB] text-center font-outfit text-[16px] font-normal leading-[normal]'>The information you provide will be displayed on your public profile. Please ensure to write it in the language you intend to teach</p>
       </div>
 
       <div className='ml-[3.264vw] mr-[3.889vw] xsm:ml-0 xsm:mr-0 my-[43px]'>
         <div className='flex xsm:flex-col gap-[21px] items-center h-fit'>
-          <label htmlFor='video' className="group bg-[rgba(0,0,0,0)] hidden xsm:flex xsm:w-full items-center gap-[8px] justify-center w-[163px] transition-all duration-200 hover:bg-primary2 border border-primary2 text-primary2 hover:text-[white] py-[8px] font-outfit text-[18px] leading-normal font-medium rounded-[4px]">
+          <label htmlFor='video' className="cursor-pointer group bg-[rgba(0,0,0,0)] hidden xsm:flex xsm:w-full items-center gap-[8px] justify-center w-[163px] transition-all duration-200 hover:bg-primary2 border border-primary2 text-primary2 hover:text-[white] py-[8px] font-outfit text-[18px] leading-normal font-medium rounded-[4px]">
             Record
             <svg className='stroke-primary2 group-hover:stroke-[white] transition-all duration-200' width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M23 7L16 12L23 17V7Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />

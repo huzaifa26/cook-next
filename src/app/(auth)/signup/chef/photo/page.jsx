@@ -5,11 +5,13 @@ import Image from 'next/image'
 import { useDispatch, useSelector } from 'react-redux'
 import { addSignup } from '@/redux/signupSlice'
 import { useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
 
 export default function Page() {
   const state = useSelector((state) => state.signup.signup);
-  const dispatch=useDispatch();
-  const router=useRouter()
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const session = useSession();
 
   const [image, setImage] = useState(state?.image || null);
   const [error, setError] = useState(null);
@@ -59,17 +61,17 @@ export default function Page() {
           {image ? (
             <img src={URL.createObjectURL(image)} alt="Selected Image" className="w-[328px] h-[328px] rounded-[23px]" />
           ) :
-            <Image src={ChangeImage} alt='' className='w-[328px] h-[328px]' />
+            <Image src={session?.data?.data?.image || ChangeImage} alt='' className='w-[328px] h-[328px]' />
           }
 
           <div>
             <p className='text-[#ADABAB] font-outfit text-[16px] font-normal leading-normal'>Maximum size 5 MB. Allowed formats: PNG, JPG, SVG</p>
             <input onChange={imageFileHandler} type='file' id='image' className='hidden' accept=".png, .jpg, .svg" />
-            <label htmlFor='image' className='cursor-pointer w-[128px] xsm:w-full flex justify-center items-center gap-[8px] mt-[28px] border border-[#403D39] rounded-[4px] px-[16px] py-[8px] font-outfit text-[18px] leading-normal font-medium'>
-              <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M21.5 15V19C21.5 19.5304 21.2893 20.0391 20.9142 20.4142C20.5391 20.7893 20.0304 21 19.5 21H5.5C4.96957 21 4.46086 20.7893 4.08579 20.4142C3.71071 20.0391 3.5 19.5304 3.5 19V15" stroke="#403D39" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M17.5 8L12.5 3L7.5 8" stroke="#403D39" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M12.5 3V15" stroke="#403D39" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <label htmlFor='image' className='hover:bg-[#403D39] hover:text-[white] cursor-pointer w-[128px] group transition-all duration-200 xsm:w-full flex justify-center items-center gap-[8px] mt-[28px] border border-[#403D39] rounded-[4px] px-[16px] py-[8px] font-outfit text-[18px] leading-normal font-medium'>
+              <svg className='group-hover:stroke-[white] stroke-[#403D39] transition-all duration-200' width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21.5 15V19C21.5 19.5304 21.2893 20.0391 20.9142 20.4142C20.5391 20.7893 20.0304 21 19.5 21H5.5C4.96957 21 4.46086 20.7893 4.08579 20.4142C3.71071 20.0391 3.5 19.5304 3.5 19V15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M17.5 8L12.5 3L7.5 8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M12.5 3V15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
               upload
             </label>
@@ -77,7 +79,7 @@ export default function Page() {
         </div>
 
         <div className='mt-[95px] xsm:mt-[42px] flex justify-between'>
-          <button onClick={()=> router.back()} className="transition-all duration-200 bg-[rgba(0,0,0,0)] hover:bg-primary2 border-2 border-primary2 text-primary2 hover:text-[white] w-[128px] py-[8px] font-outfit text-[18px] leading-normal font-medium rounded-[4px]">Back</button>
+          <button onClick={() => router.back()} className="transition-all duration-200 bg-[rgba(0,0,0,0)] hover:bg-primary2 border-2 border-primary2 text-primary2 hover:text-[white] w-[128px] py-[8px] font-outfit text-[18px] leading-normal font-medium rounded-[4px]">Back</button>
           <button onClick={imageSubmitHandler} className="transition-all duration-200 bg-primary2 hover:bg-[rgba(0,0,0,0)] border-2 border-primary2 text-[white] hover:text-primary2 w-[128px] py-[8px] font-outfit text-[18px] leading-normal font-medium rounded-[4px]">Next</button>
         </div>
       </div>

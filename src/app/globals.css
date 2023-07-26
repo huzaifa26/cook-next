@@ -541,21 +541,21 @@ body {
 
 
 
-::-webkit-scrollbar {
+.customSideBar ::-webkit-scrollbar {
   width: 6px;
 }
 
 /* Track */
-::-webkit-scrollbar-track {
+.customSideBar ::-webkit-scrollbar-track {
   background: #FFDBB8; 
 }
  
 /* Handle */
-::-webkit-scrollbar-thumb {
+.customSideBar ::-webkit-scrollbar-thumb {
   background: #D27722; 
 }
 
 /* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
+.customSideBar ::-webkit-scrollbar-thumb:hover {
   background: #FFDBB8; 
 }

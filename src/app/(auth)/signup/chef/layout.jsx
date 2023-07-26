@@ -1,19 +1,49 @@
 'use client'
 import CurrencyModal from '@/components/layout/CurrencyModal';
 import LanguageModal from '@/components/layout/LanguageModal';
+import Loading from '@/components/utils/Loading';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { redirect, usePathname } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
 export default function RootLayout({ children }) {
+  const session = useSession();
+
   const [currencyModal, setCurrencyModal] = useState(false);
   const [languageModal, setLanguageModal] = useState(false);
 
-
   const pathname = usePathname();
 
-  const [screenWidth, setScreenWidth] = useState(1000);
+  const [screenWidth, setScreenWidth] = useState(typeof window !== undefined && window.innerWidth);
 
+  useEffect(() => {
+    // Function to update the screenWidth state whenever the window is resized
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    // Attach the resize event listener
+    window.addEventListener('resize', handleResize);
+
+    // Clean up the event listener when the component is unmounted
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  // if (session.status === "loading") {
+  //   return <Loading />
+  // }
+
+  // if (session.status === 'authenticated') {
+  //   if (session?.data?.data?.accountType === 'student') {
+  //     redirect('/student-dashboard')
+  //   }
+  //   if (session?.data?.data?.accountType === 'student') {
+  //     redirect('/tutor-dashboard')
+  //   }
+  // }
 
   return (
     <>
@@ -41,7 +71,7 @@ export default function RootLayout({ children }) {
           </div>
 
           <Link href='/support'>
-            <div className='custom-tooltip ml-[2.778vw]' data-tooltip="Support">
+            <div className='custom-tooltip mx-[2.778vw] xsm:hidden' data-tooltip="Support">
               <svg className='stroke-primaryLighten2 group fill-primary2 hover:fill-primaryLighten2' width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 22.5C17.5228 22.5 22 18.0228 22 12.5C22 6.97715 17.5228 2.5 12 2.5C6.47715 2.5 2 6.97715 2 12.5C2 18.0228 6.47715 22.5 12 22.5Z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 <path className='group-hover:stroke-primary2 transition-all duration-200 stroke-primaryLighten2' d="M12 16.5V12.5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -49,12 +79,15 @@ export default function RootLayout({ children }) {
               </svg>
             </div>
           </Link>
+          {session.status === "authenticated" &&
+            <button className='px-[16px] py-[4px] xsm:ml-[9.994px] bg-primaryLighten2 hover:bg-primary2 hover:text-primaryLighten2 rounded-[4px] text-primary2 border border-primaryLighten2 transition-all duration-200 font-outfit leading-normal font-normal text-[18px]'>Logout</button>
+          }
         </div>
       </nav>
 
       <main className='w-full  bg-[#FFFBF6] pb-[112px] pt-[36px]'>
-        <div className='w-fit h-[45px] flex gap-[6px] m-auto xsm:hidden'>
-          <div style={screenWidth > 577 || pathname === '/signup/chef' ? { display: 'flex' } : { display: "none" }} className='flex gap-[8px] items-center'>
+        <div className='w-fit h-[45px] flex gap-[0.417vw] m-auto xsm:hidden'>
+          <div style={screenWidth > 768 || pathname === '/signup/chef' ? { display: 'flex' } : { display: "none" }} className='flex gap-[0.556vw] items-center'>
             <p className={pathname === '/signup/chef' ? 'w-[25px] h-[25px] text-[white] bg-primary2 border border-primary2 flex justify-center items-center rounded-full font-outfit text-[14px] font-medium leading-normal' : 'w-[25px] h-[25px] text-primaryLighten2 border border-primaryLighten2 flex justify-center items-center rounded-full font-outfit text-[14px] font-medium leading-normal'}>1</p>
             <p className={pathname === '/signup/chef' ? 'text-[14px] font-medium leading-normal text-primary2' : 'text-[14px] font-medium leading-normal text-TextColor opacity-[0.4]'}>About</p>
             <div className='w-[22px] h-[23px] ml-[-2px] flex justify-center items-center'>
@@ -64,7 +97,7 @@ export default function RootLayout({ children }) {
             </div>
           </div>
 
-          <div style={screenWidth > 577 || pathname === '/signup/chef/photo' ? { display: 'flex' } : { display: "none" }} className='flex gap-[8px] items-center'>
+          <div style={screenWidth > 768 || pathname === '/signup/chef/photo' ? { display: 'flex' } : { display: "none" }} className='flex gap-[0.556vw] items-center'>
             <p className={pathname === '/signup/chef/photo' ? 'w-[25px] h-[25px] text-[white] bg-primary2 border border-primary2 flex justify-center items-center rounded-full font-outfit text-[14px] font-medium leading-normal' : 'w-[25px] h-[25px] text-primaryLighten2 border border-primaryLighten2 flex justify-center items-center rounded-full font-outfit text-[14px] font-medium leading-normal'}>2</p>
             <p className={pathname === '/signup/chef/photo' ? 'text-[14px] font-medium leading-normal text-primary2' : 'text-[14px] font-medium leading-normal text-TextColor opacity-[0.4]'}>Photo</p>
             <div className='w-[22px] h-[23px] ml-[-2px] flex justify-center items-center'>
@@ -74,7 +107,7 @@ export default function RootLayout({ children }) {
             </div>
           </div>
 
-          <div style={screenWidth > 577 || pathname === '/signup/chef/description' ? { display: 'flex' } : { display: "none" }} className='flex gap-[8px] items-center'>
+          <div style={screenWidth > 768 || pathname === '/signup/chef/description' ? { display: 'flex' } : { display: "none" }} className='flex gap-[0.556vw] items-center'>
             <p className={pathname === '/signup/chef/description' ? 'w-[25px] h-[25px] text-[white] bg-primary2 border border-primary2 flex justify-center items-center rounded-full font-outfit text-[14px] font-medium leading-normal' : 'w-[25px] h-[25px] text-primaryLighten2 border border-primaryLighten2 flex justify-center items-center rounded-full font-outfit text-[14px] font-medium leading-normal'}>3</p>
             <p className={pathname === '/signup/chef/description' ? 'text-[14px] font-medium leading-normal text-primary2' : 'text-[14px] font-medium leading-normal text-TextColor opacity-[0.4]'}>Description</p>
             <div className='w-[22px] h-[23px] ml-[-2px] flex justify-center items-center'>
@@ -84,7 +117,7 @@ export default function RootLayout({ children }) {
             </div>
           </div>
 
-          <div style={screenWidth > 577 || pathname === '/signup/chef/video' ? { display: 'flex' } : { display: "none" }} className='flex gap-[8px] items-center'>
+          <div style={screenWidth > 768 || pathname === '/signup/chef/video' ? { display: 'flex' } : { display: "none" }} className='flex gap-[0.556vw] items-center'>
             <p className={pathname === '/signup/chef/video' ? 'w-[25px] h-[25px] text-[white] bg-primary2 border border-primary2 flex justify-center items-center rounded-full font-outfit text-[14px] font-medium leading-normal' : 'w-[25px] h-[25px] text-primaryLighten2 border border-primaryLighten2 flex justify-center items-center rounded-full font-outfit text-[14px] font-medium leading-normal'}>4</p>
             <p className={pathname === '/signup/chef/video' ? 'text-[14px] font-medium leading-normal text-primary2' : 'text-[14px] font-medium leading-normal text-TextColor opacity-[0.4]'}>Video</p>
             <div className='w-[22px] h-[23px] ml-[-2px] flex justify-center items-center'>
@@ -94,7 +127,7 @@ export default function RootLayout({ children }) {
             </div>
           </div>
 
-          <div style={screenWidth > 577 || pathname === '/signup/chef/availability' ? { display: 'flex' } : { display: "none" }} className='flex gap-[8px] items-center'>
+          <div style={screenWidth > 768 || pathname === '/signup/chef/availability' ? { display: 'flex' } : { display: "none" }} className='flex gap-[0.556vw] items-center'>
             <p className={pathname === '/signup/chef/availability' ? 'w-[25px] h-[25px] text-[white] bg-primary2 border border-primary2 flex justify-center items-center rounded-full font-outfit text-[14px] font-medium leading-normal' : 'w-[25px] h-[25px] text-primaryLighten2 border border-primaryLighten2 flex justify-center items-center rounded-full font-outfit text-[14px] font-medium leading-normal'}>5</p>
             <p className={pathname === '/signup/chef/availability' ? 'text-[14px] font-medium leading-normal text-primary2' : 'text-[14px] font-medium leading-normal text-TextColor opacity-[0.4]'}>Availability</p>
             <div className='w-[22px] h-[23px] ml-[-2px] flex justify-center items-center'>
@@ -104,7 +137,7 @@ export default function RootLayout({ children }) {
             </div>
           </div>
 
-          <div style={screenWidth > 577 || pathname === '/signup/chef/pricing' ? { display: 'flex' } : { display: "none" }} className='flex gap-[8px] items-center'>
+          <div style={screenWidth > 768 || pathname === '/signup/chef/pricing' ? { display: 'flex' } : { display: "none" }} className='flex gap-[0.556vw] items-center'>
             <p className={pathname === '/signup/chef/pricing' ? 'w-[25px] h-[25px] text-[white] bg-primary2 border border-primary2 flex justify-center items-center rounded-full font-outfit text-[14px] font-medium leading-normal' : 'w-[25px] h-[25px] text-primaryLighten2 border border-primaryLighten2 flex justify-center items-center rounded-full font-outfit text-[14px] font-medium leading-normal'}>6</p>
             <p className={pathname === '/signup/chef/pricing' ? 'text-[14px] font-medium leading-normal text-primary2' : 'text-[14px] font-medium leading-normal text-TextColor opacity-[0.4]'}>Pricing</p>
           </div>

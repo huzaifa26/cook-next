@@ -33,12 +33,12 @@ export default function Page() {
       res = await res.json();
 
       if (res.status === 201) {
-        if(searchParams.get('email_verified')){
-          setTimeout(()=>{
+        if (searchParams.get('email_verified')) {
+          setTimeout(() => {
             router.push(`/student-dashboard?accountType=${data.accountType}`);
-          },3000)
-        }else{
-          router.push(`/verify-mail?name=${data.name}&email=${data.email}`);
+          }, 3000)
+        } else {
+          router.push(`/verify-mail?name=${data.name}&email=${data.email}&accountType=${data.accountType}`);
         }
       }
     } catch (error) {
