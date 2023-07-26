@@ -13,8 +13,8 @@ export default function handler(req, res) {
   const io = new Server(httpServer, {
     path: "/api/socket",
     addTrailingSlash: false,
-    pingInterval: 5000,
-    pingTimeout: 10000,
+    // pingInterval: 5000,
+    // pingTimeout: 10000,
   });
 
   res.socket.server.io = io;

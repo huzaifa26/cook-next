@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'scontent-iad3-2.xx.fbcdn.net',
+        hostname: 'https://scontent-iad3-2.xx.fbcdn.net',
         port: '',
         pathname: '/account123/**',
       },
