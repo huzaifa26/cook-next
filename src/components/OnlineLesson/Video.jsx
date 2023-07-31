@@ -176,7 +176,7 @@ export default function Video({ divRef, widthNumber, windowSize, width }) {
         };
 
         peer.ontrack = (event) => {
-          console.log("Streaming...");
+          console.log("Streaming...",stream);
           
           partnerVideoRef.current.srcObject = event.streams[0];
           setShowOtherUser(event.streams[0]);

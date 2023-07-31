@@ -21,6 +21,9 @@ export default function Page() {
 
   const router = useRouter();
   const [error, setError] = useState(null)
+  
+  const [showPassword, setShowPassword] = useState(false);
+  const [passwordError, setPasswordError] = useState(null);
 
   const session = useSession();
 
@@ -93,9 +96,6 @@ export default function Page() {
   const linkedInSigninHandler = async () => {
     signIn('linkedin');
   }
-
-  const [showPassword, setShowPassword] = useState(false);
-  const [passwordError, setPasswordError] = useState(null);
 
   return (
     <main className='flex relative md:min-h-[1194px] sm:min-h-[1194px] xsm:h-[844px]'>
