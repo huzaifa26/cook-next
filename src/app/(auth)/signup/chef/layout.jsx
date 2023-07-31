@@ -32,18 +32,18 @@ export default function RootLayout({ children }) {
     };
   }, []);
 
-  // if (session.status === "loading") {
-  //   return <Loading />
-  // }
+  if (session.status === "loading") {
+    return <Loading />
+  }
 
-  // if (session.status === 'authenticated') {
-  //   if (session?.data?.data?.accountType === 'student') {
-  //     redirect('/student-dashboard')
-  //   }
-  //   if (session?.data?.data?.accountType === 'student') {
-  //     redirect('/tutor-dashboard')
-  //   }
-  // }
+  if (session.status === 'authenticated') {
+    if (session?.data?.data?.accountType === 'student') {
+      redirect('/student-dashboard')
+    }
+    if (session?.data?.data?.accountType === 'student') {
+      redirect('/tutor-dashboard')
+    }
+  }
 
   return (
     <>

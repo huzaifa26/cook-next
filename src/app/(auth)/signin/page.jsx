@@ -17,6 +17,9 @@ export default function Page() {
   const session = useSession();
   const router = useRouter();
 
+  const [showPassword, setShowPassword] = useState(false)
+  const [passwordError, setPasswordError] = useState(null);
+
   if(session.status === "loading"){
     return <Loading/>
   }
@@ -49,16 +52,6 @@ export default function Page() {
   const linkedInSigninHandler = async () => {
     signIn('linkedin');
   }
-
-  // useLayoutEffect(()=>{
-  //   if(session.status === 'authenticated'){
-  //     router.push('/student-dashboard');
-  //   }
-  //   // signOut('credentials');
-  // },[session])
-
-  const [showPassword, setShowPassword] = useState(false)
-  const [passwordError, setPasswordError] = useState(null);
 
   return (
     <main className='flex relative md:min-h-[1194px] sm:min-h-[1194px] xsm:h-[844px]'>

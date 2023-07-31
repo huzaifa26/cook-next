@@ -1,11 +1,229 @@
+'use client'
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import VideoImage from "@/assets/OnlineLesson/VideoImage.png"
+import { API_URL } from '@/utils/consts'
+import { io } from 'socket.io-client'
+import { useSession } from 'next-auth/react'
+import Peer from 'simple-peer';
+import SimplePeer from 'simple-peer'
 
-export default function Video({divRef,widthNumber,windowSize,width}) {
+let socket;
+
+export default function Video({ divRef, widthNumber, windowSize, width }) {
+  const socketRef = useRef();
+  const userVideoRef = useRef();
+  const partnerVideoRef = useRef();
+  const peerRef = useRef();
+  const [isCalling, setIsCalling] = useState(false);
+  const [roomId, setRoomId] = useState('');
+  const [isBothUsersJoined, setIsBothUsersJoined] = useState(false);
+  const [stream, setStream] = useState();
+
+  const session = useSession();
+
+  // const socketInitializer = async () => {
+  //   await fetch(API_URL + "/api/socket");
+
+  //   try {
+  //     socket = io(undefined, {
+  //       path: '/api/socket',
+  //       addTrailingSlash: false,
+  //     });
+
+  //     // socketRef.current = socket
+
+  //     socket.on('connected', socket.id);
+
+  //     setRoomId(session?.data?.data?._id)
+  //     socket.emit('join-room', session?.data?.data?._id)
+
+  //     socket.on('start-call', () => {
+  //       setIsBothUsersJoined(true);
+  //       startPeerConnection();
+  //     });;
+
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // }
+
+  // const startPeerConnection = () => {
+  //   navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+  //     .then((stream) => {
+  //       userVideoRef.current.srcObject = stream;
+
+  //       const peer = new SimplePeer({
+  //         initiator: true, // The user initiating the call should be the initiator
+  //         trickle: false,
+  //         config: {
+  //           iceServers: [
+  //             { urls: 'stun:stun.l.google.com:19302' },
+  //             { urls: 'stun:stun1.l.google.com:19302' },
+  //             { urls: 'stun:stun2.l.google.com:19302' },
+  //             { urls: 'stun:stun3.l.google.com:19302' },
+  //             { urls: 'stun:stun4.l.google.com:19302' },
+  //             {
+  //               url: 'turn:turn.bistri.com:80',
+  //               credential: 'homeo',
+  //               username: 'homeo',
+  //             },
+  //             {
+  //               url: 'turn:turn.anyfirewall.com:443?transport=tcp',
+  //               credential: 'webrtc',
+  //               username: 'webrtc',
+  //             },
+  //           ],
+  //         },
+  //         stream
+  //       });
+
+  //       peerRef.current = peer;
+
+  //       // peer.once('signal', (signals, roomId) => {
+  //       //   console.log(signals, roomId);
+  //       //   peerRef.current.signal(signals);
+  //       // });
+
+  //       peer.once('signal', (signals, roomId) => {
+  //         console.log(signals, roomId);
+  //         console.log(peer);
+  //         peer.signal(signals);
+  //       });
+
+
+  //       peer.on('stream', (stream) => {
+  //         console.log("steaming.......", stream);
+  //         partnerVideoRef.current.srcObject = stream;
+  //       });
+
+  //       peer.on('icecandidate', (candidate) => {
+  //         console.log('ICE candidate:', candidate);
+  //       });
+  //     })
+  //     .catch((error) => console.error('Error accessing media devices:', error));
+  // };
+
+
+  const socketInitializer = async () => {
+    await fetch(API_URL + "/api/socket");
+
+    try {
+      socket = io(undefined, {
+        path: '/api/socket',
+        addTrailingSlash: false,
+      });
+
+      socket.on('connected', () => {
+        console.log('Connected to socket:', socket.id);
+        setRoomId(session?.data?.data?._id);
+      });
+
+      socket.emit('join-room', session?.data?.data?._id);
+
+      socket.on('start-call', () => {
+        setIsBothUsersJoined(true);
+        startPeerConnection();
+      });
+
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const [showOtherUser,setShowOtherUser]=useState();
+
+  const startPeerConnection = () => {
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+      .then((stream) => {
+        console.log("own stream",stream);
+        userVideoRef.current.srcObject = stream;
+
+        const configuration = {
+          iceServers: [
+            { urls: 'stun:stun.l.google.com:19302' },
+            { urls: 'stun:stun1.l.google.com:19302' },
+            { urls: 'stun:stun2.l.google.com:19302' },
+            { urls: 'stun:stun3.l.google.com:19302' },
+            { urls: 'stun:stun4.l.google.com:19302' },
+            {
+              urls: 'turn:turn.bistri.com:80',
+              credential: 'homeo',
+              username: 'homeo',
+            },
+            {
+              urls: 'turn:turn.anyfirewall.com:443?transport=tcp',
+              credential: 'webrtc',
+              username: 'webrtc',
+            },
+          ],
+        };
+
+        const peer = new RTCPeerConnection(configuration);
+
+        stream.getTracks().forEach(track => {
+          console.log("other user stream",stream);
+          peer.addTrack(track, stream);
+        });
+
+        peerRef.current = peer;
+
+        peer.onicecandidate = (event) => {
+          if (event.candidate) {
+            // Send the ICE candidate to the other peer via the signaling server (socket.io)
+            socket.emit('ice-candidate', { candidate: event.candidate, roomId: session?.data?.data?._id });
+          }
+        };
+
+        peer.ontrack = (event) => {
+          console.log("Streaming...");
+          
+          partnerVideoRef.current.srcObject = event.streams[0];
+          setShowOtherUser(event.streams[0]);
+        };
+
+        socket.on('remote-ice-candidate', (data) => {
+          // When receiving ICE candidate from the other peer via the signaling server (socket.io)
+          const candidate = new RTCIceCandidate(data.candidate);
+          peer.addIceCandidate(candidate)
+            .catch(error => console.error('Error adding ICE candidate:', error));
+        });
+
+        socket.on('answer-sdp', (data) => {
+          // When receiving answer SDP from the other peer via the signaling server (socket.io)
+          const remoteDescription = new RTCSessionDescription(data.sdp);
+          peer.setRemoteDescription(remoteDescription)
+            .then(() => console.log('Remote description set successfully'))
+            .catch(error => console.error('Error setting remote description:', error));
+        });
+
+        peer.createOffer()
+          .then(offer => peer.setLocalDescription(offer))
+          .then(() => {
+            // Send the local description (offer SDP) to the other peer via the signaling server (socket.io)
+            socket.emit('offer-sdp', { sdp: peer.localDescription, roomId: session?.data?.data?._id });
+          })
+          .catch(error => console.error('Error creating offer:', error));
+      })
+      .catch((error) => console.error('Error accessing media devices:', error));
+  };
+
+  useEffect(() => {
+    socketInitializer();
+  }, [])
+
+
   return (
     <div ref={divRef} style={widthNumber < windowSize?.width ? { width } : { width: "100%" }} className='h-full relative min-w-[508px] xsm:min-w-[320px]'>
-      <Image className='object-cover w-full h-screen' src={VideoImage} alt="" />
+
+      {isBothUsersJoined ? (
+        <div className='flex object-cover w-full h-screen relative'>
+          <video ref={userVideoRef} className='bg-[aqua] w-[200px] z-[2002] h-[200px] absolute bottom-[102px] left-0' autoPlay muted />
+          {<video ref={partnerVideoRef} muted className='bg-[red] w-[200px] z-[2001] h-[200px] absolute top-0 left-0' autoPlay />}
+        </div>
+      ) : (
+        <Image className='object-cover w-full h-screen' src={VideoImage} alt="" />
+      )}
       <div className='absolute top-[38px] w-full px-[44px] flex justify-between items-center'>
         <svg width="54" height="54" viewBox="0 0 65 65" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect width="64.4" height="64.4" rx="32.2" fill="#D27722" />
@@ -25,7 +243,7 @@ export default function Video({divRef,widthNumber,windowSize,width}) {
           </defs>
         </svg>
       </div>
-      <div className='absolute bottom-0 w-full h-[102px] bg-[rgba(37,36,34,0.5)] flex items-center justify-center gap-[25px]'>
+      <div className='absolute bottom-0 z-[2003] w-full h-[102px] bg-[rgba(37,36,34,0.5)] flex items-center justify-center gap-[25px]'>
         <svg width="54" height="54" viewBox="0 0 65 65" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect width="64.4" height="64.4" rx="32.2" fill="white" />
           <g clipPath="url(#clip0_634_45472)">

@@ -1,5 +1,5 @@
 // export const API_URL='https://cook-next.vercel.app/';
-export const API_URL='http://localhost:3000/';
+export const API_URL = 'http://localhost:3000/';
 
 export const countries = [
   ":flag-af: Afghanistan",
@@ -281,3 +281,62 @@ export const languagesArray = [
   "Marathi",
   "Tamil",
 ];
+
+
+export function createArrayWithCurrentAndNext7Days() {
+  const daysArray = [];
+  const currentDate = new Date();
+
+  for (let i = 0; i < 7; i++) {
+    const nextDate = new Date(currentDate);
+    nextDate.setDate(currentDate.getDate() + i);
+    const dayString = nextDate.toLocaleDateString('en-US', { weekday: 'short' }).toUpperCase();
+    const dateString = nextDate.toLocaleDateString('en-US', { day: '2-digit' });
+    daysArray.push(`${dayString} ${dateString}`);
+  }
+
+  return daysArray;
+}
+
+export function getNextSixDays(inputStr) {
+  const daysOfWeek = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
+  const [dayStr, dateStr] = inputStr.split(' ');
+  const dayIndex = daysOfWeek.indexOf(dayStr);
+  let date = parseInt(dateStr, 10);
+
+  const result = [];
+
+  for (let i = 0; i < 7; i++) {
+    date++;
+    if (date > 31) {  // You may need to adjust this based on your requirements and handle specific months accordingly
+      date = 1;
+    }
+    const nextDayIndex = (dayIndex + i + 1) % 7;
+    const nextDateStr = date.toString().padStart(2, '0'); // Add leading zero if date is a single digit
+    const nextDay = `${daysOfWeek[nextDayIndex]} ${nextDateStr}`;
+    result.push(nextDay);
+  }
+  return result;
+}
+
+export function getPreviousSixDays(inputStr) {
+  const daysOfWeek = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
+  const [dayStr, dateStr] = inputStr.split(' ');
+  const dayIndex = daysOfWeek.indexOf(dayStr);
+  let date = parseInt(dateStr, 10);
+  const result = [];
+
+  for (let i = 0; i < 7; i++) {
+    date--;
+    if (date < 1) {
+      date = 31; // You may need to adjust this based on your requirements and handle specific months accordingly
+    }
+
+    const prevDayIndex = (dayIndex - i - 1 + 7) % 7;
+    const prevDateStr = date.toString().padStart(2, '0'); // Add leading zero if date is a single digit
+    const prevDay = `${daysOfWeek[prevDayIndex]} ${prevDateStr}`;
+    result.push(prevDay);
+  }
+
+  return result.reverse();
+}

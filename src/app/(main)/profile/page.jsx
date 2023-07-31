@@ -11,8 +11,13 @@ import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/navigation'
 import TimeSelection from '@/components/Profile/TimeSelection'
 import AvailabilityComponent from '@/components/Profile/AvailabilityComponent'
+import { createArrayWithCurrentAndNext7Days, getNextSixDays, getPreviousSixDays } from '@/utils/consts'
 
 export default function Page() {
+
+  const [days, setDays] = useState(createArrayWithCurrentAndNext7Days());
+
+
   const router = useRouter();
   const [resumeTab, setResumeTab] = useState('education');
   const scrollRef = useRef(null);
@@ -57,16 +62,16 @@ export default function Page() {
 
   const [showModal, setShowModal] = useState(false)
 
-  const days = ["SAT 22", "SUN 23", "MON 24", "TUE 25", "WED 26", "THU 27", "FRI 28"];
 
   const timeSlots = [
     "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00"
   ];
 
+
   return (
     <>
       {showModal &&
-        <TimeSelection tutor={tutor} closeModal={()=> setShowModal(false)}/>
+        <TimeSelection tutor={tutor} closeModal={() => setShowModal(false)} />
       }
       <main className='px-[12.153vw] md:px-[5.749vw] sm:px-[5.749vw] xsm:px-[8.205vw] flex justify-start gap-[23px] pt-[79px]'>
         <div>
@@ -143,7 +148,7 @@ export default function Page() {
               </div>
               <div className='flex gap-[13px] mt-[27px] xsm:flex-col sm:flex-col xsm:items-center sm:items-center justify-center'>
                 <button onClick={() => router.push("/student-dashboard/chat?data=" + encodeURIComponent(JSON.stringify(tutor)))} className='w-[242px] h-[39px] border-2 border-primary rounded-[4px] font-outfit font-normal text-[18px] leading-[22.68px] text-primary2 '>Send A Message</button>
-                <button onClick={()=> setShowModal(true)} className='w-[242px] h-[39px] border-2 border-primary rounded-[4px] font-kanit font-normal text-[18px] leading-[26.91px] bg-primary2 text-[white] '>Book A Trial Lesson</button>
+                <button onClick={() => setShowModal(true)} className='w-[242px] h-[39px] border-2 border-primary rounded-[4px] font-kanit font-normal text-[18px] leading-[26.91px] bg-primary2 text-[white] '>Book A Trial Lesson</button>
               </div>
             </div>
           </div>
@@ -179,14 +184,26 @@ export default function Page() {
               <p className='font-outfit font-normal text-[16px] leading-[24.8px] text-[white]'>Lorem ipsum dolor sit amet consectetur. Nisi urna arcu tempor in dui. At rhoncus s</p>
             </div>
             <div className='flex items-center justify-between'>
-              <div className='flex items-center gap-[5px]'>
-                <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M15.8333 3.83331H4.16667C3.24619 3.83331 2.5 4.57951 2.5 5.49998V17.1666C2.5 18.0871 3.24619 18.8333 4.16667 18.8333H15.8333C16.7538 18.8333 17.5 18.0871 17.5 17.1666V5.49998C17.5 4.57951 16.7538 3.83331 15.8333 3.83331Z" stroke="#D27722" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M13.3333 2.16669V5.50002" stroke="#D27722" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M6.66669 2.16669V5.50002" stroke="#D27722" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M2.5 8.83331H17.5" stroke="#D27722" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-                <p className='font-outfit font-semibold text-[20px] leading-[31px]'>Mon, 24 Apr</p>
+              <div className='flex gap-[19px]'>
+                <div className='flex items-center gap-[12px]'>
+                  <svg onClick={() => setDays(getPreviousSixDays(days[0]))} className='cursor-pointer' width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="32" height="32" rx="4" fill="#FFDBB8" />
+                    <path d="M19 22L13 16L19 10" stroke="#403D39" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                  <svg onClick={() => setDays(getNextSixDays(days[days.length - 1]))} className='cursor-pointer' width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="32" height="32" rx="4" fill="#FFDBB8" />
+                    <path d="M13 22L19 16L13 10" stroke="#403D39" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+                <div onClick={() => setDays(createArrayWithCurrentAndNext7Days())} className='flex items-center gap-[5px] cursor-pointer'>
+                  <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15.8333 3.83331H4.16667C3.24619 3.83331 2.5 4.57951 2.5 5.49998V17.1666C2.5 18.0871 3.24619 18.8333 4.16667 18.8333H15.8333C16.7538 18.8333 17.5 18.0871 17.5 17.1666V5.49998C17.5 4.57951 16.7538 3.83331 15.8333 3.83331Z" stroke="#D27722" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M13.3333 2.16669V5.50002" stroke="#D27722" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M6.66669 2.16669V5.50002" stroke="#D27722" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M2.5 8.83331H17.5" stroke="#D27722" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  <p className='font-outfit font-semibold text-[20px] leading-[31px]'>Mon, 24 Apr</p>
+                </div>
               </div>
               <div className='flex items-center gap-[5px]'>
                 <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -196,7 +213,7 @@ export default function Page() {
                 <p className='font-outfit font-semibold text-[20px] leading-[31px]'>Spain, GMT +2:00</p>
               </div>
             </div>
-            <AvailabilityComponent />
+            <AvailabilityComponent timeSlots={timeSlots} days={days} />
           </div>
           <div id="reviews" className='w-[52.361vw] md:w-full sm:w-full xsm:w-full '>
             <div className='w-full mt-[50px]'>
@@ -412,7 +429,7 @@ export default function Page() {
               }
             </div>
             <button onClick={() => router.push("/student-dashboard/chat?data=" + encodeURIComponent(JSON.stringify(tutor)))} className='w-full h-[39px] border-2 border-primary2 rounded-[4px] font-outfit font-normal text-[18px] leading-[22.68px] text-primary2 mt-[27px] hover:bg-primary2 hover:text-[white] transition-all duration-200'>Send A Message</button>
-            <button onClick={()=> setShowModal(true)} className='w-full h-[39px] border-2 border-primary2 rounded-[4px] font-kanit font-normal text-[18px] leading-[26.91px] bg-primary2 text-[white] mt-[12px] hover:bg-[rgba(0,0,0,0)] hover:text-primary2 transition-all duration-200'>Book A Trial Lesson</button>
+            <button onClick={() => setShowModal(true)} className='w-full h-[39px] border-2 border-primary2 rounded-[4px] font-kanit font-normal text-[18px] leading-[26.91px] bg-primary2 text-[white] mt-[12px] hover:bg-[rgba(0,0,0,0)] hover:text-primary2 transition-all duration-200'>Book A Trial Lesson</button>
           </div>
         </div>
       </main>

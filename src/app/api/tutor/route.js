@@ -5,7 +5,15 @@ import { NextResponse } from "next/server";
 export const GET = async (request) => {
   try {
     await connect();
-    const chefs = await User.find({ accountType: 'chef' });
+
+    const chefs = await User.find(
+      {
+        $and: [
+          { accountType: 'chef' },
+          { isProfileComplete: true }
+        ]
+      }
+    );
     return new NextResponse(
       JSON.stringify({
         message: "Data fetched succesfully",

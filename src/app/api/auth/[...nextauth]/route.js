@@ -88,7 +88,7 @@ export const authOptions = {
             if (user.provider === account.provider) {
               return true
             } else {
-              return '/signin'
+              return '/signin?error=No account found'
             }
           } else {
 

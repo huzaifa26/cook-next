@@ -1,11 +1,7 @@
 import React from 'react'
 
-export default function AvalabilityBookLesson() {
-  const days = ["SAT 22", "SUN 23", "MON 24", "TUE 25", "WED 26", "THU 27", "FRI 28"];
-
-  const timeSlots = [
-    "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00"
-  ];
+export default function AvalabilityBookLesson({ days, timeSlots, setTime }) {
+  // const [daysArray,setDaysArray]=useState(days);
 
   return (
     <div className='flex justify-between mt-[25px]'>
@@ -17,7 +13,7 @@ export default function AvalabilityBookLesson() {
             </div>
             <div className='flex flex-col gap-[10px]'>
               {timeSlots.map((timeSlot, idx) => (
-                <p key={idx} className='font-outfit font-medium text-[14px] leading-[21.7px] text-center text-primary2'>{timeSlot}</p>
+                <p onClick={() => { setTime(day + " " + timeSlot) }} key={idx} className='cursor-pointer font-outfit font-medium text-[14px] leading-[21.7px] text-center text-primary2'>{timeSlot}</p>
               ))}
             </div>
           </div>
