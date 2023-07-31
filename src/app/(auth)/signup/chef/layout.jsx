@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
 
   const pathname = usePathname();
 
-  const [screenWidth, setScreenWidth] = useState(window && typeof window !== undefined && window.innerWidth);
+  const [screenWidth, setScreenWidth] = useState(1000);
 
   useEffect(() => {
     // Function to update the screenWidth state whenever the window is resized
