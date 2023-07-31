@@ -1,5 +1,6 @@
 // export const API_URL='https://cook-next.vercel.app/';
-export const API_URL = 'http://localhost:3000/';
+export const API_URL='https://nextjs-version.dwkkube0s72gv.amplifyapp.com/';
+// export const API_URL = 'http://localhost:3000/';
 
 export const countries = [
   ":flag-af: Afghanistan",
